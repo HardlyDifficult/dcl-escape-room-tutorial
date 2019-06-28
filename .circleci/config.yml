@@ -1,0 +1,83 @@
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      # npm i and cache
+      - restore_cache:
+          keys:
+            - v1-{{ checksum "package.json" }}
+      - run: npm i --production --ignore-scripts
+      - save_cache:
+          paths:
+            - node_modules
+            - package-lock.json
+          key: v1-{{ checksum "package.json" }}
+
+      # lint and commit any changes, which may restart the build
+      - run: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+      - run: npm run lint # includes --fix
+      - run: bash .circleci/commit.sh
+
+      ###########
+      # Scenes
+      ###########
+
+      # TODO build scenes
+
+      ###########
+      # Tutorial
+      ###########
+
+      # npm i and cache
+      - restore_cache:
+          keys:
+            - v1-{{ checksum "tutorial/package.json" }}
+      - run: cd tutorial && npm i --production
+      - save_cache:
+          paths:
+            - node_modules
+            - package-lock.json
+          key: v1-{{ checksum "tutorial/package.json" }}
+
+      # build
+      - run: cd tutorial && npm run build
+
+      # save (for push)
+      - persist_to_workspace:
+          root: '..'
+          paths:
+            - repo/tutorial/src/.vuepress/dist
+
+  push:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: '..'
+
+      - run: mkdir ~/.ssh
+      - run: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+      - run: bash .circleci/deploy-ghpages.sh
+
+workflows:
+  build:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+                - artifacts
+      - push:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - test
