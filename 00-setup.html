@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>00: Setup | dcl-escape-room-tutorial</title>
+    <meta name="description" content="Decentraland tutorial">
+    
+    
+    <link rel="preload" href="/docs/assets/css/0.styles.71c8a156.css" as="style"><link rel="preload" href="/docs/assets/js/app.bb405211.js" as="script"><link rel="preload" href="/docs/assets/js/2.4912d4cf.js" as="script"><link rel="preload" href="/docs/assets/js/4.77739933.js" as="script"><link rel="prefetch" href="/docs/assets/js/3.e189f229.js"><link rel="prefetch" href="/docs/assets/js/5.dbec5203.js"><link rel="prefetch" href="/docs/assets/js/6.5985457e.js"><link rel="prefetch" href="/docs/assets/js/7.e1d471b3.js"><link rel="prefetch" href="/docs/assets/js/8.f53e5623.js">
+    <link rel="stylesheet" href="/docs/assets/css/0.styles.71c8a156.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/docs/" class="home-link router-link-active"><!----> <span class="site-name">dcl-escape-room-tutorial</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/" class="nav-link">Home</a></div><div class="nav-item"><a href="/docs/introduction.html" class="nav-link">Guide</a></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/" class="nav-link">Home</a></div><div class="nav-item"><a href="/docs/introduction.html" class="nav-link">Guide</a></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/docs/" class="sidebar-link">Home</a></li><li><a href="/docs/00-setup.html" class="active sidebar-link">00: Setup</a></li><li><a href="/docs/01-room.html" class="sidebar-link">01: Room</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="_00-setup"><a href="#_00-setup" aria-hidden="true" class="header-anchor">#</a> 00: Setup</h1> <p>Primary resource --&gt; https://docs.decentraland.org/</p> <p>Install NodeJS</p> <div class="language- extra-class"><pre class="language-text"><code>npm init
+npm i decentraland-ecs decentraland
+npx dcl init
+</code></pre></div><p>Then run:</p> <div class="language- extra-class"><pre class="language-text"><code>npm run start
+</code></pre></div><p>to see the &quot;game&quot; running in your browser.  If you have Metamask installed it will prompt you to connect before the page finishes loading (but it also works without metamask).</p> <p>It should look something like this:</p> <p><img src="/docs/assets/img/defaultScene.f4c07f1d.png" alt="Default Scene"></p> <p>Frame rate for debugging in top left</p> <p>Chat in bottom left.  It actually works when players are connected to the same server.  Try it by using a second tab.</p> <p>A spinning box in the scene</p> <p>You can walk (wasd or arrows) around and jump (space).</p> <p>once you <code>npm run start</code> you open a second command prompt and run <code>npm run watch</code>.  Then anytime you make a change it will recompile and you simply refresh the browser to see your updates</p> <p>delete the example contents inside <code>game.ts</code> (done in playground)</p> <p>Add a model:</p> <p>Add this to <code>game.ts</code> (this is the entire file ATM)</p> <div class="language- extra-class"><pre class="language-text"><code>const scene = new Entity()
+scene.addComponent(new GLTFShape(&quot;models/scene.glb&quot;))
+scene.addComponent(new Transform({rotation: Quaternion.Euler(0,180,0)}))
+engine.addEntity(scene)
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/docs/" class="prev router-link-active">
+          Home
+        </a></span> <span class="next"><a href="/docs/01-room.html">
+          01: Room
+        </a>
+        →
+      </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/docs/assets/js/app.bb405211.js" defer></script><script src="/docs/assets/js/2.4912d4cf.js" defer></script><script src="/docs/assets/js/4.77739933.js" defer></script>
+  </body>
+</html>
