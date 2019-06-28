@@ -1,7 +1,7 @@
 module.exports = {
   title: 'dcl-escape-room-tutorial',
   description: 'Decentraland tutorial',
-  base: '/docs/',
+  base: '/',
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
