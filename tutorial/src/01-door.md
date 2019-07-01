@@ -66,3 +66,12 @@ door.addComponent(
   })
 );
 ```
+
+TODO then file separation
+gameObjects: baseScene, door
+Rooms: room1
+
+
+## Challenge to the reader
+
+The model also includes a `close` animation.  Add this to the Door GameObject and update the click behavior to toggle the door open/closed on click (instead of just open and then stay open).

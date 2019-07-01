@@ -6,9 +6,12 @@ Install NodeJS
 
 ```
 npm init
-npm i decentraland-ecs decentraland
+npm i decentraland
+npm i -d decentraland-ecs 
 npx dcl init
 ```
+
+TODO do we need the decentraland-ecs or does that come from dcl init?
 
 Then run:
 
@@ -20,7 +23,7 @@ to see the "game" running in your browser.  If you have Metamask installed it wi
 
 It should look something like this:
 
-![Default Scene](./00/defaultScene.png)
+![Default Scene](./images/defaultScene.png)
 
 Frame rate for debugging in top left
 

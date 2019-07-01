@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial#readme",
   "dependencies": {
-    "decentraland": "3.2.1",
-    "decentraland-ecs": "6.2.1"
+    "decentraland": "3.2.1"
+  },
+  "devDependencies": {
+    "decentraland-ecs": "latest"
   },
   "scripts": {
     "start": "dcl start",
@@ -28,8 +30,5 @@
     "deploy:now": "dcl export && now export",
     "ecs:install": "npm install --save-dev decentraland-ecs@latest",
     "ecs:install-next": "npm install --save-dev decentraland-ecs@next"
-  },
-  "devDependencies": {
-    "decentraland-ecs": "latest"
   }
 }

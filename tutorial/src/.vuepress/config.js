@@ -12,7 +12,8 @@ module.exports = {
     sidebar: [
       '/',
       '/00-setup',
-      '/01-room',
+      '/01-door',
+      '/02-button',
     ]
   },
 }
