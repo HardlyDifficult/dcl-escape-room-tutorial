@@ -66,3 +66,7 @@ door.addComponent(
   })
 );
 ```
+
+TODO then file separation
+gameObjects: baseScene, door
+Rooms: room1

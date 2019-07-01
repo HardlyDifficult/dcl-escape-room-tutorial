@@ -33,8 +33,8 @@ jobs:
       # Scenes
       ###########
 
-      # TODO build scenes
-
+      - run: cd 00-setup-complete && npm i && npm run build
+      # TODO other scenes
 
       ###########
       # Tutorial

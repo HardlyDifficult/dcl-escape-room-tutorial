@@ -6,9 +6,12 @@ Install NodeJS
 
 ```
 npm init
-npm i decentraland-ecs decentraland
+npm i decentraland
+npm i -d decentraland-ecs 
 npx dcl init
 ```
+
+TODO do we need the decentraland-ecs or does that come from dcl init?
 
 Then run:
 
