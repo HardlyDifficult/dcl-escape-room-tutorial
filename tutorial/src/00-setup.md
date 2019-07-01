@@ -23,7 +23,7 @@ to see the "game" running in your browser.  If you have Metamask installed it wi
 
 It should look something like this:
 
-![Default Scene](./00/defaultScene.png)
+![Default Scene](./images/defaultScene.png)
 
 Frame rate for debugging in top left
 

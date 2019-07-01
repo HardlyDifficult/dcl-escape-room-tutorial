@@ -34,6 +34,10 @@ jobs:
       ###########
 
       - run: cd 00-setup-complete && npm i && npm run build
+      - run: cd 01-door-playground && npm i && npm run build
+      - run: cd 01-door-complete && npm i && npm run build
+      - run: cd 02-button-playground && npm i && npm run build
+      - run: cd 02-button-complete && npm i && npm run build
       # TODO other scenes
 
       ###########
