@@ -1,4 +1,4 @@
-import {BaseScene} from "../gameObjects/baseScene";
+import { BaseScene } from "../gameObjects/baseScene";
 
 /**
  * The core scene for this parcel of land.

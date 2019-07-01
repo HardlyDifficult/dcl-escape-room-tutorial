@@ -9,7 +9,7 @@ export class Door extends Entity {
 
     //add gltf shape
     this.addComponent(new GLTFShape("models/generic/door.glb"));
-  
+
     //add transform and set it in position
     this.addComponent(new Transform(transform));
 

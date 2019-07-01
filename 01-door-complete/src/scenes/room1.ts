@@ -1,4 +1,4 @@
-import {Door} from '../gameObjects/door'
+import { Door } from "../gameObjects/door";
 
 /**
  * Room 1: Open a door
