@@ -1,41 +1,18 @@
 import { Timer, TimerSystem } from "../modules/timerSystem";
+import { Door } from "../gameObjects/door";
 
 export function CreateRoom2(): void {
   /**
-   * TODO replace this with the Door gameObject like we did in room1
-   * Need to add the "Close" animation state plus a function to closeDoor
-   * Then below replace the play door clip/sound calls near the bottom with `openDoor` / `closeDoor`
-   *
-   * After we can make gameObjects for the other parts here.
+   * [?]After we can make gameObjects for the other parts here.
    */
 
   //create door entity
-  let door = new Entity();
-
-  //add gltf shape
-  door.addComponent(new GLTFShape("models/generic/door.glb"));
-
-  //add transform and set positoin
-  door.addComponent(
+  let door = new Door(
     new Transform({
       position: new Vector3(8, 0, 11.74),
       rotation: Quaternion.Euler(0, 90, 0)
     })
   );
-
-  //creat animator and add animation clips
-  let doorAnimator = new Animator();
-  doorAnimator.addClip(new AnimationState("Open", { looping: false }));
-  doorAnimator.addClip(new AnimationState("Close", { looping: false }));
-  door.addComponent(doorAnimator);
-
-  //create audio source component, set audio clip and add it to door entity
-  let doorAudioSource = new AudioSource(
-    new AudioClip("sounds/door_squeak.mp3")
-  );
-  door.addComponent(doorAudioSource);
-
-  engine.addEntity(door);
 
   //create a timer that will keep the door open for X amount of seconds
   let countdownTimer = new Timer(5);
@@ -96,12 +73,13 @@ export function CreateRoom2(): void {
     //reset countdown
     countdownTimer.reset();
     //stop previous animation as a workaround to a bug with animations
-    doorAnimator.getClip("Open").stop();
+    //doorAnimator.getClip("OpenDoor").stop();
     //play Close animation
-    doorAnimator.getClip("Close").play();
+    //doorAnimator.getClip("CloseDoor").play();
     //play door sound
-    doorAudioSource.playOnce();
+    //doorAudioSource.playOnce();
     //reset countdown text value
+    door.closeDoor();
     countdownTextShape.value = formatTimeString(countdownTimer.getTimeLeft());
   });
 
@@ -111,14 +89,15 @@ export function CreateRoom2(): void {
       //check if timer is running
       if (!countdownTimer.isRunning()) {
         //stop previous animation as a workaround to a bug with animations
-        doorAnimator.getClip("Close").stop();
+        //doorAnimator.getClip("CloseDoor").stop();
         //play Open animation
-        doorAnimator.getClip("Open").play();
+        //doorAnimator.getClip("OpenDoor").play();
         //play door sound
-        doorAudioSource.playOnce();
+        //doorAudioSource.playOnce();
         //play button sound
-        button.getComponent(AudioSource).playOnce();
+        //button.getComponent(AudioSource).playOnce();
         //reset countdown from previous state
+        door.openDoor();
         countdownTimer.reset();
         //make the timer run
         TimerSystem.instance.runTimer(countdownTimer);

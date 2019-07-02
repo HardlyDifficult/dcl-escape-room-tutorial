@@ -15,6 +15,7 @@ export class Door extends Entity {
 
     //create animator and add animation clips
     this.doorAnimator.addClip(new AnimationState("Open", { looping: false }));
+    this.doorAnimator.addClip(new AnimationState("Close", { looping: false }));
     this.addComponent(this.doorAnimator);
 
     //create audio source component, set audio clip and add it to door entity
@@ -23,11 +24,17 @@ export class Door extends Entity {
     //add door entity to engine
     engine.addEntity(this);
   }
-
   public openDoor(): void {
     if (!this.isDoorOpen) {
       this.isDoorOpen = true;
       this.doorAnimator.getClip("Open").play();
+      this.getComponent(AudioSource).playOnce();
+    }
+  }
+  public closeDoor(): void {
+    if (this.isDoorOpen) {
+      this.isDoorOpen = false;
+      this.doorAnimator.getClip("Close").play();
       this.getComponent(AudioSource).playOnce();
     }
   }
