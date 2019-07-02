@@ -31,11 +31,11 @@ export class Door extends Entity {
       this.getComponent(AudioSource).playOnce();
     }
   }
-  public closeDoor(): void{
-    if (this.isDoorOpen){
+  public closeDoor(): void {
+    if (this.isDoorOpen) {
       this.isDoorOpen = false;
       this.doorAnimator.getClip("Close").play();
       this.getComponent(AudioSource).playOnce();
-   }
+    }
   }
 }

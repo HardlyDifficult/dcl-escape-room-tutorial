@@ -7,10 +7,12 @@ export function CreateRoom2(): void {
    */
 
   //create door entity
-  let door = new Door(new Transform({
-    position: new Vector3(8, 0, 11.74),
-    rotation: Quaternion.Euler(0, 90, 0)
-  }));
+  let door = new Door(
+    new Transform({
+      position: new Vector3(8, 0, 11.74),
+      rotation: Quaternion.Euler(0, 90, 0)
+    })
+  );
 
   //create a timer that will keep the door open for X amount of seconds
   let countdownTimer = new Timer(5);
@@ -80,7 +82,7 @@ export function CreateRoom2(): void {
     door.closeDoor();
     countdownTextShape.value = formatTimeString(countdownTimer.getTimeLeft());
   });
-  
+
   //listen for click event to toggle door state
   button.addComponent(
     new OnClick(event => {
