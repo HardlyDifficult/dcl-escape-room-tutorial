@@ -19,7 +19,9 @@
   "homepage": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial#readme",
   "scripts": {
     "lint": "eslint . --ext .js,.ts  --fix",
-    "lintNoFix": "eslint . --ext .js,.ts"
+    "lintNoFix": "eslint . --ext .js,.ts",
+    "deploy": "scripts/deploy.sh",
+    "deploy:all": "scripts/deploy_all.sh"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "1.11.0",
