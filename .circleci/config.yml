@@ -38,6 +38,7 @@ jobs:
       - run: cd 01-door-complete && npm i && npm run build
       - run: cd 02-button-playground && npm i && npm run build
       - run: cd 02-button-complete && npm i && npm run build
+      - run: cd 05-keypad-complete && npm i && npm run build
       # TODO other scenes
 
       ###########
