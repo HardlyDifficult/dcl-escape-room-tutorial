@@ -2,10 +2,10 @@
 if [ -n "$1" ]; then
     cd "$1"
     npm i
-    dcl build
-    dcl export
+    npx dcl build
+    npx dcl export
     cd export
-    now -n "$1" -t "$NOW_TOKEN" --public --scope "hardlydifficult"
+    npx now -n "$1" -t "$NOW_TOKEN" --public --scope "hardlydifficult"
 else
     echo "please enter tutorial directory name"
 fi
