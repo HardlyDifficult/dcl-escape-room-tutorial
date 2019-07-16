@@ -1,46 +1,38 @@
 import resources from "../resources";
 
-// Resources which are used multiple times below, to improve performance.
-const buttonTexture = new Texture("images/codepad/pwdpanel_buttons.png");
-const inputTexture = new Texture("images/codepad/pwdpanel_input.png");
-
 // Buttons Size
 const buttonSize = new Vector2(64, 64);
 // Space between Buttons
 const buttonSpace = new Vector2(5, 5);
 
-export class KeypadUI extends Entity {
+export class KeypadUI {
   private uiContainer: UIContainerRect;
   private panelInputs: { image: UIImage; text: UIText }[];
 
   /**
    * Called when a value key is pressed.
    */
-  onInput: (character: string) => void;
+  public onInput: (value: number) => void;
 
   /**
    * Called when the reset button is pressed.
    */
-  onReset: () => void;
+  public onReset: () => void;
 
   /**
    * Called when the submit button is pressed.
    */
-  onSubmit: () => void;
+  public onSubmit: () => void;
 
-  constructor(gameCanvas: UICanvas) {
-    super();
-    engine.addEntity(this);
-
-    // Create a full screen container
-    this.uiContainer = new UIContainerRect(gameCanvas);
+  constructor(parent: UIShape) {
+    this.uiContainer = new UIContainerRect(parent);
     this.uiContainer.width = "100%";
     this.uiContainer.height = "100%";
 
     // Display an image in the background for the keypad UI
     const panelBackground = new UIImage(
       this.uiContainer,
-      new Texture("images/codepad/pwdpanel_bg.png")
+      resources.textures.panelBackground
     );
     panelBackground.sourceWidth = 222;
     panelBackground.sourceHeight = 297;
@@ -49,21 +41,6 @@ export class KeypadUI extends Entity {
     panelBackground.positionX = 70;
     panelBackground.positionY = -55;
 
-    // A close button near the top right
-    const closeImage = new UIImage(
-      this.uiContainer,
-      resources.closeButtonTexture
-    );
-    closeImage.sourceWidth = 32;
-    closeImage.sourceHeight = 32;
-    closeImage.width = 32;
-    closeImage.height = 32;
-    closeImage.positionX = 204;
-    closeImage.positionY = 133;
-    closeImage.onClick = new OnClick((): void => {
-      this.hide();
-    });
-
     // Title text on the top
     const panelText = new UIText(this.uiContainer);
     panelText.value = "Enter Code";
@@ -71,11 +48,28 @@ export class KeypadUI extends Entity {
     panelText.positionX = 36;
     panelText.fontSize = 30;
 
+    // Add a close button near the top right
+    const closeImage = new UIImage(
+      this.uiContainer,
+      resources.textures.closeButton
+    );
+    closeImage.sourceWidth = 32;
+    closeImage.sourceHeight = 32;
+    closeImage.width = 32;
+    closeImage.height = 32;
+    closeImage.positionX = 204;
+    closeImage.positionY = 133;
+
+    // When close is clicked, hide the UI
+    closeImage.onClick = new OnClick((): void => {
+      this.hide();
+    });
+
     // 3 boxes to show the entered code or current message
     this.panelInputs = [];
     for (let i = 0; i < 3; i++) {
       const inputSlot = {
-        image: new UIImage(this.uiContainer, inputTexture),
+        image: new UIImage(this.uiContainer, resources.textures.inputBox),
         text: new UIText(this.uiContainer)
       };
       inputSlot.image.sourceWidth = 64;
@@ -94,7 +88,7 @@ export class KeypadUI extends Entity {
     for (let col = 0; col < 3; col++) {
       for (let row = 0; row < 4; row++) {
         // The value this button represents
-        let value;
+        let value: number;
         if (col == 1 && row == 3) {
           // The 0 button is a special case
           value = 0;
@@ -113,7 +107,7 @@ export class KeypadUI extends Entity {
           // The clear button in the bottom left
           buttonImage = new UIImage(
             this.uiContainer,
-            new Texture("images/codepad/pwdpanel_clear.png")
+            resources.textures.clearButton
           );
 
           // Call onReset when clicked
@@ -124,7 +118,7 @@ export class KeypadUI extends Entity {
           // The enter button in the bottom right
           buttonImage = new UIImage(
             this.uiContainer,
-            new Texture("images/codepad/pwdpanel_enter.png")
+            resources.textures.enterButton
           );
 
           // Call onSubmit when clicked
@@ -133,7 +127,10 @@ export class KeypadUI extends Entity {
           });
         } else {
           // A number value button
-          buttonImage = new UIImage(this.uiContainer, buttonTexture);
+          buttonImage = new UIImage(
+            this.uiContainer,
+            resources.textures.numberButton
+          );
 
           const numberText = new UIText(this.uiContainer);
           numberText.isPointerBlocker = false;
@@ -146,9 +143,9 @@ export class KeypadUI extends Entity {
           numberText.isPointerBlocker = false;
           numberText.value = value.toString();
 
-          // Call onInput when clicked
+          //Call onInput when clicked
           buttonImage.onClick = new OnClick((): void => {
-            this.onInput(value.toString());
+            this.onInput(value);
           });
         }
 
@@ -163,19 +160,19 @@ export class KeypadUI extends Entity {
     }
   }
 
-  public show(): void {
-    this.uiContainer.visible = true;
-  }
-
-  public hide(): void {
-    this.uiContainer.visible = false;
-  }
-
   public display(message: string, color: Color4 = Color4.Black()): void {
     for (let i = 0; i < this.panelInputs.length; i++) {
       let character = message.length > i ? message[i] : "";
       this.panelInputs[i].text.value = character;
       this.panelInputs[i].text.color = color;
     }
+  }
+
+  public show(): void {
+    this.uiContainer.visible = true;
+  }
+
+  public hide(): void {
+    this.uiContainer.visible = false;
   }
 }

@@ -1,34 +1,32 @@
 import resources from "../resources";
 
-// Resources which are used multiple times below, to improve performance.
-const audioAccessGranted = new AudioClip("sounds/access_granted.mp3");
-const audioAccessDenied = new AudioClip("sounds/access_denied.mp3");
-
 export class Keypad extends Entity {
   constructor(transform: TranformConstructorArgs) {
     super();
     engine.addEntity(this);
 
-    this.addComponent(new GLTFShape("models/generic/codePad.glb"));
+    this.addComponent(resources.models.codePad);
     this.addComponent(new Transform(transform));
   }
 
   public playButtonPressed(): void {
     const clip = this.addComponentOrReplace(
-      new AudioSource(resources.buttonPressed)
+      new AudioSource(resources.sounds.buttonPressed)
     );
     clip.playOnce();
   }
 
   public playAccessGranted(): void {
     const clip = this.addComponentOrReplace(
-      new AudioSource(audioAccessGranted)
+      new AudioSource(resources.sounds.accessGranted)
     );
     clip.playOnce();
   }
 
   public playAccessDenied(): void {
-    const clip = this.addComponentOrReplace(new AudioSource(audioAccessDenied));
+    const clip = this.addComponentOrReplace(
+      new AudioSource(resources.sounds.accessDenied)
+    );
     clip.playOnce();
   }
 }

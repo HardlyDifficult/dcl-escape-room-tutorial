@@ -1,12 +1,13 @@
 import { ToggleComponent } from "../modules/toggleComponent";
 import { RotateTransformComponent } from "../modules/transfromSystem";
+import resources from "../resources";
 
 export class Carpet extends Entity {
   constructor(transform: TranformConstructorArgs) {
     super();
     engine.addEntity(this);
 
-    this.addComponent(new GLTFShape("models/room4/carpet.glb"));
+    this.addComponent(resources.models.carpet);
     this.addComponent(new Transform(transform));
 
     // Add a toggle component to rotate the carpet back and forth
