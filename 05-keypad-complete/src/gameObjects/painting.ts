@@ -1,3 +1,5 @@
+import resources from "../resources";
+
 export class Painting extends Entity {
   constructor(transform: TranformConstructorArgs) {
     super();
@@ -8,9 +10,7 @@ export class Painting extends Entity {
 
     // Create a material for painting image
     let paintingMat = new Material();
-    paintingMat.albedoTexture = new Texture("images/room4/fernpicture.png", {
-      hasAlpha: true
-    });
+    paintingMat.albedoTexture = resources.textures.fernPicture;
     paintingMat.hasAlpha = true;
     this.addComponent(paintingMat);
   }

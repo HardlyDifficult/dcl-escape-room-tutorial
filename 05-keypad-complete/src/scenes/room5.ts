@@ -1,4 +1,5 @@
 import GameObjects from "../gameObjects/index";
+import UI from "../ui/index";
 
 const password = "155";
 
@@ -31,10 +32,7 @@ export function CreateRoom5(gameCanvas: UICanvas): void {
   });
 
   // The painting hint
-  const paintingHint = new GameObjects.UIHint(
-    gameCanvas,
-    "images/room4/fernpictureHint.png"
-  );
+  const paintingHint = new UI.PaintingHint(gameCanvas);
   paintingHint.hide();
 
   // When the painting is clicked, show the hint
@@ -62,10 +60,7 @@ export function CreateRoom5(gameCanvas: UICanvas): void {
   );
 
   // The coin hint
-  const coinHint = new GameObjects.UIHint(
-    gameCanvas,
-    "images/room4/coinHint.png"
-  );
+  const coinHint = new UI.CoinHint(gameCanvas);
   coinHint.hide();
 
   // When the coin is clicked, show the hint
@@ -85,7 +80,7 @@ export function CreateRoom5(gameCanvas: UICanvas): void {
   });
 
   // UI for interacting with the keypad
-  const keypadUI = new GameObjects.KeypadUI(gameCanvas);
+  const keypadUI = new UI.KeypadUI(gameCanvas);
   keypadUI.hide();
 
   // When the keypad on the wall is clicked, display the UI
@@ -97,8 +92,8 @@ export function CreateRoom5(gameCanvas: UICanvas): void {
 
   // Wire up the keypad UI
   let currentInput = "";
-  keypadUI.onInput = (character: string): void => {
-    currentInput += character;
+  keypadUI.onInput = (value: number): void => {
+    currentInput += value;
     keypadUI.display(currentInput);
     keypad.playButtonPressed();
   };

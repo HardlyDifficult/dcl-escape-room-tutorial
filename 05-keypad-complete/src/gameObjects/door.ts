@@ -1,3 +1,5 @@
+import resources from "../resources";
+
 export class Door extends Entity {
   private doorAnimator: Animator = new Animator();
 
@@ -7,7 +9,7 @@ export class Door extends Entity {
     super();
     engine.addEntity(this);
 
-    this.addComponent(new GLTFShape("models/generic/door.glb"));
+    this.addComponent(resources.models.door);
     this.addComponent(new Transform(transform));
 
     // Add the supported animations
@@ -16,7 +18,7 @@ export class Door extends Entity {
     this.addComponent(this.doorAnimator);
 
     // Add an audio clip to play when opening / closing the door
-    this.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
+    this.addComponent(new AudioSource(resources.sounds.doorSqueak));
   }
 
   public openDoor(): void {

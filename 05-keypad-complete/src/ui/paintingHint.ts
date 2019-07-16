@@ -1,18 +1,17 @@
 import resources from "../resources";
 
-export class UIHint extends Entity {
+export class PaintingHint {
   private uiContainer: UIContainerRect;
 
-  constructor(gameCanvas: UICanvas, hintImagePath: string) {
-    super();
-    engine.addEntity(this);
-
-    this.uiContainer = new UIContainerRect(gameCanvas);
-
+  constructor(parent: UIShape) {
+    this.uiContainer = new UIContainerRect(parent);
     this.uiContainer.width = "100%";
     this.uiContainer.height = "100%";
 
-    const hintImage = new UIImage(this.uiContainer, new Texture(hintImagePath));
+    const hintImage = new UIImage(
+      this.uiContainer,
+      resources.textures.paintingHint
+    );
     hintImage.sourceWidth = 392;
     hintImage.sourceHeight = 512;
     hintImage.width = 261;
@@ -21,7 +20,7 @@ export class UIHint extends Entity {
     // Add a close button near the top right
     const closeImage = new UIImage(
       this.uiContainer,
-      resources.closeButtonTexture
+      resources.textures.closeButton
     );
     closeImage.sourceWidth = 32;
     closeImage.sourceHeight = 32;
@@ -29,7 +28,8 @@ export class UIHint extends Entity {
     closeImage.height = 32;
     closeImage.positionX = 164;
     closeImage.positionY = 224;
-    // When close, hide the UI
+
+    // When close is clicked, hide the UI
     closeImage.onClick = new OnClick((): void => {
       this.hide();
     });
