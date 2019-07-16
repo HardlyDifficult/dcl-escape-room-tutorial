@@ -1,8 +1,7 @@
-import { CreateMainScene } from "./scenes/mainScene";
 import { CreateRoom2 } from "./scenes/room2";
+import { BaseScene } from "./scenes/baseScene";
 
-/**
- * Load the game scene by scene.
- */
-CreateMainScene();
+// Creating Base Scene
+new BaseScene();
+// Creating Room2
 CreateRoom2();

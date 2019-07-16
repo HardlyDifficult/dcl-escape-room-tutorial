@@ -1,23 +1,31 @@
 import { Timer, TimerSystem } from "../modules/timerSystem";
-import { Door } from "../gameObjects/door";
 
 export function CreateRoom2(): void {
-  /**
-   * [?]After we can make gameObjects for the other parts here.
-   */
+  // Creating Door Entity
+  let door = new Entity();
+  engine.addEntity(door);
 
-  //create door entity
-  let door = new Door(
+  door.addComponent(new GLTFShape("models/generic/door.glb"));
+  door.addComponent(
     new Transform({
       position: new Vector3(8, 0, 11.74),
       rotation: Quaternion.Euler(0, 90, 0)
     })
   );
 
-  //create a timer that will keep the door open for X amount of seconds
-  let countdownTimer = new Timer(5);
+  // Adding Door Animations
+  let doorAnimator = new Animator();
+  doorAnimator.addClip(new AnimationState("Open", { looping: false }));
+  doorAnimator.addClip(new AnimationState("Close", { looping: false }));
 
-  //function to convert seconds left in timer to a formatted string
+  // Adding Animator and Sound Clip to Door
+  door.addComponent(doorAnimator);
+  door.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
+
+  // Creating CountDown Timer
+  let countDownTimer = new Timer(5);
+
+  // Function to Convert Seconds left in Timer to a Formatted string
   let formatTimeString = (seconds: number): string => {
     let mins = Math.floor(seconds / 60);
     let secs = Math.floor(seconds % 60);
@@ -28,15 +36,11 @@ export function CreateRoom2(): void {
     );
   };
 
-  //create the button that we'll use to open the door
+  // Creating the Button the we'll use to Open the Door
   let button = new Entity();
-  //add button to the engine
   engine.addEntity(button);
 
-  //add shape component to button
   button.addComponent(new GLTFShape("models/generic/redbutton.gltf"));
-
-  //add transform and set position
   button.addComponent(
     new Transform({
       position: new Vector3(1.91, 1.1, 12.12),
@@ -44,66 +48,58 @@ export function CreateRoom2(): void {
     })
   );
 
-  //add audio source to button
+  // Adding Audio Source to Button
   button.addComponent(new AudioSource(new AudioClip("sounds/button.mp3")));
 
-  //create countdown displayer
-  let countdown = new Entity();
-  engine.addEntity(countdown);
+  // Creating Countdown Display
+  let countDown = new Entity();
+  engine.addEntity(countDown);
 
-  //add transform and set position
-  countdown.addComponent(
+  countDown.addComponent(
     new Transform({
       position: new Vector3(7.7, 3.5, 12.5),
       rotation: Quaternion.Euler(0, 90, 0)
     })
   );
 
-  //create text shape for countdown
-  let countdownTextShape = new TextShape(
-    formatTimeString(countdownTimer.getTimeLeft())
+  // Creating Text Shape for CountDown
+  let countDownTextShape = new TextShape(
+    formatTimeString(countDownTimer.getTimeLeft())
   );
-  countdownTextShape.color = Color3.Red();
-  countdown.addComponent(countdownTextShape);
+  countDownTextShape.color = Color3.Red();
+  countDown.addComponent(countDownTextShape);
 
-  //set to listen for countdown timer's update
-  countdownTimer.setOnTimerUpdate((): void => {
-    countdownTextShape.value = formatTimeString(countdownTimer.getTimeLeft());
+  // Set to Listen for Countdown Timer's Update
+  countDownTimer.setOnTimerUpdate((): void => {
+    countDownTextShape.value = formatTimeString(countDownTimer.getTimeLeft());
   });
 
-  //listen for when we reach to the end of the countdown
-  countdownTimer.setOnTimerEnds((): void => {
-    //reset countdown
-    countdownTimer.reset();
-    //stop previous animation as a workaround to a bug with animations
-    //doorAnimator.getClip("OpenDoor").stop();
-    //play Close animation
-    //doorAnimator.getClip("CloseDoor").play();
-    //play door sound
-    //doorAudioSource.playOnce();
-    //reset countdown text value
-    door.closeDoor();
-    countdownTextShape.value = formatTimeString(countdownTimer.getTimeLeft());
+  // Set to Listen for Countdown Timer's End
+  countDownTimer.setOnTimerEnds((): void => {
+    // Resetting Timer
+    countDownTimer.reset();
+    countDownTextShape.value = formatTimeString(countDownTimer.getTimeLeft());
+
+    // Closing Door
+    doorAnimator.getClip("Open").stop();
+    doorAnimator.getClip("Close").play();
+    door.getComponent(AudioSource).playOnce();
   });
 
-  //listen for click event to toggle door state
+  // Set to Listen for OnClick Event for Button
   button.addComponent(
-    new OnClick((): void => {
-      //check if timer is running
-      if (!countdownTimer.isRunning()) {
-        //stop previous animation as a workaround to a bug with animations
-        //doorAnimator.getClip("CloseDoor").stop();
-        //play Open animation
-        //doorAnimator.getClip("OpenDoor").play();
-        //play door sound
-        //doorAudioSource.playOnce();
-        //play button sound
-        //button.getComponent(AudioSource).playOnce();
-        //reset countdown from previous state
-        door.openDoor();
-        countdownTimer.reset();
-        //make the timer run
-        TimerSystem.instance.runTimer(countdownTimer);
+    new OnClick(() => {
+      if (!countDownTimer.isRunning()) {
+        // Resetting Timer
+        countDownTimer.reset();
+        TimerSystem.instance.runTimer(countDownTimer);
+
+        // Opening Door
+        doorAnimator.getClip("Close").stop();
+        doorAnimator.getClip("Open").play();
+        door.getComponent(AudioSource).playOnce();
+
+        button.getComponent(AudioSource).playOnce();
       }
     })
   );
