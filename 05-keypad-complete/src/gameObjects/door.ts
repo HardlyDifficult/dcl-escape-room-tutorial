@@ -24,6 +24,7 @@ export class Door extends Entity {
   public openDoor(): void {
     if (!this.isDoorOpen) {
       this.isDoorOpen = true;
+      this.doorAnimator.getClip("Close").stop();
       this.doorAnimator.getClip("Open").play();
       this.getComponent(AudioSource).playOnce();
     }
@@ -32,6 +33,7 @@ export class Door extends Entity {
   public closeDoor(): void {
     if (this.isDoorOpen) {
       this.isDoorOpen = false;
+      this.doorAnimator.getClip("Open").stop();
       this.doorAnimator.getClip("Close").play();
       this.getComponent(AudioSource).playOnce();
     }
