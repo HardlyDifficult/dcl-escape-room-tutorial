@@ -22,7 +22,6 @@ export class Door extends Entity {
 
     //create audio source component, set audio clip and add it to door entity
     this.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
-
   }
   public openDoor(): void {
     if (!this.isDoorOpen) {
