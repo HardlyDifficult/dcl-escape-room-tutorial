@@ -18,9 +18,9 @@ export function CreateRoom2(): void {
   let countdownTimer = new Timer(5);
 
   //function to convert seconds left in timer to a formatted string
-  let formatTimeString = (seconds: number) => {
-    let mins = Math.floor(countdownTimer.getTimeLeft() / 60);
-    let secs = Math.floor(countdownTimer.getTimeLeft() % 60);
+  let formatTimeString = (seconds: number): string => {
+    let mins = Math.floor(seconds / 60);
+    let secs = Math.floor(seconds % 60);
     return (
       mins.toLocaleString(undefined, { minimumIntegerDigits: 2 }) +
       ":" +
@@ -64,12 +64,12 @@ export function CreateRoom2(): void {
   countdown.addComponent(countdownTextShape);
 
   //set to listen for countdown timer's update
-  countdownTimer.setOnTimerUpdate(dt => {
+  countdownTimer.setOnTimerUpdate((): void => {
     countdownTextShape.value = formatTimeString(countdownTimer.getTimeLeft());
   });
 
   //listen for when we reach to the end of the countdown
-  countdownTimer.setOnTimerEnds(() => {
+  countdownTimer.setOnTimerEnds((): void => {
     //reset countdown
     countdownTimer.reset();
     //stop previous animation as a workaround to a bug with animations
@@ -85,7 +85,7 @@ export function CreateRoom2(): void {
 
   //listen for click event to toggle door state
   button.addComponent(
-    new OnClick(event => {
+    new OnClick((): void => {
       //check if timer is running
       if (!countdownTimer.isRunning()) {
         //stop previous animation as a workaround to a bug with animations

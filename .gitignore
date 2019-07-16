@@ -2,3 +2,7 @@ node_modules
 bin
 package-lock.json
 dist/
+.idea
+export
+yarn.lock
+.directory
