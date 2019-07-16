@@ -42,3 +42,4 @@ door.addComponent(
     }
   })
 );
+
