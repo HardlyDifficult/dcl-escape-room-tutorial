@@ -24,7 +24,9 @@ export class Keypad extends Entity {
   }
 
   public playAccessDenied(): void {
-    const clip = this.addComponentOrReplace(new AudioSource(resources.sounds.accessDenied));
+    const clip = this.addComponentOrReplace(
+      new AudioSource(resources.sounds.accessDenied)
+    );
     clip.playOnce();
   }
 }
