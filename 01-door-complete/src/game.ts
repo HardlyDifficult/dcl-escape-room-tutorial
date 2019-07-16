@@ -1,18 +1,21 @@
 // Creating Main Scene
 let baseScene = new Entity();
+// Adding Main Scene into Engine
+engine.addEntity(baseScene);
+
+// Setting Base Scene Model and Transform
 baseScene.addComponent(new GLTFShape("models/scene.glb"));
 baseScene.addComponent(
   new Transform({ rotation: Quaternion.Euler(0, 180, 0) })
 );
-
-// Adding Main Scene into Engine
-engine.addEntity(baseScene);
 
 // Variable to Store is the Door is Open
 let isDoorOpen = false;
 
 // Creating Door Object
 let door = new Entity();
+// Adding Door into Engine
+engine.addEntity(door);
 
 // Adding Door Model
 door.addComponent(new GLTFShape("models/generic/door.glb"));
@@ -40,5 +43,3 @@ door.addComponent(
   })
 );
 
-// Adding Door into Engine
-engine.addEntity(door);

@@ -42,8 +42,9 @@ Add a model:
 Add this to `game.ts` (this is the entire file ATM)
 
 ```
-const scene = new Entity()
+const baseScene = new Entity()
+engine.addEntity(baseScene)
+
 scene.addComponent(new GLTFShape("models/scene.glb"))
 scene.addComponent(new Transform({rotation: Quaternion.Euler(0,180,0)}))
-engine.addEntity(scene)
 ```

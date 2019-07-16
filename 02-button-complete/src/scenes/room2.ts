@@ -5,18 +5,18 @@ export function CreateRoom2(): void {
   /**
    * [?]After we can make gameObjects for the other parts here.
    */
-
+  
   //create door entity
   let door = new Door(
     new Transform({
       position: new Vector3(8, 0, 11.74),
       rotation: Quaternion.Euler(0, 90, 0)
     })
-  );
-
+    );
+    
   //create a timer that will keep the door open for X amount of seconds
   let countdownTimer = new Timer(5);
-
+    
   //function to convert seconds left in timer to a formatted string
   let formatTimeString = (seconds: number): string => {
     let mins = Math.floor(seconds / 60);
@@ -25,11 +25,13 @@ export function CreateRoom2(): void {
       mins.toLocaleString(undefined, { minimumIntegerDigits: 2 }) +
       ":" +
       secs.toLocaleString(undefined, { minimumIntegerDigits: 2 })
-    );
-  };
-
+      );
+    };
+      
   //create the button that we'll use to open the door
   let button = new Entity();
+  //add button to the engine
+  engine.addEntity(button);
 
   //add shape component to button
   button.addComponent(new GLTFShape("models/generic/redbutton.gltf"));
@@ -47,6 +49,7 @@ export function CreateRoom2(): void {
 
   //create countdown displayer
   let countdown = new Entity();
+  engine.addEntity(countdown);
 
   //add transform and set position
   countdown.addComponent(
@@ -104,7 +107,4 @@ export function CreateRoom2(): void {
       }
     })
   );
-  //add entities to the engine
-  engine.addEntity(button);
-  engine.addEntity(countdown);
 }
