@@ -1,4 +1,7 @@
-const scene = new Entity();
-scene.addComponent(new GLTFShape("models/scene.glb"));
-scene.addComponent(new Transform({ rotation: Quaternion.Euler(0, 180, 0) }));
-engine.addEntity(scene);
+const baseScene = new Entity();
+engine.addEntity(baseScene);
+
+baseScene.addComponent(new GLTFShape("models/scene.glb"));
+baseScene.addComponent(
+  new Transform({ rotation: Quaternion.Euler(0, 180, 0) })
+);

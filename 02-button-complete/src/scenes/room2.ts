@@ -30,6 +30,8 @@ export function CreateRoom2(): void {
 
   //create the button that we'll use to open the door
   let button = new Entity();
+  //add button to the engine
+  engine.addEntity(button);
 
   //add shape component to button
   button.addComponent(new GLTFShape("models/generic/redbutton.gltf"));
@@ -47,6 +49,7 @@ export function CreateRoom2(): void {
 
   //create countdown displayer
   let countdown = new Entity();
+  engine.addEntity(countdown);
 
   //add transform and set position
   countdown.addComponent(
@@ -104,7 +107,4 @@ export function CreateRoom2(): void {
       }
     })
   );
-  //add entities to the engine
-  engine.addEntity(button);
-  engine.addEntity(countdown);
 }

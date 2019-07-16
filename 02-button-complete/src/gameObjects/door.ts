@@ -6,6 +6,8 @@ export class Door extends Entity {
   constructor(transform: TranformConstructorArgs) {
     //create door entity
     super();
+    //add door entity to engine
+    engine.addEntity(this);
 
     //add gltf shape
     this.addComponent(new GLTFShape("models/generic/door.glb"));
@@ -20,9 +22,6 @@ export class Door extends Entity {
 
     //create audio source component, set audio clip and add it to door entity
     this.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
-
-    //add door entity to engine
-    engine.addEntity(this);
   }
   public openDoor(): void {
     if (!this.isDoorOpen) {

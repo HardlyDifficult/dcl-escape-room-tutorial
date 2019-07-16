@@ -4,20 +4,19 @@ Start with the default scene from 00.  Plus model, sound.  Maybe use playground
 
 Add a door
 
-After `engine.addEntity(scene)`...
+After `engine.addEntity(baseScene)`...
 
 ```
 //create door entity
 let door = new Entity();
+//add door entity to engine
+engine.addEntity(door);
 
 //add gltf shape
 door.addComponent(new GLTFShape("models/generic/door.glb"));
 
 //add transform and set it in position
 door.addComponent(new Transform({ position: new Vector3(6.58, 0, 7.85) }));
-
-//add door entity to engine
-engine.addEntity(door);
 ```
 
 Open the door
@@ -45,8 +44,6 @@ door.addComponent(
 
 ```
 
-ends with ...`//add door entity to engine`
-
 
 Play a sound effect
 
@@ -66,11 +63,6 @@ door.addComponent(
   })
 );
 ```
-
-TODO then file separation
-gameObjects: baseScene, door
-Rooms: room1
-
 
 ## Challenge to the reader
 
