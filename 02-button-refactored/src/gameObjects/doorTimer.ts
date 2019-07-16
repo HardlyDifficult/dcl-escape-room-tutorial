@@ -1,39 +1,39 @@
 import { Timer, TimerSystem } from "../modules/timerSystem";
 
-export class DoorTimer extends Timer{
-    // Vairables to Store Text Entity
-    private countdown: Entity;
-    private countdownTextShape: TextShape;
+export class DoorTimer extends Timer {
+  // Vairables to Store Text Entity
+  private countdown: Entity;
+  private countdownTextShape: TextShape;
 
-    constructor(seconds: number, transform: TranformConstructorArgs){
-        // Create Timer
-        super(seconds);
-        
-        // Creating Timer Entity
-        this.countdown = new Entity();
-        engine.addEntity(this.countdown);
+  constructor(seconds: number, transform: TranformConstructorArgs) {
+    // Create Timer
+    super(seconds);
 
-        this.countdown.addComponent(new Transform(transform));
+    // Creating Timer Entity
+    this.countdown = new Entity();
+    engine.addEntity(this.countdown);
 
-        // Creating Timer Text
-        this.countdownTextShape = new TextShape(this.formatTimeString());
-        this.countdownTextShape.color = Color3.Red();
+    this.countdown.addComponent(new Transform(transform));
 
-        this.countdown.addComponent(this.countdownTextShape);
-    }
+    // Creating Timer Text
+    this.countdownTextShape = new TextShape(this.formatTimeString());
+    this.countdownTextShape.color = Color3.Red();
 
-    public updateDisplay(): void{
-        this.countdownTextShape.value = this.formatTimeString();
-    }
+    this.countdown.addComponent(this.countdownTextShape);
+  }
 
-    private formatTimeString(): string{
-        let mins = Math.floor(this.getTimeLeft() / 60);
-        let secs = Math.floor(this.getTimeLeft() % 60);
+  public updateDisplay(): void {
+    this.countdownTextShape.value = this.formatTimeString();
+  }
 
-        return (
-            mins.toLocaleString(undefined, {minimumIntegerDigits: 2}) +
-            ":" +
-            secs.toLocaleString(undefined, {minimumIntegerDigits: 2})
-        );
-    }
+  private formatTimeString(): string {
+    let mins = Math.floor(this.getTimeLeft() / 60);
+    let secs = Math.floor(this.getTimeLeft() % 60);
+
+    return (
+      mins.toLocaleString(undefined, { minimumIntegerDigits: 2 }) +
+      ":" +
+      secs.toLocaleString(undefined, { minimumIntegerDigits: 2 })
+    );
+  }
 }
