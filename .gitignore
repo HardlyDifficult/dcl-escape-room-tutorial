@@ -6,3 +6,4 @@ dist/
 export
 yarn.lock
 .directory
+*/.vscode/settings.json
