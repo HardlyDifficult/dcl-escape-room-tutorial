@@ -1,5 +1,5 @@
-import { CreateRoom2 } from "./scenes/room2";
 import { BaseScene } from "./scenes/baseScene";
+import { CreateRoom2 } from "./scenes/room2";
 
 // Creating Base Scene
 new BaseScene();
