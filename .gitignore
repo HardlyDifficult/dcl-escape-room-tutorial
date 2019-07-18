@@ -6,4 +6,5 @@ dist/
 export
 yarn.lock
 .directory
-*/.vscode/settings.json
+.vscode/settings.json
+.DS_Store
