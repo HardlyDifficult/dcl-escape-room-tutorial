@@ -1,4 +1,3 @@
-
 export class BaseScene extends Entity {
   constructor() {
     super();

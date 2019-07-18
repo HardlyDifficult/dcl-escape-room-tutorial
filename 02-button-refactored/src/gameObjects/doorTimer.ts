@@ -1,4 +1,4 @@
-import { Timer, TimerSystem } from "../modules/timerSystem";
+import { Timer } from "../modules/timerSystem";
 
 export class DoorTimer extends Timer {
   // Vairables to Store Text Entity
