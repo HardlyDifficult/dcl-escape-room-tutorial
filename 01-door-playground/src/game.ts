@@ -5,3 +5,5 @@ baseScene.addComponent(new GLTFShape("models/scene.glb"));
 baseScene.addComponent(
   new Transform({ rotation: Quaternion.Euler(0, 180, 0) })
 );
+
+// TODO create the first room
