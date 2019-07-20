@@ -34,7 +34,7 @@ door.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
 
 // Adding Open Door Event
 door.addComponent(
-  new OnClick(event => {
+  new OnClick((): void => {
     if (!isDoorOpen) {
       isDoorOpen = true;
       doorAnimation.getClip("Open").play();

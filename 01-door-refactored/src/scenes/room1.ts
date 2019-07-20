@@ -24,7 +24,7 @@ export function CreateRoom1(): void {
 
   // Adding Open Door Event
   door.addComponent(
-    new OnClick(event => {
+    new OnClick((): void => {
       if (!isDoorOpen) {
         isDoorOpen = true;
         doorAnimation.getClip("Open").play();

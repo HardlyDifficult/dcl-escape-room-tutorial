@@ -88,7 +88,7 @@ export function CreateRoom2(): void {
 
   // Set to Listen for OnClick Event for Button
   button.addComponent(
-    new OnClick(() => {
+    new OnClick((): void => {
       if (!countDownTimer.isRunning()) {
         // Resetting Timer
         countDownTimer.reset();
