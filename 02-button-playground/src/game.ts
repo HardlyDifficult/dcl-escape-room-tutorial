@@ -1,12 +1,5 @@
-import { CreateMainScene } from "./scenes/mainScene";
+import { CreateBaseScene } from "./scenes/baseScene";
+import { CreateRoom2 } from "./scenes/room2";
 
-/**
- * Load the game scene by scene.
- */
-let baseScene = new Entity();
-engine.addEntity(baseScene);
-
-baseScene.addComponent(new GLTFShape("models/scene.glb"));
-baseScene.addComponent(
-  new Transform({ rotation: Quaternion.Euler(0, 180, 0) })
-);
+CreateBaseScene();
+CreateRoom2();
