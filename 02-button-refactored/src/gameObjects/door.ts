@@ -13,8 +13,12 @@ export class Door extends Entity {
     this.addComponent(new Transform(transform));
 
     this.addComponent(new Animator());
-    this.getComponent(Animator).addClip(new AnimationState("Open", { looping: false }));
-    this.getComponent(Animator).addClip(new AnimationState("Close", { looping: false }));
+    this.getComponent(Animator).addClip(
+      new AnimationState("Open", { looping: false })
+    );
+    this.getComponent(Animator).addClip(
+      new AnimationState("Close", { looping: false })
+    );
 
     this.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
   }
@@ -25,8 +29,12 @@ export class Door extends Entity {
   public openDoor(): void {
     if (!this.isDoorOpen) {
       this.isDoorOpen = true;
-      this.getComponent(Animator).getClip("Close").stop();
-      this.getComponent(Animator).getClip("Open").play();
+      this.getComponent(Animator)
+        .getClip("Close")
+        .stop();
+      this.getComponent(Animator)
+        .getClip("Open")
+        .play();
       this.getComponent(AudioSource).playOnce();
     }
   }
@@ -35,8 +43,12 @@ export class Door extends Entity {
   public closeDoor(): void {
     if (this.isDoorOpen) {
       this.isDoorOpen = false;
-      this.getComponent(Animator).getClip("Open").stop();
-      this.getComponent(Animator).getClip("Close").play();
+      this.getComponent(Animator)
+        .getClip("Open")
+        .stop();
+      this.getComponent(Animator)
+        .getClip("Close")
+        .play();
       this.getComponent(AudioSource).playOnce();
     }
   }

@@ -8,7 +8,7 @@ export class CountdownTimeText extends Entity {
 
     this.addComponent(new Transform(transform));
     this.addComponent(new TextShape());
-    this.getComponent(TextShape).color = Color3.Red();  
+    this.getComponent(TextShape).color = Color3.Red();
   }
 
   // This method can be called anytime to change the number of seconds left on the clock

@@ -10,7 +10,7 @@ function formatTimeString(seconds: number): string {
     ":" +
     secs.toLocaleString(undefined, { minimumIntegerDigits: 2 })
   );
-};
+}
 
 export function CreateRoom2(): void {
   /**
@@ -30,8 +30,12 @@ export function CreateRoom2(): void {
 
   // Add the supported animations
   door.addComponent(new Animator());
-  door.getComponent(Animator).addClip(new AnimationState("Open", { looping: false }));
-  door.getComponent(Animator).addClip(new AnimationState("Close", { looping: false }));
+  door
+    .getComponent(Animator)
+    .addClip(new AnimationState("Open", { looping: false }));
+  door
+    .getComponent(Animator)
+    .addClip(new AnimationState("Close", { looping: false }));
 
   // And a sound effect to play when opening
   door.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
@@ -54,27 +58,37 @@ export function CreateRoom2(): void {
   );
 
   // Instead of a model, we'll add a TextShape to display the countdown
-  countDownTimeText.addComponent(new TextShape(
-    formatTimeString(countDownTimer.getTimeLeft())
-  ));
+  countDownTimeText.addComponent(
+    new TextShape(formatTimeString(countDownTimer.getTimeLeft()))
+  );
   countDownTimeText.getComponent(TextShape).color = Color3.Red();
 
   // As the timer counts down
   countDownTimer.setOnTimerUpdate((): void => {
     // Update the text displayed
-    countDownTimeText.getComponent(TextShape).value = formatTimeString(countDownTimer.getTimeLeft());
+    countDownTimeText.getComponent(TextShape).value = formatTimeString(
+      countDownTimer.getTimeLeft()
+    );
   });
 
   // When the timer ends
   countDownTimer.setOnTimerEnds((): void => {
     // Close the door
-    door.getComponent(Animator).getClip("Open").stop();
-    door.getComponent(Animator).getClip("Close").play();
+    door
+      .getComponent(Animator)
+      .getClip("Open")
+      .stop();
+    door
+      .getComponent(Animator)
+      .getClip("Close")
+      .play();
     door.getComponent(AudioSource).playOnce();
 
     // Reset the timer
     countDownTimer.reset();
-    countDownTimeText.getComponent(TextShape).value = formatTimeString(countDownTimer.getTimeLeft());
+    countDownTimeText.getComponent(TextShape).value = formatTimeString(
+      countDownTimer.getTimeLeft()
+    );
   });
 
   /**
@@ -106,8 +120,14 @@ export function CreateRoom2(): void {
         button.getComponent(AudioSource).playOnce();
 
         // And open the door
-        door.getComponent(Animator).getClip("Close").stop();
-        door.getComponent(Animator).getClip("Open").play();
+        door
+          .getComponent(Animator)
+          .getClip("Close")
+          .stop();
+        door
+          .getComponent(Animator)
+          .getClip("Open")
+          .play();
         door.getComponent(AudioSource).playOnce();
       }
     })

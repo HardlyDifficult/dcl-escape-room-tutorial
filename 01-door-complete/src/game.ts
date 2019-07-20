@@ -17,7 +17,9 @@ door.addComponent(new Transform({ position: new Vector3(6.58, 0, 7.85) }));
 // Add an Animator to play clips inside the model file, created by the artist
 door.addComponent(new Animator());
 // This model has an "Open" animation that when played should happen once and then stop moving
-door.getComponent(Animator).addClip(new AnimationState("Open", { looping: false }));
+door
+  .getComponent(Animator)
+  .addClip(new AnimationState("Open", { looping: false }));
 
 // Add an AudioSource to play a squeak as the door opens
 door.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
@@ -31,7 +33,10 @@ door.addComponent(
       isDoorOpen = true;
 
       // Play the animation
-      door.getComponent(Animator).getClip("Open").play();
+      door
+        .getComponent(Animator)
+        .getClip("Open")
+        .play();
       // And the sound effect
       door.getComponent(AudioSource).playOnce();
     }

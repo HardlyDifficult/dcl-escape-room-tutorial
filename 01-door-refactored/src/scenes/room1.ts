@@ -7,7 +7,9 @@ export function CreateRoom1(): void {
   door.addComponent(new Transform({ position: new Vector3(6.58, 0, 7.85) }));
 
   door.addComponent(new Animator());
-  door.getComponent(Animator).addClip(new AnimationState("Open", { looping: false }));
+  door
+    .getComponent(Animator)
+    .addClip(new AnimationState("Open", { looping: false }));
 
   door.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
 
@@ -16,7 +18,10 @@ export function CreateRoom1(): void {
     new OnClick((): void => {
       if (!isDoorOpen) {
         isDoorOpen = true;
-        door.getComponent(Animator).getClip("Open").play();
+        door
+          .getComponent(Animator)
+          .getClip("Open")
+          .play();
         door.getComponent(AudioSource).playOnce();
       }
     })
