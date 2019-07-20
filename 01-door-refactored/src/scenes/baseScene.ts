@@ -1,9 +1,10 @@
-export class BaseScene extends Entity {
-  constructor() {
-    super();
-    engine.addEntity(this);
+// Export as a function for game.ts to call in order to construct the base scene
+export function CreateBaseScene(): void {
+  const baseScene = new Entity();
+  engine.addEntity(baseScene);
 
-    this.addComponent(new GLTFShape("models/scene.glb"));
-    this.addComponent(new Transform({ rotation: Quaternion.Euler(0, 180, 0) }));
-  }
+  baseScene.addComponent(new GLTFShape("models/scene.glb"));
+  baseScene.addComponent(
+    new Transform({ rotation: Quaternion.Euler(0, 180, 0) })
+  );
 }

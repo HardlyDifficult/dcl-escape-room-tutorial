@@ -93,7 +93,7 @@ export class TimerSystem implements ISystem {
    * @param onTimerEnds callback for when timer ends
    */
   public createTimer(time: number, onTimerEnds: () => void): Timer {
-    let timer = new Timer(time, onTimerEnds);
+    const timer = new Timer(time, onTimerEnds);
     this.runTimer(timer);
     return timer;
   }
@@ -123,7 +123,7 @@ export class TimerSystem implements ISystem {
 
   update(dt: number) {
     for (let i = 0; i < this.runningTimers.length; i++) {
-      let timer = this.runningTimers[i];
+      const timer = this.runningTimers[i];
       timer.updateTime(dt);
       if (timer.hasFinished()) {
         this.removedTimers.push(i);

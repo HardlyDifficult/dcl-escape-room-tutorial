@@ -1,7 +1,7 @@
+// Import references to code we moved into separate files to ease readibility
+import { CreateBaseScene } from "./scenes/baseScene";
 import { CreateRoom1 } from "./scenes/room1";
-import { BaseScene } from "./scenes/baseScene";
 
-// Creating Main Scene
-new BaseScene();
-// Creating Room1
+// Construct the game, one scene at a time
+CreateBaseScene();
 CreateRoom1();

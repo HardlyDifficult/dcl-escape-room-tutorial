@@ -15,7 +15,7 @@ export function CreateRoom5(gameCanvas: UICanvas): void {
   });
 
   // The door to unlock
-  let door = new GameObjects.Door({
+  const door = new GameObjects.Door({
     position: new Vector3(25, 0, 10),
     rotation: Quaternion.Euler(0, 90, 0)
   });
