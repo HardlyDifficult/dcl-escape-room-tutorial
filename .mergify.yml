@@ -1,0 +1,87 @@
+pull_request_rules:
+  - name: approved
+    conditions:
+      - "#approved-reviews-by>=1"
+      - "#status-failure=0"
+      - "#label=0"
+      - "status-success=WIP"
+    actions:
+      label:
+        add: ["auto-merge"]
+
+  - name: hd
+    conditions:
+      - author=NickCuso
+      - "#status-failure=0"
+      - "#label=0"
+      - "status-success=WIP"
+    actions:
+      label:
+        add: ["auto-merge"]
+
+  - name: renovate
+    conditions:
+      - author=renovate[bot]
+      - "#status-failure=0"
+      - "#label=0"
+      - "status-success=WIP"
+    actions:
+      label:
+        add: ["auto-merge"]
+
+  - name: dependabot
+    conditions:
+      - author=dependabot[bot]
+      - "#status-failure=0"
+      - "#label=0"
+      - "status-success=WIP"
+    actions:
+      label:
+        add: ["auto-merge"]
+
+  - name: imgbot
+    conditions:
+      - author=imgbot[bot]
+      - "#status-failure=0"
+      - "#label=0"
+      - "status-success=WIP"
+    actions:
+      label:
+        add: ["auto-merge"]
+
+  - name: stop on wip
+    conditions:
+      - label=auto-merge
+      - "-status-success=WIP"
+    actions:
+      label:
+        remove: ["auto-merge"]
+        
+  - name: stop on failure
+    conditions:
+      - label=auto-merge
+      - "#status-failure>=1"
+    actions:
+      label:
+        remove: ["auto-merge"]
+
+  - name: stop on label
+    conditions:
+      - label=auto-merge
+      - "#label>=2"
+    actions:
+      label:
+        remove: ["auto-merge"]
+
+  - name: auto-merge
+    conditions:
+      - label=auto-merge
+      - "#label=1"
+      - "#changes-requested-reviews-by=0"
+      - "status-success=ci/circleci: test"
+      - "status-success=WIP"
+    actions:
+      merge:
+        method: squash
+        strict: smart
+      delete_head_branch: {}
