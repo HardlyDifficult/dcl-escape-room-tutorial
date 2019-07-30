@@ -1,5 +1,5 @@
 // The Timer and TimerSystem are DCL provided components used by this room
-import utils from "decentraland-ecs-utils";
+import utils from "../../node_modules/decentraland-ecs-utils/index";
 
 const openDoorTime = 5; // Seconds
 
