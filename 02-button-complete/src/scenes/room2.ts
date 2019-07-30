@@ -24,10 +24,9 @@ export function CreateRoom2(): void {
   engine.addEntity(door);
   door.addComponent(new GLTFShape("models/room2/Puzzle02_Door.glb"));
   door.addComponent(
-    new Transform(
-      {
-        position:new Vector3(24.1,5.51634,24.9)
-      })
+    new Transform({
+      position: new Vector3(24.1, 5.51634, 24.9)
+    })
   );
 
   // Add the supported animations
@@ -50,33 +49,36 @@ export function CreateRoom2(): void {
   engine.addEntity(countDownDisplayer);
 
   // Adding Mesh to the Displayer
-  countDownDisplayer.addComponent(new GLTFShape("models/room1/Puzzle02_ButtomScreen.glb"));
+  countDownDisplayer.addComponent(
+    new GLTFShape("models/room1/Puzzle02_ButtomScreen.glb")
+  );
 
   // Set position to the displayer
   countDownDisplayer.addComponent(
     new Transform({
-    position: new Vector3(25.1272,9.51119,25.1116)
-      })
-    );
+      position: new Vector3(25.1272, 9.51119, 25.1116)
+    })
+  );
 
-    // Create countdown displayer
-    let countdown = new Entity();
+  // Create countdown displayer
+  let countdown = new Entity();
 
-    // Set countdown text as child of displayer
-    countdown.setParent(countDownDisplayer);
+  // Set countdown text as child of displayer
+  countdown.setParent(countDownDisplayer);
 
-    // Add transform and set position
-    countdown.addComponent(
-      new Transform({
-        position: new Vector3(0,0,0.1), rotation: Quaternion.Euler(20,180,0) 
-      })
-    );
+  // Add transform and set position
+  countdown.addComponent(
+    new Transform({
+      position: new Vector3(0, 0, 0.1),
+      rotation: Quaternion.Euler(20, 180, 0)
+    })
+  );
 
-    //create text shape for countdown
-    let countdownTextShape = new TextShape(formatTimeString(openDoorTime));
-    countdownTextShape.color = Color3.Red();
-    countdownTextShape.fontSize = 5;
-    countdown.addComponent(countdownTextShape);
+  //create text shape for countdown
+  let countdownTextShape = new TextShape(formatTimeString(openDoorTime));
+  countdownTextShape.color = Color3.Red();
+  countdownTextShape.fontSize = 5;
+  countdown.addComponent(countdownTextShape);
 
   /**
    * Button
@@ -88,14 +90,16 @@ export function CreateRoom2(): void {
   button.addComponent(new GLTFShape("models/room2/Square_Button.glb"));
   button.addComponent(
     new Transform({
-      position: new Vector3(26.3714,6.89,26.8936)
+      position: new Vector3(26.3714, 6.89, 26.8936)
     })
   );
-    // Create animator for button
-    let buttonAnimator = new Animator()
+  // Create animator for button
+  let buttonAnimator = new Animator();
 
-    // Add clip to animator
-    buttonAnimator.addClip(new AnimationState("Button_Action", {looping:false}))
+  // Add clip to animator
+  buttonAnimator.addClip(
+    new AnimationState("Button_Action", { looping: false })
+  );
 
   // And a sound effect for when the button is pressed
   button.addComponent(new AudioSource(new AudioClip("sounds/button.mp3")));
@@ -111,31 +115,44 @@ export function CreateRoom2(): void {
         let countdown = openDoorTime;
 
         // Create 1 second interval
-        countDownDisplayer.addComponent(new utils.Interval(1000,(): void =>{
-        countdown --;
+        countDownDisplayer.addComponent(
+          new utils.Interval(1000, (): void => {
+            countdown--;
 
-        if (countdown > 0){
-          countdownTextShape.value = formatTimeString(countdown);
-        }
-        else{
-          // Reset countdown
-          countDownDisplayer.removeComponent(utils.Interval);
+            if (countdown > 0) {
+              countdownTextShape.value = formatTimeString(countdown);
+            } else {
+              // Reset countdown
+              countDownDisplayer.removeComponent(utils.Interval);
 
-          // Stop previous animation as a workaround to a bug with animations
-          door.getComponent(Animator).getClip("Door_Open").stop();
-          // Play Close animation
-          door.getComponent(Animator).getClip("Door_Close").play();
-          // Play door sound
-          door.getComponent(AudioSource).playOnce(); 
-          // Reset countdown text value
-          countdownTextShape.value = formatTimeString(openDoorTime);
-        }
-        }));
-      
+              // Stop previous animation as a workaround to a bug with animations
+              door
+                .getComponent(Animator)
+                .getClip("Door_Open")
+                .stop();
+              // Play Close animation
+              door
+                .getComponent(Animator)
+                .getClip("Door_Close")
+                .play();
+              // Play door sound
+              door.getComponent(AudioSource).playOnce();
+              // Reset countdown text value
+              countdownTextShape.value = formatTimeString(openDoorTime);
+            }
+          })
+        );
+
         // Stop previous animation as a workaround to a bug with animations
-        door.getComponent(Animator).getClip("Door_Close").stop();
+        door
+          .getComponent(Animator)
+          .getClip("Door_Close")
+          .stop();
         // Play Open animation
-        door.getComponent(Animator).getClip("Door_Open").play();
+        door
+          .getComponent(Animator)
+          .getClip("Door_Open")
+          .play();
         // Play door sound
         door.getComponent(AudioSource).playOnce();
         // Play button sound
