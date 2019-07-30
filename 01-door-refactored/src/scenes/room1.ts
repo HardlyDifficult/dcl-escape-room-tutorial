@@ -4,7 +4,9 @@ export function CreateRoom1(): void {
   engine.addEntity(door);
 
   door.addComponent(new GLTFShape("models/room1/Puzzle01_Door.glb"));
-  door.addComponent(new Transform({position: new Vector3(21.18,10.8,24.5)}));
+  door.addComponent(
+    new Transform({ position: new Vector3(21.18, 10.8, 24.5) })
+  );
 
   door.addComponent(new Animator());
   door

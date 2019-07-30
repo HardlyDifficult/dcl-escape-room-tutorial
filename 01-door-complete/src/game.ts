@@ -9,7 +9,7 @@ engine.addEntity(door);
 
 // Give it a model and move it into place
 door.addComponent(new GLTFShape("models/room1/Puzzle01_Door.glb"));
-door.addComponent(new Transform({position: new Vector3(21.18,10.8,24.5)}));
+door.addComponent(new Transform({ position: new Vector3(21.18, 10.8, 24.5) }));
 
 // Add an Animator to play clips inside the model file, created by the artist
 door.addComponent(new Animator());
