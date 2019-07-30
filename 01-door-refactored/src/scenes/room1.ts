@@ -3,13 +3,13 @@ export function CreateRoom1(): void {
   const door = new Entity();
   engine.addEntity(door);
 
-  door.addComponent(new GLTFShape("models/generic/door.glb"));
-  door.addComponent(new Transform({ position: new Vector3(6.58, 0, 7.85) }));
+  door.addComponent(new GLTFShape("models/room1/Puzzle01_Door.glb"));
+  door.addComponent(new Transform({position: new Vector3(21.18,10.8,24.5)}));
 
   door.addComponent(new Animator());
   door
     .getComponent(Animator)
-    .addClip(new AnimationState("Open", { looping: false }));
+    .addClip(new AnimationState("Door_Open", { looping: false }));
 
   door.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
 
@@ -20,7 +20,7 @@ export function CreateRoom1(): void {
         isDoorOpen = true;
         door
           .getComponent(Animator)
-          .getClip("Open")
+          .getClip("Door_Open")
           .play();
         door.getComponent(AudioSource).playOnce();
       }
