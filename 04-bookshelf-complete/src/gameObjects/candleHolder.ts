@@ -26,14 +26,15 @@ export class CandleHolder extends Entity{
             // Rotating Entity
             if(value == utils.ToggleState.On){
                 this.addComponentOrReplace(new utils.RotateTransformComponent(this.getComponent(Transform).rotation, this.endRot, 0.5));
+                // Playing Sound
+                this.getComponent(AudioSource).playOnce();
             }
             else{
                 this.addComponentOrReplace(new utils.RotateTransformComponent(this.getComponent(Transform).rotation, this.startRot, 0.5));
+                // Playing Sound
+                this.getComponent(AudioSource).playOnce();
             }
-
-            // Playing Sound
-            this.getComponent(AudioSource).playOnce();
-        }))
+        }));
     }
 
     public Toggle(): void{

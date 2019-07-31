@@ -27,14 +27,15 @@ export class Bookshelf extends Entity{
             // Moving Bookshelf
             if(value == utils.ToggleState.On){
                 this.addComponentOrReplace(new utils.MoveTransformComponent(this.getComponent(Transform).position, this.endPos, 3));
+                // Playing Audio
+                this.getComponent(AudioSource).playOnce();
             }
             else{
                 this.addComponentOrReplace(new utils.MoveTransformComponent(this.getComponent(Transform).position, this.startPos, 3));
+                // Playing Audio
+                this.getComponent(AudioSource).playOnce();
             }
-            
-            // Playing Audio
-            this.getComponent(AudioSource).playOnce();
-        }))
+        }));
     }
 
     public Toggle(): void {

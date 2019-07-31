@@ -22,13 +22,14 @@ export class MovableEntity extends Entity{
             // Moving Entity
             if(value == utils.ToggleState.On){
                 this.addComponentOrReplace(new utils.MoveTransformComponent(this.getComponent(Transform).position, this.endPos, 0.5));
+                // Playing Audio
+                this.getComponent(AudioSource).playOnce();
             }
             else{
                 this.addComponentOrReplace(new utils.MoveTransformComponent(this.getComponent(Transform).position, this.startPos, 0.5));
+                // Playing Audio
+                this.getComponent(AudioSource).playOnce();
             }
-
-            // Playing Audio
-            this.getComponent(AudioSource).playOnce();
         }));
 
         // Adding OnClick Event
