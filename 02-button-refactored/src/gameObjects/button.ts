@@ -15,7 +15,7 @@ export class Button extends Entity {
 
   // A button can be pressed.  At the moment this just plays a sound effect
   // but maybe an animation will be added in the future as well.
-  public pressButton() {
+  public pressButton(): void {
     this.getComponent(AudioSource).playOnce();
   }
 }
