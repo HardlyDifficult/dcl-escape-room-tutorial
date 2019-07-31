@@ -14,6 +14,6 @@
     "decentraland-ecs": "6.2.3"
   },
   "dependencies": {
-    "decentraland": "3.2.4"
+    "decentraland": "3.2.5"
   }
 }
