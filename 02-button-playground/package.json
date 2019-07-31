@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial#readme",
   "dependencies": {
-    "decentraland": "3.2.4"
+    "decentraland": "3.2.4",
+    "decentraland-ecs-utils": "^1.0.1"
   },
   "devDependencies": {
     "decentraland-ecs": "latest"

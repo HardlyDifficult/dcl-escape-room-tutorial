@@ -4,6 +4,5 @@ export class BaseScene extends Entity {
     engine.addEntity(this);
 
     this.addComponent(new GLTFShape("models/scene.glb"));
-    this.addComponent(new Transform({ rotation: Quaternion.Euler(0, 180, 0) }));
   }
 }

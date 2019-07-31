@@ -1,129 +1,86 @@
-import { BookShelf } from "../gameObjects/bookShelf";
-import { Chanderlier } from "../gameObjects/chanderlier";
-import { GenericMove } from "../gameObjects/genericMove";
-import { GenericRotate } from "../gameObjects/genericRotate";
-import { GenericModel } from "../gameObjects/genericModel";
+import {MovableEntity} from "../gameObjects/movableEntity";
+import {RotatableEntity} from "../gameObjects/rotatableEntity";
+import {Bookshelf} from "../gameObjects/bookshelf";
+import {CandleHolder} from "../gameObjects/candleHolder";
 
-export function CreateRoom4(): void {
-  // Creating Audio Clips for Several Entities
-  let audioClipMoveObject1 = new AudioClip("sounds/move_object1.mp3");
-  let audioClipMoveObject2 = new AudioClip("sounds/move_object2.mp3");
+export function CreateRoom4(): void{
 
-  // Creating Bookshelf
-  let bookshelf = new BookShelf(
-    new Transform({
-      position: new Vector3(15.525, 0, 6.53),
-      rotation: Quaternion.Euler(0, 90, 0)
-    })
-  );
+    // Importing Audio Clips
+    let audioMoveObject1 = new AudioClip("sounds/move_object1.mp3");
+    let audioMoveObject2 = new AudioClip("sounds/move_object2.mp3");
 
-  // Creating Candlestick Holder but they call it Chanderlier so whatever
-  let chandelier = new Chanderlier(
-    new Transform({
-      position: new Vector3(0.4, 1.5, -0.05),
-      rotation: Quaternion.Identity
-    })
-  );
+    // Creating Bookshelf
+    let bookshelf = new Bookshelf(new Transform({
+        position: new Vector3(20.6557,5.4996,15.041),
+        rotation: Quaternion.Identity
+    }), 
+    new Vector3(1.5,0,0));
 
-  // Setting Chanderlier Parent
-  chandelier.setParent(bookshelf);
-
-  chandelier.addComponent(
-    new OnClick((): void => {
-      chandelier.ToggleChanderlier();
-      bookshelf.ToggleBookshelf();
-    })
-  );
-
-  // Creating Book
-  let book = new GenericRotate(
-    new Transform({
-      position: new Vector3(-0.8, 0.59, -0.19),
-      rotation: Quaternion.Euler(0, -90, 0)
+    // Creating CandleHolder
+    let candleHolder = new CandleHolder(new Transform({
+        position: new Vector3(17.5056,7.61611,15.3835),
+        rotation: Quaternion.Identity
     }),
-    Quaternion.Euler(0, -90, 25)
-  );
-  book.setParent(bookshelf);
+    Quaternion.Euler(0,0,30));
 
-  // Adding Unique Book Components
-  book.addComponent(new GLTFShape("models/room4/book.glb"));
-  book.addComponent(new AudioSource(audioClipMoveObject1));
+    // Adding OnClick Event
+    candleHolder.addComponent(new OnClick((): void =>{
+        candleHolder.Toggle();
+        bookshelf.Toggle();
+    }))
 
-  // Creating Couch
-  let couch = new GenericMove(
-    new Transform({
-      position: new Vector3(15, 0, 2.5)
+    // -- Background Objects -- //
+
+    // Creating First Book
+    let book1 = new RotatableEntity(new Transform({
+        position: new Vector3(15.8321,7.83095,14.1252),
+        rotation: Quaternion.Identity
     }),
-    new Vector3(0, 0, 0.4)
-  );
+    Quaternion.Euler(0,0,-25));
 
-  // Adding Unique Couch Components
-  couch.addComponent(new GLTFShape("models/room4/couch.glb"));
-  couch.addComponent(new AudioSource(audioClipMoveObject1));
+    // Adding Model and Sound
+    book1.addComponent(new GLTFShape("models/room4/Puzzle04_Book1.glb"));
+    book1.addComponent(new AudioSource(audioMoveObject1));
 
-  // Creating Table
-  let table = new GenericModel(
-    new GLTFShape("models/room4/table.glb"),
-    new Transform({
-      position: new Vector3(8.63, 0, 3.63)
-    })
-  );
-
-  // Creating Wine Bottle
-  let wineBottle = new GenericMove(
-    new Transform({
-      position: new Vector3(8.53, 1.011, 3.72)
+    // Creating Telescope
+    let telescope  = new RotatableEntity(new Transform({
+        position: new Vector3(22.6554,7.02615,10.6208),
+        rotation: Quaternion.Identity,
     }),
-    new Vector3(-0.2, 0, 0)
-  );
+    Quaternion.Euler(0,127,0));
 
-  // Adding Unique Bottle Components
-  wineBottle.addComponent(new GLTFShape("models/room4/winebottle.glb"));
-  wineBottle.addComponent(new AudioSource(audioClipMoveObject2));
+    // Adding Model and Sound
+    telescope.addComponent(new GLTFShape("models/room4/Puzzle04_Telescope.glb"));
+    telescope.addComponent(new AudioSource(audioMoveObject1));
 
-  // Creating Wine Glass
-  let wineGlass = new GenericMove(
-    new Transform({
-      position: new Vector3(8.72, 1.041, 3.42)
+    // Creating Second Book
+    let book2 = new MovableEntity(new Transform({
+        position: new Vector3(20.41,6.4118,10.4922)
     }),
-    new Vector3(0, 0, -0.2)
-  );
+    new Vector3(0,0,-0.2));
 
-  // Adding Unique Glass Components
-  wineGlass.addComponent(new GLTFShape("models/room4/wineglass.glb"));
-  wineGlass.addComponent(new AudioSource(audioClipMoveObject2));
+    // Adding Model and Sound
+    book2.addComponent(new GLTFShape("models/room4/Puzzle04_Book2.glb"));
+    book2.addComponent(new AudioSource(audioMoveObject1));
 
-  // Creating Chair
-  let chair = new GenericRotate(
-    new Transform({
-      position: new Vector3(9.22, 0, 3.86),
-      rotation: Quaternion.Identity
+    // Creating Wine Glass
+    let wineGlass = new MovableEntity(new Transform({
+        position: new Vector3(25.7505,6.95786,10.5917)
     }),
-    Quaternion.Euler(0, 15, 0)
-  );
+    new Vector3(0.2,0,0));
 
-  // Adding Unique Chair Components
-  chair.addComponent(new GLTFShape("models/room4/chair.glb"));
-  chair.addComponent(new AudioSource(audioClipMoveObject1));
+    // Adding Model and Sound
+    wineGlass.addComponent(new GLTFShape("models/room4/Puzzle04_WGlass.glb"));
+    wineGlass.addComponent(new AudioSource(audioMoveObject2));
 
-  // Creating Wall Painting
-  let wallPainting = new GenericRotate(
-    new Transform({
-      position: new Vector3(12.33, 2.65, 0.31),
-      rotation: Quaternion.Euler(90, 0, 0)
-    }),
-    Quaternion.Euler(90, 10, 0)
-  );
+    // Creating Globe
+    let globe = new RotatableEntity(new Transform({
+        position: new Vector3(21.2191,7.11234,10.6817),
+        rotation: Quaternion.Euler(0.146,34.9,-33.8)
+    }), 
+    Quaternion.Euler(174, -26.43, -149.37));
 
-  // Adding Unique Painting Components
-  wallPainting.addComponent(new GLTFShape("models/room4/manacoin.glb"));
-  wallPainting.addComponent(new AudioSource(audioClipMoveObject1));
-
-  // Creating Fake Door
-  let fakeDoor = new GenericModel(
-    new GLTFShape("models/generic/door.glb"),
-    new Transform({
-      position: new Vector3(10.5, 0, 0.4)
-    })
-  );
+    // Adding Model and Sound
+    globe.addComponent(new GLTFShape("models/room4/Puzzle04_Globe.glb"));
+    globe.addComponent(new AudioSource(audioMoveObject1));
 }
