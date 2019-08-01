@@ -13,16 +13,8 @@ jobs:
           paths:
             - repo
 
-      # npm i and cache
-      - restore_cache:
-          keys:
-            - v1-{{ checksum "package.json" }}
+      # npm i
       - run: npm i
-      - save_cache:
-          paths:
-            - node_modules
-            - package-lock.json
-          key: v1-{{ checksum "package.json" }}
 
       # lint and commit any changes, which may restart the build
       - run: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
@@ -33,13 +25,7 @@ jobs:
       # Scenes
       ###########
 
-      - run: cd 00-setup-complete && npm i && npm run build
-      - run: cd 01-door-playground && npm i && npm run build
-      - run: cd 01-door-complete && npm i && npm run build
-      - run: cd 02-button-playground && npm i && npm run build
-      - run: cd 02-button-complete && npm i && npm run build
-      - run: cd 05-keypad-complete && npm i && npm run build
-      # TODO other scenes
+      - run: bash scripts/build_all.sh
 
       ###########
       # Tutorial
