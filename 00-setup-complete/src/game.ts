@@ -6,8 +6,3 @@ engine.addEntity(baseScene);
 
 // Give it a component for the model itself
 baseScene.addComponent(new GLTFShape("models/scene.glb"));
-
-// And rotate it into position
-baseScene.addComponent(
-  new Transform({ rotation: Quaternion.Euler(0, 180, 0) })
-);
