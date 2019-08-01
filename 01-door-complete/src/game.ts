@@ -1,6 +1,5 @@
 const baseScene = new Entity();
 engine.addEntity(baseScene);
-
 baseScene.addComponent(new GLTFShape("models/scene.glb"));
 
 // Add an entity for the door
