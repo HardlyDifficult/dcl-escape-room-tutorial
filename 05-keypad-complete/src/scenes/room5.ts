@@ -1,118 +1,78 @@
-import GameObjects from "../gameObjects/index";
-import UI from "../ui/index";
-
-const password = "155";
+import utils from "../../node_modules/decentraland-ecs-utils/index";
+import resources from "../resources";
+import { HintImage } from "../ui/hintImage";
+import { ModelEntity } from "../gameObjects/modelEntity";
+import { RotatableEntity } from "../gameObjects/rotatableEntity";
+import { ToggleDoor } from "../gameObjects/toggleDoor";
+import { EmptyEntity } from "../gameObjects/emptyEntity";
+import { Keypad } from "../ui/keypad";
 
 export function CreateRoom5(gameCanvas: UICanvas): void {
-  /**
-   * Core scene elemets
-   */
+  // Creating Door
+  const door = new ToggleDoor(
+    new Transform({
+      position: new Vector3(19.5141, 5.54709, 25.676)
+    }),
+    resources.models.door5,
+    resources.sounds.doorSqueak
+  );
 
-  // A wall to place things on
-  new GameObjects.Wall({
-    position: new Vector3(19, 1.4, 13.1),
-    scale: new Vector3(4, 3, 1)
-  });
+  // Creating Keypad
+  const keypad = new Keypad(gameCanvas, door);
 
-  // The door to unlock
-  const door = new GameObjects.Door({
-    position: new Vector3(25, 0, 10),
-    rotation: Quaternion.Euler(0, 90, 0)
-  });
+  // Creating Keypad Lock
+  const keypadLock = new EmptyEntity(
+    new Transform({
+      position: new Vector3(19.6486, 7, 23.142),
+      scale: new Vector3(0.2, 0.6, 0.4)
+    }),
+    keypad
+  );
 
-  /**
-   * Painting
-   */
+  // Creating Painting
+  const painting = new ModelEntity(
+    new Transform({
+      position: new Vector3(22.2283, 7.60325, 20.9326)
+    }),
+    resources.models.pictureFrame
+  );
 
-  // The painting on the wall
-  const painting = new GameObjects.Painting({
-    position: new Vector3(18, 1.5, 13),
-    scale: new Vector3(0.7, 1, 1),
-    rotation: Quaternion.Euler(0, 0, 180)
-  });
+  // Creating Painting Hint
+  const paintingHint = new HintImage(gameCanvas, resources.textures.fernHint);
 
-  // The painting hint
-  const paintingHint = new UI.PaintingHint(gameCanvas);
-  paintingHint.hide();
-
-  // When the painting is clicked, show the hint
+  // Adding OnClick Event
   painting.addComponent(
     new OnClick((): void => {
-      paintingHint.show();
+      paintingHint.visible = true;
     })
   );
 
-  /**
-   * Carpet & Coin
-   */
+  // Creating Carpet
+  const carpet = new RotatableEntity(
+    new Transform({
+      position: new Vector3(20.7079, 5.50579, 24.6273),
+      rotation: Quaternion.Identity
+    }),
+    Quaternion.Euler(0, -10, 0)
+  );
 
-  // The coin to be hidden under the carpet
-  const coin = new GameObjects.Coin({ position: new Vector3(18, 0, 10.5) });
+  carpet.addComponent(resources.models.carpet);
 
-  // The carpet on-top of the coin
-  const carpet = new GameObjects.Carpet({ position: new Vector3(19, 0, 11) });
+  // Creating Postit
+  const postit = new ModelEntity(
+    new Transform({
+      position: new Vector3(21.571, 5.50857, 25.9534)
+    }),
+    resources.models.postit
+  );
 
-  // When the carpet is clicked, toggle rotation which will reveal the coin
-  carpet.addComponent(
+  // Creating Postit Hint
+  const postitHint = new HintImage(gameCanvas, resources.textures.postitHint);
+
+  // Adding OnClick Event
+  postit.addComponent(
     new OnClick((): void => {
-      carpet.rotateCarpet();
+      postitHint.visible = true;
     })
   );
-
-  // The coin hint
-  const coinHint = new UI.CoinHint(gameCanvas);
-  coinHint.hide();
-
-  // When the coin is clicked, show the hint
-  coin.addComponent(
-    new OnClick((): void => {
-      coinHint.show();
-    })
-  );
-
-  /**
-   * Keypad
-   */
-
-  // The keypad on the wall
-  const keypad = new GameObjects.Keypad({
-    position: new Vector3(19.5, 1.5, 13)
-  });
-
-  // UI for interacting with the keypad
-  const keypadUI = new UI.KeypadUI(gameCanvas);
-  keypadUI.hide();
-
-  // When the keypad on the wall is clicked, display the UI
-  keypad.addComponent(
-    new OnClick((): void => {
-      keypadUI.show();
-    })
-  );
-
-  // Wire up the keypad UI
-  let currentInput = "";
-  keypadUI.onInput = (value: number): void => {
-    currentInput += value;
-    keypadUI.display(currentInput);
-    keypad.playButtonPressed();
-  };
-  keypadUI.onReset = (): void => {
-    currentInput = "";
-    keypadUI.display(currentInput);
-    keypad.playButtonPressed();
-  };
-  keypadUI.onSubmit = (): void => {
-    if (currentInput == password) {
-      // Correct!
-      keypadUI.display("OK!", Color4.Green());
-      keypad.playAccessGranted();
-      door.openDoor();
-    } else {
-      // The password is incorrect
-      keypadUI.display("Err", Color4.Red());
-      currentInput = "";
-      keypad.playAccessDenied();
-    }
-  };
 }
