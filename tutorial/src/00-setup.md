@@ -48,3 +48,5 @@ engine.addEntity(baseScene)
 scene.addComponent(new GLTFShape("models/scene.glb"))
 scene.addComponent(new Transform({rotation: Quaternion.Euler(0,180,0)}))
 ```
+
+We also added multiple parcels to the `scene.json`
