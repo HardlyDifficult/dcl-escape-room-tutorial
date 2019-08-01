@@ -1,0 +1,27 @@
+{
+  "extends": "npm-package-json-lint-config-default",
+  "rules": {
+    "require-author": "error",
+    "require-name": "error",
+    "require-license": "error",
+    "require-version": "off",
+    "prefer-alphabetical-peerDependencies": "error",
+    "prefer-alphabetical-optionalDependencies": "error",
+    "prefer-alphabetical-bundledDependencies": "error",
+    "prefer-alphabetical-devDependencies": "error",
+    "prefer-alphabetical-dependencies": "error",
+    "version-format": "error",
+    "name-format": "error",
+    "description-format": ["error", {
+      "requireCapitalFirstLetter": true,
+      "requireEndingPeriod": true
+    }],
+    "prefer-property-order": ["error", []],
+    "valid-values-license": ["error", [
+      "MIT"
+     ]],
+     "valid-values-author": ["error", [
+      "HardlyDifficult"
+    ]]
+  }
+}
