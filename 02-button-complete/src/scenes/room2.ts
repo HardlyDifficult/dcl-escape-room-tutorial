@@ -36,7 +36,7 @@ export function CreateRoom2(): void {
   door
     .getComponent(Animator)
     .addClip(new AnimationState("Door_Close", { looping: false }));
-  
+
   door.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
 
   /**
@@ -93,9 +93,9 @@ export function CreateRoom2(): void {
 
   // Add the button animation
   button.addComponent(new Animator());
-  button.getComponent(Animator).addClip(
-    new AnimationState("Button_Action", { looping: false })
-  );
+  button
+    .getComponent(Animator)
+    .addClip(new AnimationState("Button_Action", { looping: false }));
 
   // And a sound effect for when the button is pressed
   button.addComponent(new AudioSource(new AudioClip("sounds/button.mp3")));
@@ -115,7 +115,9 @@ export function CreateRoom2(): void {
 
             if (timeRemaining > 0) {
               // Update the display with the new timeRemaining
-              countdownText.getComponent(TextShape).value = formatTimeString(timeRemaining);
+              countdownText.getComponent(TextShape).value = formatTimeString(
+                timeRemaining
+              );
             } else {
               // Timer has reached 0! Remove the interval so the display does not go negative
               countdownClock.removeComponent(utils.Interval);
@@ -136,7 +138,9 @@ export function CreateRoom2(): void {
               door.getComponent(AudioSource).playOnce();
 
               // Then reset the text
-              countdownText.getComponent(TextShape).value = formatTimeString(openDoorTime);
+              countdownText.getComponent(TextShape).value = formatTimeString(
+                openDoorTime
+              );
             }
           })
         );
@@ -156,8 +160,14 @@ export function CreateRoom2(): void {
 
         // Animate the button press
         // Stop previous animation as a workaround to a bug with animations
-        button.getComponent(Animator).getClip("Button_Action").stop();
-        button.getComponent(Animator).getClip("Button_Action").play();
+        button
+          .getComponent(Animator)
+          .getClip("Button_Action")
+          .stop();
+        button
+          .getComponent(Animator)
+          .getClip("Button_Action")
+          .play();
 
         // And play the button sound effect
         button.getComponent(AudioSource).playOnce();
