@@ -10,7 +10,7 @@
   "owner": "",
   "scene": {
     "parcels": [
-      "0,0"
+      "0,0","1,0","0,1","1,1","1,2","0,2","2,0","2,1","2,2"
     ],
     "base": "0,0"
   },
@@ -20,7 +20,7 @@
   },
   "policy": {
     "contentRating": "E",
-    "fly": true,
+    "fly": false,
     "voiceEnabled": true,
     "blacklist": [],
     "teleportPosition": ""
