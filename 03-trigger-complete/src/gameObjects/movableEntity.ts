@@ -1,50 +1,56 @@
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 
+/**
+ * An object which moves from one position to another anytime it is clicked.
+ */
 export class MovableEntity extends Entity {
-  private startPos: Vector3;
-  private endPos: Vector3;
-
-  constructor(transform: TranformConstructorArgs, movement: Vector3) {
-    // Creating Entity
+  constructor(
+    model: GLTFShape,
+    transform: TranformConstructorArgs,
+    sound: AudioClip,
+    deltaPosition: Vector3
+  ) {
     super();
     engine.addEntity(this);
 
-    // Creating Transform
+    this.addComponent(model);
     this.addComponent(new Transform(transform));
+    this.addComponent(new AudioSource(sound));
 
-    // Setting Positional Vectors
-    this.startPos = transform.position;
-    this.endPos = transform.position.add(movement);
+    // Save the positions to move between
+    const startPos = transform.position;
+    const endPos = transform.position.add(deltaPosition);
 
-    // Adding Toogle Component
+    // Add a Toggle component which defaults to Off
     this.addComponent(
       new utils.ToggleComponent(utils.ToggleState.Off, (value): void => {
-        // Moving Entity
+        // On change
         if (value == utils.ToggleState.On) {
+          // Move to the endPos when toggled on
           this.addComponentOrReplace(
             new utils.MoveTransformComponent(
               this.getComponent(Transform).position,
-              this.endPos,
+              endPos,
               0.5
             )
           );
-          // Playing Audio
+          // And play the sound effect
           this.getComponent(AudioSource).playOnce();
         } else {
+          // Move to the startPos when toggled off
           this.addComponentOrReplace(
             new utils.MoveTransformComponent(
               this.getComponent(Transform).position,
-              this.startPos,
+              startPos,
               0.5
             )
           );
-          // Playing Audio
           this.getComponent(AudioSource).playOnce();
         }
       })
     );
 
-    // Adding OnClick Event
+    // When clicked, toggle possition
     this.addComponent(
       new OnClick((): void => {
         this.getComponent(utils.ToggleComponent).toggle();
