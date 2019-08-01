@@ -1,6 +1,6 @@
 import { MovableEntity } from "../gameObjects/movableEntity";
 import { RotatableEntity } from "../gameObjects/rotatableEntity";
-import { Bookshelf } from "../gameObjects/bookshelf";
+import { Bookshelf } from "../gameObjects/bookShelf";
 import { CandleHolder } from "../gameObjects/candleHolder";
 
 export function CreateRoom4(): void {
