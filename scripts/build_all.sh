@@ -4,4 +4,5 @@ ls | grep -E "^[0-9]{2}" | while read -r folder ; do
     cd "$folder"
     npm i
     npm run build
+    cd ..
 done
