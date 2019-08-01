@@ -15,8 +15,12 @@ export class Button extends Entity {
   }
 
   public press(): void {
-    this.getComponent(Animator).getClip("Button_Action").stop(); // bug workaround
-    this.getComponent(Animator).getClip("Button_Action").play();
+    this.getComponent(Animator)
+      .getClip("Button_Action")
+      .stop(); // bug workaround
+    this.getComponent(Animator)
+      .getClip("Button_Action")
+      .play();
     this.getComponent(AudioSource).playOnce();
   }
 }

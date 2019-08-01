@@ -8,7 +8,8 @@ export class MovableEntity extends Entity {
     model: GLTFShape,
     transform: TranformConstructorArgs,
     sound: AudioClip,
-    deltaPosition: Vector3) {
+    deltaPosition: Vector3
+  ) {
     super();
     engine.addEntity(this);
 

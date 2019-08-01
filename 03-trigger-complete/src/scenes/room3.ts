@@ -26,13 +26,15 @@ export function CreateRoom3(): void {
       new utils.TriggerBoxShape(new Vector3(4.2, 3, 8), Vector3.Zero()),
       0,
       0,
-      null, 
       null,
-      (): void => { // onCameraEnter
+      null,
+      (): void => {
+        // onCameraEnter
         // Slam the door shut before they can run through
         door.closeDoor();
       },
-      (): void => { // onCameraExit
+      (): void => {
+        // onCameraExit
         // And tease them by opening the door again if they start to walk away (but quietly)
         door.openDoor(false);
       }
@@ -50,7 +52,7 @@ export function CreateRoom3(): void {
   button.addComponent(
     new OnClick((): void => {
       button.press();
-      door.openDoor(false); 
+      door.openDoor(false);
       // And disable the trigger so that we don't slam the door again
       trigger.getComponent(utils.TriggerComponent).enabled = false;
     })
