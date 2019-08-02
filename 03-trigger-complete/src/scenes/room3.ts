@@ -7,9 +7,7 @@ export function CreateRoom3(): void {
   // Add the door for this room
   const door = new Door(
     new GLTFShape("models/room3/Puzzle03_Door.glb"),
-    new Transform({
-      position: new Vector3(24.1166, 7.17, 15.78)
-    }),
+    { position: new Vector3(24.1166, 7.17, 15.78) },
     new AudioClip("sounds/room3/whip.mp3")
   );
   // This door starts open
@@ -42,11 +40,9 @@ export function CreateRoom3(): void {
   );
 
   // Add a big red button
-  const button = new Button(
-    new Transform({
-      position: new Vector3(22.4456, 5.92706, 24.18)
-    })
-  );
+  const button = new Button(new GLTFShape("models/room3/Round_Button.glb"), {
+    position: new Vector3(22.4456, 5.92706, 24.18)
+  });
 
   // Open the door when the button is pressed
   button.addComponent(
@@ -61,33 +57,25 @@ export function CreateRoom3(): void {
   // Add a few movable plants in the room, one of which is covering the button
   new MovableEntity(
     new GLTFShape("models/room3/Puzzle03_Plant1.glb"),
-    new Transform({
-      position: new Vector3(23.2489, 5.5071, 23.813)
-    }),
+    { position: new Vector3(23.2489, 5.5071, 23.813) },
     new AudioClip("sounds/move_object1.mp3"),
     new Vector3(0, 0, -0.5)
   );
   new MovableEntity(
     new GLTFShape("models/room3/Puzzle03_Plant2.glb"),
-    new Transform({
-      position: new Vector3(26.9356, 5.52006, 23.4817)
-    }),
+    { position: new Vector3(26.9356, 5.52006, 23.4817) },
     new AudioClip("sounds/move_object1.mp3"),
     new Vector3(0, 0, -0.5)
   );
   new MovableEntity(
     new GLTFShape("models/room3/Puzzle03_Plant3.glb"),
-    new Transform({
-      position: new Vector3(23.4513, 5.50571, 16.8218)
-    }),
+    { position: new Vector3(23.4513, 5.50571, 16.8218) },
     new AudioClip("sounds/move_object1.mp3"),
     new Vector3(0, 0, 0.5)
   );
   new MovableEntity(
     new GLTFShape("models/room3/Puzzle03_Plant4.glb"),
-    new Transform({
-      position: new Vector3(26.9878, 5.51511, 16.8279)
-    }),
+    { position: new Vector3(26.9878, 5.51511, 16.8279) },
     new AudioClip("sounds/move_object1.mp3"),
     new Vector3(0, 0, 0.5)
   );
