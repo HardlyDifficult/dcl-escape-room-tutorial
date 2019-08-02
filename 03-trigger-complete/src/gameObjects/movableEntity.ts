@@ -1,7 +1,7 @@
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 
 /**
- * An object which moves from one position to another anytime it is clicked.
+ * An object which moves from one position to another when toggled.
  */
 export class MovableEntity extends Entity {
   constructor(
@@ -25,6 +25,7 @@ export class MovableEntity extends Entity {
     this.addComponent(
       new utils.ToggleComponent(utils.ToggleState.Off, (value): void => {
         // On change
+
         if (value == utils.ToggleState.On) {
           // Move to the endPos when toggled on
           this.addComponentOrReplace(
@@ -34,8 +35,6 @@ export class MovableEntity extends Entity {
               0.5
             )
           );
-          // And play the sound effect
-          this.getComponent(AudioSource).playOnce();
         } else {
           // Move to the startPos when toggled off
           this.addComponentOrReplace(
@@ -45,15 +44,10 @@ export class MovableEntity extends Entity {
               0.5
             )
           );
-          this.getComponent(AudioSource).playOnce();
         }
-      })
-    );
 
-    // When clicked, toggle possition
-    this.addComponent(
-      new OnClick((): void => {
-        this.getComponent(utils.ToggleComponent).toggle();
+        // And play the sound effect
+        this.getComponent(AudioSource).playOnce();
       })
     );
   }

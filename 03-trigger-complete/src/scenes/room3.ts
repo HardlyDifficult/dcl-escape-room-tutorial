@@ -40,7 +40,7 @@ export function CreateRoom3(): void {
   );
 
   // Add a big red button
-  const button = new Button(new GLTFShape("models/room3/Round_Button.glb"), {
+  const button = new Button(new GLTFShape("models/generic/Round_Button.glb"), {
     position: new Vector3(22.4456, 5.92706, 24.18)
   });
 
@@ -55,28 +55,51 @@ export function CreateRoom3(): void {
   );
 
   // Add a few movable plants in the room, one of which is covering the button
-  new MovableEntity(
+  const fern1 = new MovableEntity(
     new GLTFShape("models/room3/Puzzle03_Plant1.glb"),
     { position: new Vector3(23.2489, 5.5071, 23.813) },
     new AudioClip("sounds/move_object1.mp3"),
     new Vector3(0, 0, -0.5)
   );
-  new MovableEntity(
+  // When clicked, toggle possition
+  fern1.addComponent(
+    new OnClick((): void => {
+      fern1.getComponent(utils.ToggleComponent).toggle();
+    })
+  );
+
+  // And add a few decoy plants
+  const fern2 = new MovableEntity(
     new GLTFShape("models/room3/Puzzle03_Plant2.glb"),
     { position: new Vector3(26.9356, 5.52006, 23.4817) },
     new AudioClip("sounds/move_object1.mp3"),
     new Vector3(0, 0, -0.5)
   );
-  new MovableEntity(
+  fern2.addComponent(
+    new OnClick((): void => {
+      fern2.getComponent(utils.ToggleComponent).toggle();
+    })
+  );
+  const fern3 = new MovableEntity(
     new GLTFShape("models/room3/Puzzle03_Plant3.glb"),
     { position: new Vector3(23.4513, 5.50571, 16.8218) },
     new AudioClip("sounds/move_object1.mp3"),
     new Vector3(0, 0, 0.5)
   );
-  new MovableEntity(
+  fern3.addComponent(
+    new OnClick((): void => {
+      fern3.getComponent(utils.ToggleComponent).toggle();
+    })
+  );
+  const fern4 = new MovableEntity(
     new GLTFShape("models/room3/Puzzle03_Plant4.glb"),
     { position: new Vector3(26.9878, 5.51511, 16.8279) },
     new AudioClip("sounds/move_object1.mp3"),
     new Vector3(0, 0, 0.5)
+  );
+  fern4.addComponent(
+    new OnClick((): void => {
+      fern4.getComponent(utils.ToggleComponent).toggle();
+    })
   );
 }
