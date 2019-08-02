@@ -20,6 +20,7 @@ export function CreateRoom1(): void {
     new OnClick((): void => {
       if (!isDoorOpen) {
         isDoorOpen = true;
+
         door
           .getComponent(Animator)
           .getClip("Door_Open")
