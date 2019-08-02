@@ -8,7 +8,7 @@ export function CreateRoom1(): void {
     { position: new Vector3(21.18, 10.8, 24.5) },
     new AudioClip("sounds/door_squeak.mp3")
   );
-  
+
   door.addComponent(
     new OnClick((): void => {
       // In this room, the door opens when clicked

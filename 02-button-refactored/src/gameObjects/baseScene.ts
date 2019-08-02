@@ -5,7 +5,8 @@
 /**
  * Export the class to be used by another file
  * Extends a basic `Entity` so additional components may be added go GameObjects when needed
- */ 
+ */
+
 export class BaseScene extends Entity {
   // The constructor is required for the class, called when `new BaseScene()` is used
   constructor() {

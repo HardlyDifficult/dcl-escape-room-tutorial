@@ -31,7 +31,8 @@ export class Door extends Entity {
    * Exposing `openDoor` as an action this object is capable of
    * This contains the open door experience (animation and sound) while allowing
    * the scenes to decide when the action occurs (e.g. on door click in room 1 or button click in room 2)
-   */ 
+   */
+
   public openDoor(playAudio: boolean = true): void {
     if (!this.isOpen) {
       this.isOpen = true;

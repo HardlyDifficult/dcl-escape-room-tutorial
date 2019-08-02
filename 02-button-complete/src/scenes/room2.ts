@@ -103,7 +103,6 @@ export function CreateRoom2(): void {
   // When the player clicks the button
   button.addComponent(
     new OnClick((): void => {
-      
       // Checking if timer is running
       if (!countdownClock.hasComponent(utils.Interval)) {
         // Animate the button press
@@ -115,10 +114,10 @@ export function CreateRoom2(): void {
           .getComponent(Animator)
           .getClip("Button_Action")
           .play();
-  
+
         // And play the button sound effect
         button.getComponent(AudioSource).playOnce();
-        
+
         // Open the door
         door
           .getComponent(Animator)
@@ -130,7 +129,7 @@ export function CreateRoom2(): void {
           .play();
         // And play the sound effect
         door.getComponent(AudioSource).playOnce();
-        
+
         // And add an interval to update the text every 1 second and slam the door again when time runs out
         let timeRemaining = openDoorTime;
         countdownClock.addComponent(
