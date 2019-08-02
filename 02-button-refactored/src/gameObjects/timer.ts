@@ -1,34 +1,33 @@
+/**
+ * A timer which can be placed on a wall.
+ */
 export class Timer extends Entity {
-  private countDownText: Entity;
-  private timerText: TextShape;
+  // Store the text entity for use in the method below
+  public timerText: Entity;
 
-  public openDoorTime = 5; // In Seconds
-
-  constructor(transform: TranformConstructorArgs) {
+  constructor(model: GLTFShape, transform: TranformConstructorArgs) {
     super();
     engine.addEntity(this);
 
+    this.addComponent(model);
     this.addComponent(new Transform(transform));
-    this.addComponent(new GLTFShape("models/room1/Countdown_Clock.glb"));
 
-    this.countDownText = new Entity();
-    this.countDownText.setParent(this);
+    this.timerText = new Entity();
+    this.timerText.setParent(this);
 
-    this.countDownText.addComponent(
+    this.timerText.addComponent(
       new Transform({
         position: new Vector3(0, 0, 0.1),
         rotation: Quaternion.Euler(20, 180, 0)
       })
     );
 
-    this.timerText = new TextShape(this.formatTimeString(this.openDoorTime));
-    this.timerText.color = Color3.Red();
-    this.timerText.fontSize = 5;
-
-    this.countDownText.addComponent(this.timerText);
+    // The value to display will be controlled by the scene itself
+    this.timerText.addComponent(new TextShape());
+    this.timerText.getComponent(TextShape).color = Color3.Red();
+    this.timerText.getComponent(TextShape).fontSize = 5;
   }
 
-  // Function to convert the time left into a string like "00:05"
   private formatTimeString(seconds: number): string {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
@@ -39,7 +38,10 @@ export class Timer extends Entity {
     );
   }
 
+  // This method can be called anytime to change the number of seconds on the clock
   public updateTimeString(seconds: number): void {
-    this.timerText.value = this.formatTimeString(seconds);
+    this.timerText.getComponent(TextShape).value = this.formatTimeString(
+      seconds
+    );
   }
 }
