@@ -103,11 +103,36 @@ export function CreateRoom2(): void {
   // When the player clicks the button
   button.addComponent(
     new OnClick((): void => {
+      
       // Checking if timer is running
       if (!countdownClock.hasComponent(utils.Interval)) {
+        // Animate the button press
+        button
+          .getComponent(Animator)
+          .getClip("Button_Action")
+          .stop(); // bug workaround
+        button
+          .getComponent(Animator)
+          .getClip("Button_Action")
+          .play();
+  
+        // And play the button sound effect
+        button.getComponent(AudioSource).playOnce();
+        
+        // Open the door
+        door
+          .getComponent(Animator)
+          .getClip("Door_Close")
+          .stop(); // bug workaround
+        door
+          .getComponent(Animator)
+          .getClip("Door_Open")
+          .play();
+        // And play the sound effect
+        door.getComponent(AudioSource).playOnce();
+        
+        // And add an interval to update the text every 1 second and slam the door again when time runs out
         let timeRemaining = openDoorTime;
-
-        // Add an interval to update the text every 1 second
         countdownClock.addComponent(
           new utils.Interval(1000, (): void => {
             // 1 second has past
@@ -122,19 +147,15 @@ export function CreateRoom2(): void {
               // Timer has reached 0! Remove the interval so the display does not go negative
               countdownClock.removeComponent(utils.Interval);
 
-              // Stop previous animation as a workaround to a bug with animations
+              // Close the door
               door
                 .getComponent(Animator)
                 .getClip("Door_Open")
-                .stop();
-
-              // Close the door
+                .stop(); // bug workaround
               door
                 .getComponent(Animator)
                 .getClip("Door_Close")
                 .play();
-
-              // And play the sound effect
               door.getComponent(AudioSource).playOnce();
 
               // Then reset the text
@@ -144,33 +165,6 @@ export function CreateRoom2(): void {
             }
           })
         );
-
-        // Stop previous animation as a workaround to a bug with animations
-        door
-          .getComponent(Animator)
-          .getClip("Door_Close")
-          .stop();
-
-        // Open the door
-        door
-          .getComponent(Animator)
-          .getClip("Door_Open")
-          .play();
-        door.getComponent(AudioSource).playOnce();
-
-        // Animate the button press
-        // Stop previous animation as a workaround to a bug with animations
-        button
-          .getComponent(Animator)
-          .getClip("Button_Action")
-          .stop();
-        button
-          .getComponent(Animator)
-          .getClip("Button_Action")
-          .play();
-
-        // And play the button sound effect
-        button.getComponent(AudioSource).playOnce();
       }
     })
   );
