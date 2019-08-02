@@ -1,5 +1,3 @@
-import { TriggerSphereShape } from "../../node_modules/decentraland-ecs-utils/triggers/triggerSystem";
-
 export class Timer extends Entity {
   private countDownText: Entity;
   private timerText: TextShape;

@@ -1,7 +1,5 @@
 import { CreateRoom2 } from "./scenes/room2";
+import { BaseScene } from "./gameObjects/baseScene";
 
-const baseScene = new Entity();
-engine.addEntity(baseScene);
-baseScene.addComponent(new GLTFShape("models/scene.glb"));
-
+new BaseScene();
 CreateRoom2();
