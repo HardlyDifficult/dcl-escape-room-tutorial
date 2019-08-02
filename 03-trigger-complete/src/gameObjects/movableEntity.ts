@@ -25,7 +25,7 @@ export class MovableEntity extends Entity {
     this.addComponent(
       new utils.ToggleComponent(utils.ToggleState.Off, (value): void => {
         // On change
-        
+
         if (value == utils.ToggleState.On) {
           // Move to the endPos when toggled on
           this.addComponentOrReplace(
