@@ -1,22 +1,22 @@
 {
   "name": "dcl-escape-room-tutorial",
   "version": "1.0.0",
-  "description": "A Decentraland tutorial.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial.git"
-  },
+  "description": "Learn how to make a game for Decentraland.",
   "keywords": [
     "Decentraland",
     "DCL",
     "MANA"
   ],
-  "author": "HardlyDifficult",
-  "license": "MIT",
+  "homepage": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial#readme",
   "bugs": {
     "url": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial/issues"
   },
-  "homepage": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial#readme",
+  "license": "MIT",
+  "author": "HardlyDifficult",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial.git"
+  },
   "scripts": {
     "dev": "vuepress dev src",
     "build": "vuepress build src"

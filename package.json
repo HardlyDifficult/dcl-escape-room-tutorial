@@ -1,22 +1,22 @@
 {
   "name": "dcl-escape-room-tutorial",
   "version": "1.0.0",
-  "description": "A Decentraland tutorial.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial.git"
-  },
+  "description": "Learn how to make a game for Decentraland.",
   "keywords": [
     "Decentraland",
     "DCL",
     "MANA"
   ],
-  "author": "HardlyDifficult",
-  "license": "MIT",
+  "homepage": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial#readme",
   "bugs": {
     "url": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial/issues"
   },
-  "homepage": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial#readme",
+  "license": "MIT",
+  "author": "HardlyDifficult",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial.git"
+  },
   "scripts": {
     "lint": "eslint . --ext .js,.ts  --fix && npmPkgJsonLint . --fix",
     "lintNoFix": "eslint . --ext .js,.ts",
@@ -24,17 +24,17 @@
     "deploy:all": "scripts/deploy_all.sh",
     "postinstall": "scripts/install_all.sh"
   },
+  "dependencies": {
+    "eslint-config-prettier": "6.0.0",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-prettier": "3.1.0",
+    "npm-package-json-lint": "3.7.0",
+    "npm-package-json-lint-config-default": "2.0.0"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "1.13.0",
     "@typescript-eslint/parser": "1.13.0",
     "eslint": "6.1.0",
     "prettier-eslint": "9.0.0"
-  },
-  "dependencies": {
-    "eslint-config-prettier": "6.0.0",
-    "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-prettier": "3.1.0",
-    "npm-package-json-lint": "^3.7.0",
-    "npm-package-json-lint-config-default": "^2.0.0"
   }
 }

@@ -1,28 +1,21 @@
 {
-  "name": "dcl-project",
+  "name": "dcl-escape-room-tutorial",
   "version": "1.0.0",
-  "description": "My new Decentraland project",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial.git"
-  },
+  "description": "Learn how to make a game for Decentraland.",
   "keywords": [
     "Decentraland",
     "DCL",
     "MANA"
   ],
-  "author": "HardlyDifficult",
-  "license": "MIT",
+  "homepage": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial#readme",
   "bugs": {
     "url": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial/issues"
   },
-  "homepage": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial#readme",
-  "dependencies": {
-    "decentraland": "3.2.4",
-    "decentraland-ecs-utils": "1.1.0"
-  },
-  "devDependencies": {
-    "decentraland-ecs": "latest"
+  "license": "MIT",
+  "author": "HardlyDifficult",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial.git"
   },
   "scripts": {
     "start": "dcl start",
@@ -31,5 +24,12 @@
     "deploy:now": "dcl export && now export",
     "ecs:install": "npm install --save-dev decentraland-ecs@latest",
     "ecs:install-next": "npm install --save-dev decentraland-ecs@next"
+  },
+  "dependencies": {
+    "decentraland": "3.2.5",
+    "decentraland-ecs-utils": "1.1.0"
+  },
+  "devDependencies": {
+    "decentraland-ecs": "latest"
   }
 }
