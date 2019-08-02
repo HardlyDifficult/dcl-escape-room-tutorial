@@ -1,65 +1,64 @@
-import { Timer, TimerSystem } from "../modules/timerSystem";
-
-// Import the gameObjects for this room
-import { CountdownTimeText } from "../gameObjects/countdownTimeText";
+// DCL provided components used by this room
+import utils from "../../node_modules/decentraland-ecs-utils/index";
 import { Door } from "../gameObjects/door";
 import { Button } from "../gameObjects/button";
+import { Timer } from "../gameObjects/timer";
 
 export function CreateRoom2(): void {
-  // Swap out the door
+  /**
+   * Door
+   */
+
   const door = new Door(
-    "models/generic/door.glb",
+    new GLTFShape("models/room2/Puzzle02_Door.glb"),
     new Transform({
-      position: new Vector3(8, 0, 11.74),
-      rotation: Quaternion.Euler(0, 90, 0)
+      position: new Vector3(24.1, 5.51634, 24.9)
+    }),
+    new AudioClip("sounds/door_squeak.mp3")
+  );
+
+  /**
+   * Countdown timer
+   */
+
+  // Add a model to display the countdown timer on the wall
+  const countdownClock = new Timer(
+    new Transform({
+      position: new Vector3(25.1272, 9.51119, 25.1116)
     })
   );
 
-  // We are leaving the timer itself here, but also moving this into the gameObject to
-  // create a full `CountdownTimer` is an option as well.
-  const countDownTimer = new Timer(5);
+  /**
+   * Button
+   */
 
-  // And the countdown time text
-  const countDownTimeText = new CountdownTimeText({
-    position: new Vector3(7.7, 3.5, 12.5),
-    rotation: Quaternion.Euler(0, 90, 0)
-  });
-  // Update the text displayed with the current time left
-  countDownTimeText.updateDisplay(countDownTimer.getTimeLeft());
-
-  countDownTimer.setOnTimerUpdate((): void => {
-    // Update display as the timer updates
-    countDownTimeText.updateDisplay(countDownTimer.getTimeLeft());
-  });
-
-  countDownTimer.setOnTimerEnds((): void => {
-    // Close the door
-    door.closeDoor();
-
-    countDownTimer.reset();
-    // Update display again
-    countDownTimeText.updateDisplay(countDownTimer.getTimeLeft());
-  });
-
-  // Swap out the button
+  // Add the Button the we'll use to open the Door
   const button = new Button(
+    new GLTFShape("models/room2/Square_Button.glb"),
     new Transform({
-      position: new Vector3(1.91, 1.1, 12.12),
-      scale: new Vector3(0.3, 0.3, 0.3)
+      position: new Vector3(26.3714, 6.89, 26.8936)
     })
   );
 
-  // Leave the on-click behavour here so that the button could be used again in other ways
+  // When the player clicks the button
   button.addComponent(
     new OnClick((): void => {
-      if (!countDownTimer.isRunning()) {
-        countDownTimer.reset();
-        TimerSystem.instance.runTimer(countDownTimer);
+      if (!countdownClock.hasComponent(utils.Interval)) {
+        let timeRemaining = countdownClock.openDoorTime;
 
-        // Open the door
+        countdownClock.addComponent(
+          new utils.Interval(1000, (): void => {
+            timeRemaining--;
+            countdownClock.updateTimeString(timeRemaining);
+
+            if (timeRemaining <= 0) {
+              countdownClock.removeComponent(utils.Interval);
+              door.closeDoor();
+            }
+          })
+        );
+
         door.openDoor();
-        // Press the button
-        button.pressButton();
       }
     })
   );
