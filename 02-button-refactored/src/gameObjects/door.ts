@@ -1,55 +1,67 @@
-/**
- * A door and its basic behaviors to be reused by every room.
- */
 export class Door extends Entity {
-  isDoorOpen: boolean = false;
+  public isOpen: boolean;
 
-  // Pass the model src since each door has a unique look
-  constructor(modelSrc: string, transform: TranformConstructorArgs) {
+  constructor(
+    model: GLTFShape,
+    transform: TranformConstructorArgs,
+    sound: AudioClip
+  ) {
     super();
     engine.addEntity(this);
 
-    this.addComponent(new GLTFShape(modelSrc));
+    this.addComponent(model);
     this.addComponent(new Transform(transform));
 
     this.addComponent(new Animator());
     this.getComponent(Animator).addClip(
-      new AnimationState("Open", { looping: false })
+      new AnimationState("Door_Open", { looping: false })
     );
     this.getComponent(Animator).addClip(
-      new AnimationState("Close", { looping: false })
+      new AnimationState("Door_Close", { looping: false })
     );
 
-    this.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
+    this.addComponent(new AudioSource(sound));
   }
 
-  // Exposing `openDoor` as an action this object is capable of
-  // This contains the open door experience (animation and sound) while allowing
-  // the scenes to decide when the action occurs (e.g. on door click in room 1 or button click in room 2)
-  public openDoor(): void {
-    if (!this.isDoorOpen) {
-      this.isDoorOpen = true;
+  public openDoor(playAudio: boolean = true): void {
+    if (!this.isOpen) {
+      this.isOpen = true;
+
       this.getComponent(Animator)
-        .getClip("Close")
-        .stop();
+        .getClip("Door_Close")
+        .stop(); // bug workaround
       this.getComponent(Animator)
-        .getClip("Open")
+        .getClip("Door_Open")
         .play();
-      this.getComponent(AudioSource).playOnce();
+
+      if (playAudio) {
+        this.getComponent(AudioSource).playOnce();
+      }
     }
   }
 
-  // Similiarly we can close the door.
-  public closeDoor(): void {
-    if (this.isDoorOpen) {
-      this.isDoorOpen = false;
+  public closeDoor(playAudio: boolean = true): void {
+    if (this.isOpen) {
+      this.isOpen = false;
+
       this.getComponent(Animator)
-        .getClip("Open")
-        .stop();
+        .getClip("Door_Open")
+        .stop(); // bug workaround
       this.getComponent(Animator)
-        .getClip("Close")
+        .getClip("Door_Close")
         .play();
-      this.getComponent(AudioSource).playOnce();
+
+      if (playAudio) {
+        this.getComponent(AudioSource).playOnce();
+      }
+    }
+  }
+
+  public toggleDoor(playAudio: boolean = true): void {
+    if (this.isOpen) {
+      this.closeDoor(playAudio);
+    } else {
+      this.openDoor(playAudio);
     }
   }
 }
