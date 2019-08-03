@@ -4,12 +4,12 @@ export class RotatableEntity extends Entity {
   private startRot: Quaternion;
   private endRot: Quaternion;
 
-  constructor(transform: TranformConstructorArgs, rotation: Quaternion) {
-    // Creating Entity
+  constructor(model: GLTFShape, transform: TranformConstructorArgs, audio: AudioClip, rotation: Quaternion) {
     super();
     engine.addEntity(this);
 
-    // Creating Transform
+    this.addComponent(model);
+    this.addComponent(new AudioSource(audio));
     this.addComponent(new Transform(transform));
 
     // Setting Rotational Vectors
@@ -41,13 +41,6 @@ export class RotatableEntity extends Entity {
           // Playing Audio
           this.getComponent(AudioSource).playOnce();
         }
-      })
-    );
-
-    // Adding OnClick Event
-    this.addComponent(
-      new OnClick((): void => {
-        this.getComponent(utils.ToggleComponent).toggle();
       })
     );
   }
