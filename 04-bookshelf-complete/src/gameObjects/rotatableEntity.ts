@@ -4,7 +4,12 @@ export class RotatableEntity extends Entity {
   private startRot: Quaternion;
   private endRot: Quaternion;
 
-  constructor(model: GLTFShape, transform: TranformConstructorArgs, audio: AudioClip, rotation: Quaternion) {
+  constructor(
+    model: GLTFShape,
+    transform: TranformConstructorArgs,
+    audio: AudioClip,
+    rotation: Quaternion
+  ) {
     super();
     engine.addEntity(this);
 
