@@ -1,8 +1,4 @@
-/**
- * A timer which can be placed on a wall.
- */
 export class Timer extends Entity {
-  // Store the text entity for use in the method below
   public timerText: Entity;
 
   constructor(model: GLTFShape, transform: TranformConstructorArgs) {
@@ -22,7 +18,6 @@ export class Timer extends Entity {
       })
     );
 
-    // The value to display will be controlled by the scene itself
     this.timerText.addComponent(new TextShape());
     this.timerText.getComponent(TextShape).color = Color3.Red();
     this.timerText.getComponent(TextShape).fontSize = 5;
@@ -38,7 +33,6 @@ export class Timer extends Entity {
     );
   }
 
-  // This method can be called anytime to change the number of seconds on the clock
   public updateTimeString(seconds: number): void {
     this.timerText.getComponent(TextShape).value = this.formatTimeString(
       seconds
