@@ -1,7 +1,12 @@
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 
 export class RotatableEntity extends Entity {
-  constructor(model: GLTFShape, transform: TranformConstructorArgs, audio: AudioClip, rotation: Quaternion) {
+  constructor(
+    model: GLTFShape,
+    transform: TranformConstructorArgs,
+    audio: AudioClip,
+    rotation: Quaternion
+  ) {
     super();
     engine.addEntity(this);
 
