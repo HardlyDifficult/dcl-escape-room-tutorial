@@ -1,8 +1,7 @@
-// Move the door logic to a separate gameObject file
-import { Door } from "../gameObjects/door";
+// Switch the import to use the index
+import { Door } from "../gameObjects/index";
 
 export function CreateRoom1(): void {
-  // Create a door with a look and feel specific to this room
   const door = new Door(
     new GLTFShape("models/room1/Puzzle01_Door.glb"),
     { position: new Vector3(21.18, 10.8, 24.5) },
@@ -11,7 +10,6 @@ export function CreateRoom1(): void {
 
   door.addComponent(
     new OnClick((): void => {
-      // In this room, the door opens when clicked
       door.openDoor();
     })
   );
