@@ -6,10 +6,4 @@ import { MovableEntity } from "./movableEntity";
 import { Timer } from "./timer";
 
 // And make them available by name
-export {
-  BaseScene,
-  Button,
-  Door,
-  MovableEntity,
-  Timer
-}
+export { BaseScene, Button, Door, MovableEntity, Timer };
