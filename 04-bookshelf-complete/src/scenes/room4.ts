@@ -2,6 +2,7 @@ import { MovableEntity } from "../gameObjects/movableEntity";
 import { RotatableEntity } from "../gameObjects/rotatableEntity";
 import { Bookshelf } from "../gameObjects/bookShelf";
 import { CandleHolder } from "../gameObjects/candleHolder";
+import utils from "../../node_modules/decentraland-ecs-utils/index";
 
 export function CreateRoom4(): void {
   // Importing Audio Clips
@@ -38,64 +39,84 @@ export function CreateRoom4(): void {
 
   // Creating First Book
   let book1 = new RotatableEntity(
+    new GLTFShape("models/room4/Puzzle04_Book1.glb"),
     new Transform({
       position: new Vector3(15.8321, 7.83095, 14.1252),
       rotation: Quaternion.Identity
     }),
+    audioMoveObject1,
     Quaternion.Euler(0, 0, -25)
   );
 
-  // Adding Model and Sound
-  book1.addComponent(new GLTFShape("models/room4/Puzzle04_Book1.glb"));
-  book1.addComponent(new AudioSource(audioMoveObject1));
+  book1.addComponent(
+    new OnClick((): void => {
+      book1.getComponent(utils.ToggleComponent).toggle();
+    })
+  );
 
   // Creating Telescope
   let telescope = new RotatableEntity(
+    new GLTFShape("models/room4/Puzzle04_Telescope.glb"),
     new Transform({
       position: new Vector3(22.6554, 7.02615, 10.6208),
       rotation: Quaternion.Identity
     }),
+    audioMoveObject1,
     Quaternion.Euler(0, 127, 0)
   );
 
-  // Adding Model and Sound
-  telescope.addComponent(new GLTFShape("models/room4/Puzzle04_Telescope.glb"));
-  telescope.addComponent(new AudioSource(audioMoveObject1));
+  telescope.addComponent(
+    new OnClick((): void => {
+      telescope.getComponent(utils.ToggleComponent).toggle();
+    })
+  );
 
   // Creating Second Book
   let book2 = new MovableEntity(
+    new GLTFShape("models/room4/Puzzle04_Book2.glb"),
     new Transform({
       position: new Vector3(20.41, 6.4118, 10.4922)
     }),
+    audioMoveObject1,
     new Vector3(0, 0, -0.2)
   );
 
-  // Adding Model and Sound
-  book2.addComponent(new GLTFShape("models/room4/Puzzle04_Book2.glb"));
-  book2.addComponent(new AudioSource(audioMoveObject1));
+  book2.addComponent(
+    new OnClick((): void => {
+      book2.getComponent(utils.ToggleComponent).toggle();
+    })
+  );
 
   // Creating Wine Glass
   let wineGlass = new MovableEntity(
+    new GLTFShape("models/room4/Puzzle04_WGlass.glb"),
     new Transform({
       position: new Vector3(25.7505, 6.95786, 10.5917)
     }),
+    audioMoveObject2,
     new Vector3(0.2, 0, 0)
   );
 
-  // Adding Model and Sound
-  wineGlass.addComponent(new GLTFShape("models/room4/Puzzle04_WGlass.glb"));
-  wineGlass.addComponent(new AudioSource(audioMoveObject2));
+  wineGlass.addComponent(
+    new OnClick((): void => {
+      wineGlass.getComponent(utils.ToggleComponent).toggle();
+    })
+  );
 
   // Creating Globe
   let globe = new RotatableEntity(
+    new GLTFShape("models/room4/Puzzle04_Globe.glb"),
     new Transform({
       position: new Vector3(21.2191, 7.11234, 10.6817),
       rotation: Quaternion.Euler(0.146, 34.9, -33.8)
     }),
+    audioMoveObject1,
     Quaternion.Euler(174, -26.43, -149.37)
   );
 
-  // Adding Model and Sound
-  globe.addComponent(new GLTFShape("models/room4/Puzzle04_Globe.glb"));
-  globe.addComponent(new AudioSource(audioMoveObject1));
+  globe.addComponent(
+    new OnClick((): void => {
+      globe.getComponent(utils.ToggleComponent).toggle();
+    })
+  );
 }
