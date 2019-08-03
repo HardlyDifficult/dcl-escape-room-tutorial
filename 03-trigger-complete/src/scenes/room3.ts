@@ -61,7 +61,7 @@ export function CreateRoom3(): void {
     new AudioClip("sounds/move_object1.mp3"),
     new Vector3(0, 0, -0.5)
   );
-  // When clicked, toggle possition
+  // When clicked, toggle position
   fern1.addComponent(
     new OnClick((): void => {
       fern1.getComponent(utils.ToggleComponent).toggle();
