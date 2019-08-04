@@ -1,24 +1,25 @@
-import utils from "../../node_modules/decentraland-ecs-utils/index";
 import resources from "../resources";
 import { HintImage } from "../ui/hintImage";
 import { ModelEntity } from "../gameObjects/modelEntity";
 import { RotatableEntity } from "../gameObjects/rotatableEntity";
-import { ToggleDoor } from "../gameObjects/toggleDoor";
+import { Door } from "../gameObjects/door";
 import { EmptyEntity } from "../gameObjects/emptyEntity";
 import { Keypad } from "../ui/keypad";
 
 export function CreateRoom5(gameCanvas: UICanvas): void {
   // Creating Door
-  const door = new ToggleDoor(
+  const door = new Door(
+    resources.models.door5,
     new Transform({
       position: new Vector3(19.5141, 5.54709, 25.676)
     }),
-    resources.models.door5,
     resources.sounds.doorSqueak
   );
 
   // Creating Keypad
-  const keypad = new Keypad(gameCanvas, door);
+  const keypad = new Keypad(gameCanvas, (): void => {
+    door.openDoor();
+  });
 
   // Creating Keypad Lock
   const keypadLock = new EmptyEntity(
@@ -26,7 +27,9 @@ export function CreateRoom5(gameCanvas: UICanvas): void {
       position: new Vector3(19.6486, 7, 23.142),
       scale: new Vector3(0.2, 0.6, 0.4)
     }),
-    keypad
+    new OnClick((): void => {
+      keypad.visible = true;
+    })
   );
 
   // Creating Painting
