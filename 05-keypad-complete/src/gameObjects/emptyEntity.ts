@@ -1,7 +1,7 @@
 export class EmptyEntity extends Entity {
   private shape: BoxShape;
 
-  constructor(transform: TranformConstructorArgs, container: UIContainerRect) {
+  constructor(transform: TranformConstructorArgs, onClick: OnClick) {
     // Creating Entity
     super();
     engine.addEntity(this);
@@ -14,10 +14,6 @@ export class EmptyEntity extends Entity {
     this.addComponent(new Transform(transform));
     this.addComponent(this.shape);
 
-    this.addComponent(
-      new OnClick((): void => {
-        container.visible = true;
-      })
-    );
+    this.addComponent(onClick);
   }
 }
