@@ -1,0 +1,30 @@
+{
+  "display": {
+    "title": "interactive-text",
+    "favicon": "favicon_asset"
+  },
+  "contact": {
+    "name": "author-name",
+    "email": ""
+  },
+  "owner": "",
+  "scene": {
+    "parcels": [
+      "0,0","1,0","0,1","1,1","1,2","0,2","2,0","2,1","2,2"
+    ],
+    "base": "0,0"
+  },
+  "communications": {
+    "type": "webrtc",
+    "signalling": "https://signalling-01.decentraland.org"
+  },
+  "policy": {
+    "contentRating": "E",
+    "fly": false,
+    "voiceEnabled": true,
+    "blacklist": [],
+    "teleportPosition": ""
+  },
+  "main": "bin/game.js",
+  "tags": []
+}
