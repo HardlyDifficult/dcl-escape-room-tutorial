@@ -1,72 +1,68 @@
 # 01: Room
 
-Start with the default scene from 00.  Plus model, sound.  Maybe use playground
+Start with the 01-room-playground folder, it has the default scene from 00-setup and the model & sound files for this room.
 
 Add a door
 
 After `engine.addEntity(baseScene)`...
 
-```
-//create door entity
-let door = new Entity();
-//add door entity to engine
+```typescript
+// Add an entity for the door
+const door = new Entity();
 engine.addEntity(door);
 
-//add gltf shape
-door.addComponent(new GLTFShape("models/generic/door.glb"));
+// Give it a model and move it into place
+door.addComponent(new GLTFShape("models/room1/Puzzle01_Door.glb"));
+door.addComponent(new Transform({ position: new Vector3(21.18, 10.8, 24.5) }));
 
-//add transform and set it in position
-door.addComponent(new Transform({ position: new Vector3(6.58, 0, 7.85) }));
+// Add an Animator to play clips inside the model file, created by the artist
+door.addComponent(new Animator());
+// This model has an "Open" animation that when played should happen once and then stop moving
+door
+  .getComponent(Animator)
+  .addClip(new AnimationState("Door_Open", { looping: false }));
 ```
 
-Open the door
+Add an OnClick handler to open the door:
 
-After `door.addComponent(new Transform({ position: new Vector3(6.58, 0, 7.85) }));`...
-
-```
-//variable to store if door is open
+```typescript
+// When the player clicks on the door, open it!
 let isDoorOpen = false;
-
-//create animator and add animation clips
-let doorAnimator = new Animator();
-doorAnimator.addClip(new AnimationState("Open", { looping: false }));
-door.addComponent(doorAnimator);
-
-//listen to onclick event to toggle door state
 door.addComponent(
   new OnClick((): void => {
+    // Track if the door has already been opened so we don't play the animation twice
     if (!isDoorOpen) {
       isDoorOpen = true;
-      doorAnimator.getClip("Open").play();
+
+      // Play the animation
+      door
+        .getComponent(Animator)
+        .getClip("Door_Open")
+        .play();
     }
   })
 );
-
 ```
 
+And an audio source to play a sound effect when opened:
 
-Play a sound effect
-
-Add the an audio component and then play on click
-```
-//create audio source component, set audio clip and add it to door entity
+```typescript
+// Add an AudioSource to play a squeak as the door opens
 door.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
+```
 
-//listen to onclick event to toggle door state
-door.addComponent(
-  new OnClick((): void => {
-    if (!isDoorOpen) {
-      isDoorOpen = true;
-      doorAnimator.getClip("Open").play(); // <- insert this line
+Audio is 3d, meaning that where the sound originates is relevant in terms of how loud it is for the user and if it's coming from the left or the right.
+
+In the OnClick handler, add:
+
+```
+      // And the sound effect
       door.getComponent(AudioSource).playOnce();
-    }
-  })
-);
 ```
 
 ## Refactor
 
-Separate the game into seperate scene files.
+Separate the game into seperate scene files.  This file separation makes it easy to focus on just one room at a time.
 
 ## Challenge to the reader
 

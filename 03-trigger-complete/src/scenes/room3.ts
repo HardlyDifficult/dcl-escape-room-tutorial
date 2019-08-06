@@ -1,7 +1,7 @@
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 import { Door } from "../gameObjects/door";
-import { MovableEntity } from "../gameObjects/movableEntity";
 import { Button } from "../gameObjects/button";
+import { MovableEntity } from "../gameObjects/movableEntity";
 
 export function CreateRoom3(): void {
   // Add the door for this room
