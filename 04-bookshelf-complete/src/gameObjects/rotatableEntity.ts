@@ -1,5 +1,8 @@
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 
+/**
+ * An object which rotates back and forth when toggled.
+ */
 export class RotatableEntity extends Entity {
   constructor(
     model: GLTFShape,
@@ -11,18 +14,18 @@ export class RotatableEntity extends Entity {
     engine.addEntity(this);
 
     this.addComponent(model);
-    this.addComponent(new AudioSource(audio));
     this.addComponent(new Transform(transform));
+    this.addComponent(new AudioSource(audio));
 
     // Save the positions to move between
     const startRot = transform.rotation;
     const endRot = rotation;
 
-    // Adding Toggle Component
+    // Add a Toggle component which defaults to Off
     this.addComponent(
       new utils.ToggleComponent(utils.ToggleState.Off, (value): void => {
-        // Rotating Entity
         if (value == utils.ToggleState.On) {
+          // Rotate to the endRot when toggled on
           this.addComponentOrReplace(
             new utils.RotateTransformComponent(
               this.getComponent(Transform).rotation,
@@ -30,9 +33,8 @@ export class RotatableEntity extends Entity {
               0.5
             )
           );
-          // Playing Audio
-          this.getComponent(AudioSource).playOnce();
         } else {
+          // Rotate to the startRot when toggled on
           this.addComponentOrReplace(
             new utils.RotateTransformComponent(
               this.getComponent(Transform).rotation,
@@ -40,9 +42,10 @@ export class RotatableEntity extends Entity {
               0.5
             )
           );
-          // Playing Audio
-          this.getComponent(AudioSource).playOnce();
         }
+
+        // Play the sound effect
+        this.getComponent(AudioSource).playOnce();
       })
     );
   }

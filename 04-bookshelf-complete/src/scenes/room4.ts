@@ -1,122 +1,111 @@
-import { MovableEntity } from "../gameObjects/movableEntity";
-import { RotatableEntity } from "../gameObjects/rotatableEntity";
-import { Bookshelf } from "../gameObjects/bookShelf";
-import { CandleHolder } from "../gameObjects/candleHolder";
+import { MovableEntity, RotatableEntity } from "../gameObjects/index";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 
 export function CreateRoom4(): void {
-  // Importing Audio Clips
-  let audioMoveObject1 = new AudioClip("sounds/move_object1.mp3");
-  let audioMoveObject2 = new AudioClip("sounds/move_object2.mp3");
-
-  // Creating Bookshelf
-  let bookshelf = new Bookshelf(
+  // Add a movable bookshelf which acts as the door for this room
+  let bookshelf = new MovableEntity(
+    new GLTFShape("models/room4/Puzzle04_LibraryDoor.glb"),
     new Transform({
-      position: new Vector3(20.6557, 5.4996, 15.041),
-      rotation: Quaternion.Identity
+      position: new Vector3(20.6557, 5.4996, 15.041)
     }),
-    new Vector3(1.5, 0, 0)
+    new AudioClip("sounds/move_object1.mp3"),
+    new Vector3(1.5, 0, 0),
+    // Set a longer move time for the bookshelf
+    3
   );
 
-  // Creating CandleHolder
-  let candleHolder = new CandleHolder(
-    new Transform({
-      position: new Vector3(17.5056, 7.61611, 15.3835),
-      rotation: Quaternion.Identity
-    }),
-    Quaternion.Euler(0, 0, 30)
-  );
-
-  // Adding OnClick Event
-  candleHolder.addComponent(
-    new OnClick((): void => {
-      candleHolder.Toggle();
-      bookshelf.Toggle();
-    })
-  );
-
-  // -- Background Objects -- //
-
-  // Creating First Book
-  let book1 = new RotatableEntity(
-    new GLTFShape("models/room4/Puzzle04_Book1.glb"),
-    new Transform({
-      position: new Vector3(15.8321, 7.83095, 14.1252),
-      rotation: Quaternion.Identity
-    }),
-    audioMoveObject1,
-    Quaternion.Euler(0, 0, -25)
-  );
-
-  book1.addComponent(
-    new OnClick((): void => {
-      book1.getComponent(utils.ToggleComponent).toggle();
-    })
-  );
-
-  // Creating Telescope
-  let telescope = new RotatableEntity(
-    new GLTFShape("models/room4/Puzzle04_Telescope.glb"),
-    new Transform({
-      position: new Vector3(22.6554, 7.02615, 10.6208),
-      rotation: Quaternion.Identity
-    }),
-    audioMoveObject1,
-    Quaternion.Euler(0, 127, 0)
-  );
-
-  telescope.addComponent(
-    new OnClick((): void => {
-      telescope.getComponent(utils.ToggleComponent).toggle();
-    })
-  );
-
-  // Creating Second Book
-  let book2 = new MovableEntity(
+  // Add a book as a decoy
+  let movableBook = new MovableEntity(
     new GLTFShape("models/room4/Puzzle04_Book2.glb"),
     new Transform({
       position: new Vector3(20.41, 6.4118, 10.4922)
     }),
-    audioMoveObject1,
+    new AudioClip("sounds/move_object1.mp3"),
     new Vector3(0, 0, -0.2)
   );
-
-  book2.addComponent(
+  // It moves when clicked, but doesn't unlock anything
+  movableBook.addComponent(
     new OnClick((): void => {
-      book2.getComponent(utils.ToggleComponent).toggle();
+      movableBook.getComponent(utils.ToggleComponent).toggle();
     })
   );
 
-  // Creating Wine Glass
+  // And a wine glass decoy
   let wineGlass = new MovableEntity(
     new GLTFShape("models/room4/Puzzle04_WGlass.glb"),
     new Transform({
       position: new Vector3(25.7505, 6.95786, 10.5917)
     }),
-    audioMoveObject2,
+    new AudioClip("sounds/move_object2.mp3"),
     new Vector3(0.2, 0, 0)
   );
-
   wineGlass.addComponent(
     new OnClick((): void => {
       wineGlass.getComponent(utils.ToggleComponent).toggle();
     })
   );
 
-  // Creating Globe
+  // Add rotatable decoy objects as well
+  let telescope = new RotatableEntity(
+    new GLTFShape("models/room4/Puzzle04_Telescope.glb"),
+    new Transform({
+      position: new Vector3(22.6554, 7.02615, 10.6208)
+    }),
+    new AudioClip("sounds/move_object1.mp3"),
+    Quaternion.Euler(0, 127, 0)
+  );
+  telescope.addComponent(
+    new OnClick((): void => {
+      telescope.getComponent(utils.ToggleComponent).toggle();
+    })
+  );
+
   let globe = new RotatableEntity(
     new GLTFShape("models/room4/Puzzle04_Globe.glb"),
     new Transform({
       position: new Vector3(21.2191, 7.11234, 10.6817),
       rotation: Quaternion.Euler(0.146, 34.9, -33.8)
     }),
-    audioMoveObject1,
+    new AudioClip("sounds/move_object1.mp3"),
     Quaternion.Euler(174, -26.43, -149.37)
   );
 
   globe.addComponent(
     new OnClick((): void => {
       globe.getComponent(utils.ToggleComponent).toggle();
+    })
+  );
+
+  let rotatableBook = new RotatableEntity(
+    new GLTFShape("models/room4/Puzzle04_Book1.glb"),
+    new Transform({
+      position: new Vector3(15.8321, 7.83095, 14.1252)
+    }),
+    new AudioClip("sounds/move_object1.mp3"),
+    Quaternion.Euler(0, 0, -25)
+  );
+
+  rotatableBook.addComponent(
+    new OnClick((): void => {
+      rotatableBook.getComponent(utils.ToggleComponent).toggle();
+    })
+  );
+
+  // And finally the candle holder which is the key to this puzzle
+  let candleHolder = new RotatableEntity(
+    new GLTFShape("models/room4/Puzzle04_CandleHolder.glb"),
+    new Transform({
+      position: new Vector3(17.5056, 7.61611, 15.3835)
+    }),
+    new AudioClip("sounds/move_object2.mp3"),
+    Quaternion.Euler(0, 0, 30)
+  );
+
+  // When clicked, it both rotates the candle holder itself and opens the "door" (moves the bookshelf)
+  candleHolder.addComponent(
+    new OnClick((): void => {
+      candleHolder.getComponent(utils.ToggleComponent).toggle();
+      bookshelf.getComponent(utils.ToggleComponent).toggle();
     })
   );
 }
