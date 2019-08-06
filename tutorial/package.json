@@ -7,15 +7,15 @@
     "DCL",
     "MANA"
   ],
-  "homepage": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial#readme",
+  "homepage": "https://github.com/HardlyDifficult/dcl-escape-room-tutorial#readme",
   "bugs": {
-    "url": "https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial/issues"
+    "url": "https://github.com/HardlyDifficult/dcl-escape-room-tutorial/issues"
   },
   "license": "MIT",
   "author": "HardlyDifficult",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HardlyDifficult/DCL-Escape-Room-Tutorial.git"
+    "url": "git+https://github.com/HardlyDifficult/dcl-escape-room-tutorial.git"
   },
   "scripts": {
     "dev": "vuepress dev src",
