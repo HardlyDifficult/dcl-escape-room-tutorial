@@ -48,7 +48,7 @@ export class Keypad extends UIContainerRect {
     for (let col = 0; col < 3; col++) {
       for (let row = 0; row < 4; row++) {
         let number = row * 3 + col + 1;
-        let pos = new Vector2(
+        const pos = new Vector2(
           panelPosition.x + col * 60,
           panelPosition.y - row * 60
         );
@@ -60,7 +60,7 @@ export class Keypad extends UIContainerRect {
           }
 
           // Error Occurs Here
-          let button = new KeypadButton(
+          const button = new KeypadButton(
             this,
             pos,
             number,
@@ -73,7 +73,7 @@ export class Keypad extends UIContainerRect {
     }
 
     // Creating Clear Button
-    let clear = this.CreateButton(
+    const clear = this.CreateButton(
       resources.textures.clearButton,
       new Vector2(panelPosition.x, panelPosition.y - 3 * 60)
     );
@@ -86,7 +86,7 @@ export class Keypad extends UIContainerRect {
     });
 
     // Creating Enter Button
-    let enter = this.CreateButton(
+    const enter = this.CreateButton(
       resources.textures.enterButton,
       new Vector2(panelPosition.x + 2 * 60, panelPosition.y - 3 * 60)
     );
@@ -131,7 +131,7 @@ export class Keypad extends UIContainerRect {
 
   // Function to easily Create Additional buttons (Clear & Enter)
   private CreateButton = function(image: Texture, position: Vector2): UIImage {
-    let result = new UIImage(this, image);
+    const result = new UIImage(this, image);
     result.sourceWidth = 171;
     result.sourceHeight = 171;
     result.width = 55;

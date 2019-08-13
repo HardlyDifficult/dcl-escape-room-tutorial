@@ -33,7 +33,7 @@ export class Door extends Entity {
    * the scenes to decide when the action occurs (e.g. on door click in room 1 or button click in room 2)
    */
 
-  public openDoor(playAudio: boolean = true): void {
+  public openDoor(playAudio = true): void {
     if (!this.isOpen) {
       this.isOpen = true;
 
@@ -51,7 +51,7 @@ export class Door extends Entity {
   }
 
   // Similiarly we can close the door.
-  public closeDoor(playAudio: boolean = true): void {
+  public closeDoor(playAudio = true): void {
     if (this.isOpen) {
       this.isOpen = false;
 
@@ -69,7 +69,7 @@ export class Door extends Entity {
   }
 
   // Or toggle the state between open and closed
-  public toggleDoor(playAudio: boolean = true): void {
+  public toggleDoor(playAudio = true): void {
     if (this.isOpen) {
       this.closeDoor(playAudio);
     } else {

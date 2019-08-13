@@ -7,7 +7,7 @@ export class MovableEntity extends Entity {
     sound: AudioClip,
     deltaPosition: Vector3,
     // Add a variable move time with a default value
-    moveTime: number = 0.5
+    moveTime = 0.5
   ) {
     super();
     engine.addEntity(this);

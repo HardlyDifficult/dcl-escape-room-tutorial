@@ -6,7 +6,7 @@ export class MovableEntity extends Entity {
     transform: TranformConstructorArgs,
     sound: AudioClip,
     deltaPosition: Vector3,
-    moveTime: number = 0.5
+    moveTime = 0.5
   ) {
     super();
     engine.addEntity(this);

@@ -3,7 +3,7 @@ import utils from "../../node_modules/decentraland-ecs-utils/index";
 
 export function CreateRoom4(): void {
   // Add a movable bookshelf which acts as the door for this room
-  let bookshelf = new MovableEntity(
+  const bookshelf = new MovableEntity(
     new GLTFShape("models/room4/Puzzle04_LibraryDoor.glb"),
     new Transform({
       position: new Vector3(20.6557, 5.4996, 15.041)
@@ -15,7 +15,7 @@ export function CreateRoom4(): void {
   );
 
   // Add a book as a decoy
-  let movableBook = new MovableEntity(
+  const movableBook = new MovableEntity(
     new GLTFShape("models/room4/Puzzle04_Book2.glb"),
     new Transform({
       position: new Vector3(20.41, 6.4118, 10.4922)
@@ -31,7 +31,7 @@ export function CreateRoom4(): void {
   );
 
   // And a wine glass decoy
-  let wineGlass = new MovableEntity(
+  const wineGlass = new MovableEntity(
     new GLTFShape("models/room4/Puzzle04_WGlass.glb"),
     new Transform({
       position: new Vector3(25.7505, 6.95786, 10.5917)
@@ -46,7 +46,7 @@ export function CreateRoom4(): void {
   );
 
   // Add rotatable decoy objects as well
-  let telescope = new RotatableEntity(
+  const telescope = new RotatableEntity(
     new GLTFShape("models/room4/Puzzle04_Telescope.glb"),
     new Transform({
       position: new Vector3(22.6554, 7.02615, 10.6208)
@@ -60,7 +60,7 @@ export function CreateRoom4(): void {
     })
   );
 
-  let globe = new RotatableEntity(
+  const globe = new RotatableEntity(
     new GLTFShape("models/room4/Puzzle04_Globe.glb"),
     new Transform({
       position: new Vector3(21.2191, 7.11234, 10.6817),
@@ -76,7 +76,7 @@ export function CreateRoom4(): void {
     })
   );
 
-  let rotatableBook = new RotatableEntity(
+  const rotatableBook = new RotatableEntity(
     new GLTFShape("models/room4/Puzzle04_Book1.glb"),
     new Transform({
       position: new Vector3(15.8321, 7.83095, 14.1252)
@@ -92,7 +92,7 @@ export function CreateRoom4(): void {
   );
 
   // And finally the candle holder which is the key to this puzzle
-  let candleHolder = new RotatableEntity(
+  const candleHolder = new RotatableEntity(
     new GLTFShape("models/room4/Puzzle04_CandleHolder.glb"),
     new Transform({
       position: new Vector3(17.5056, 7.61611, 15.3835)
