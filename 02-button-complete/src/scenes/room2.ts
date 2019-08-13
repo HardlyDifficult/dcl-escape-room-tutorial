@@ -54,7 +54,6 @@ export function CreateRoom2(): void {
     })
   );
 
-
   // Use a `TextShape` and set the default value
   countdownText.addComponent(new TextShape(formatTimeString(openDoorTime)));
 

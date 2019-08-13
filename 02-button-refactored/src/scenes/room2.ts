@@ -15,10 +15,10 @@ export function CreateRoom2(): void {
   );
 
   // Create the timer on the wall
-  const countdownClock = new Timer(
-    { position: new Vector3(25.1272, 9.51119, 25.2116),
-      rotation: Quaternion.Euler(20, 180, 0) }
-  );
+  const countdownClock = new Timer({
+    position: new Vector3(25.1272, 9.51119, 25.2116),
+    rotation: Quaternion.Euler(20, 180, 0)
+  });
   // and set the default value
   countdownClock.updateTimeString(openDoorTime);
 

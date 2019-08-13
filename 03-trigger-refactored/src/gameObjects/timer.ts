@@ -28,8 +28,6 @@ export class Timer extends Entity {
 
   // This method can be called anytime to change the number of seconds on the clock
   public updateTimeString(seconds: number): void {
-    this.getComponent(TextShape).value = this.formatTimeString(
-      seconds
-    );
+    this.getComponent(TextShape).value = this.formatTimeString(seconds);
   }
 }
