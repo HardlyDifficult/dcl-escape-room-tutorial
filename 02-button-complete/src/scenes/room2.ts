@@ -43,32 +43,17 @@ export function CreateRoom2(): void {
    * Countdown timer
    */
 
-  // Add a model to display the countdown timer on the wall
-  const countdownClock = new Entity();
-  engine.addEntity(countdownClock);
-  countdownClock.addComponent(
-    new GLTFShape("models/room1/Countdown_Clock.glb")
-  );
-  countdownClock.addComponent(
-    new Transform({
-      position: new Vector3(25.1272, 9.51119, 25.1116)
-    })
-  );
-
   // The text for the timer is a separate entity
   const countdownText = new Entity();
+  engine.addEntity(countdownText);
 
-  // Set the clock as the parent, instead of adding it to the engine.
-  // This positions the countdown text relative to the clock itself.
-  countdownText.setParent(countdownClock);
-
-  // Make a small adjustment to the text position and rotation to the text
   countdownText.addComponent(
     new Transform({
-      position: new Vector3(0, 0, 0.1),
+      position: new Vector3(25.1272, 9.51119, 25.2116),
       rotation: Quaternion.Euler(20, 180, 0)
     })
   );
+
 
   // Use a `TextShape` and set the default value
   countdownText.addComponent(new TextShape(formatTimeString(openDoorTime)));
@@ -104,7 +89,7 @@ export function CreateRoom2(): void {
   button.addComponent(
     new OnClick((): void => {
       // Checking if timer is running
-      if (!countdownClock.hasComponent(utils.Interval)) {
+      if (!countdownText.hasComponent(utils.Interval)) {
         // Animate the button press
         button
           .getComponent(Animator)
@@ -132,7 +117,7 @@ export function CreateRoom2(): void {
 
         // And add an interval to update the text every 1 second and slam the door again when time runs out
         let timeRemaining = openDoorTime;
-        countdownClock.addComponent(
+        countdownText.addComponent(
           new utils.Interval(1000, (): void => {
             // 1 second has past
             timeRemaining--;
@@ -144,7 +129,7 @@ export function CreateRoom2(): void {
               );
             } else {
               // Timer has reached 0! Remove the interval so the display does not go negative
-              countdownClock.removeComponent(utils.Interval);
+              countdownText.removeComponent(utils.Interval);
 
               // Close the door
               door

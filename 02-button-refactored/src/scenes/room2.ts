@@ -16,8 +16,8 @@ export function CreateRoom2(): void {
 
   // Create the timer on the wall
   const countdownClock = new Timer(
-    new GLTFShape("models/room1/Countdown_Clock.glb"),
-    { position: new Vector3(25.1272, 9.51119, 25.1116) }
+    { position: new Vector3(25.1272, 9.51119, 25.2116),
+      rotation: Quaternion.Euler(20, 180, 0) }
   );
   // and set the default value
   countdownClock.updateTimeString(openDoorTime);
