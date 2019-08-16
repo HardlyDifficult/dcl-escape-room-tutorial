@@ -4,7 +4,7 @@ import utils from "../../node_modules/decentraland-ecs-utils/index";
 import resources from "../resources";
 
 export function CreateRoom4(): void {
-  let bookshelf = new MovableEntity(
+  const bookshelf = new MovableEntity(
     // Using Resources to Obtain Model
     resources.models.bookshelf,
     new Transform({
@@ -16,7 +16,7 @@ export function CreateRoom4(): void {
     3
   );
 
-  let movableBook = new MovableEntity(
+  const movableBook = new MovableEntity(
     resources.models.book2,
     new Transform({
       position: new Vector3(20.41, 6.4118, 10.4922)
@@ -30,7 +30,7 @@ export function CreateRoom4(): void {
     })
   );
 
-  let wineGlass = new MovableEntity(
+  const wineGlass = new MovableEntity(
     resources.models.wineGlass,
     new Transform({
       position: new Vector3(25.7505, 6.95786, 10.5917)
@@ -44,7 +44,7 @@ export function CreateRoom4(): void {
     })
   );
 
-  let telescope = new RotatableEntity(
+  const telescope = new RotatableEntity(
     resources.models.telescope,
     new Transform({
       position: new Vector3(22.6554, 7.02615, 10.6208)
@@ -58,7 +58,7 @@ export function CreateRoom4(): void {
     })
   );
 
-  let globe = new RotatableEntity(
+  const globe = new RotatableEntity(
     resources.models.globe,
     new Transform({
       position: new Vector3(21.2191, 7.11234, 10.6817),
@@ -74,7 +74,7 @@ export function CreateRoom4(): void {
     })
   );
 
-  let rotatableBook = new RotatableEntity(
+  const rotatableBook = new RotatableEntity(
     resources.models.book1,
     new Transform({
       position: new Vector3(15.8321, 7.83095, 14.1252)
@@ -89,7 +89,7 @@ export function CreateRoom4(): void {
     })
   );
 
-  let candleHolder = new RotatableEntity(
+  const candleHolder = new RotatableEntity(
     resources.models.candleHolder,
     new Transform({
       position: new Vector3(17.5056, 7.61611, 15.3835)

@@ -23,7 +23,7 @@ export class Door extends Entity {
     this.addComponent(new AudioSource(sound));
   }
 
-  public openDoor(playAudio: boolean = true): void {
+  public openDoor(playAudio = true): void {
     if (!this.isOpen) {
       this.isOpen = true;
 
@@ -40,7 +40,7 @@ export class Door extends Entity {
     }
   }
 
-  public closeDoor(playAudio: boolean = true): void {
+  public closeDoor(playAudio = true): void {
     if (this.isOpen) {
       this.isOpen = false;
 
@@ -57,7 +57,7 @@ export class Door extends Entity {
     }
   }
 
-  public toggleDoor(playAudio: boolean = true): void {
+  public toggleDoor(playAudio = true): void {
     if (this.isOpen) {
       this.closeDoor(playAudio);
     } else {
