@@ -81,7 +81,7 @@ pull_request_rules:
       - label=auto-merge
       - "#label=1"
       - "#changes-requested-reviews-by=0"
-      - "status-success=ci/circleci: lint"
+      - "status-success=ci/circleci: test"
       - "status-success=WIP"
     actions:
       merge:
