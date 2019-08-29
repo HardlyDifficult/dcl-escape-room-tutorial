@@ -4,9 +4,7 @@ module.exports = {
   base: '/dcl-escape-room-tutorial/',
   themeConfig: {
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/introduction' },
-      { text: 'External', link: 'https://google.com' },
+      { text: 'Full Example', link: 'https://google.com?q=todo' },
     ],
 
     sidebar: [
