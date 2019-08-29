@@ -31,7 +31,8 @@ Add an Animator and play `Door_Open` when the door is clicked:
 door.addComponent(new Animator());
 // This model has an "Open" animation that when played should happen once
 // and then stop moving
-door.getComponent(Animator)
+door
+  .getComponent(Animator)
   .addClip(new AnimationState("Door_Open", { looping: false }));
 
 // When the player clicks on the door, open it!
