@@ -2,6 +2,12 @@
 
 Start with the 02-button-playground folder, it has the default scene from 00-setup, a placeholder `room2.ts` and the model & sound files for this room.
 
+Resources:
+ - [02-button-complete](https://github.com/HardlyDifficult/dcl-escape-room-tutorial/tree/master/02-button-complete): this room's implementation
+ - [02-button-refactored](https://github.com/HardlyDifficult/dcl-escape-room-tutorial/tree/master/02-button-refactored): the complete game up until this point including some housekeeping
+
+## Add
+
 Add a door for this room
 
 ```typescript
@@ -26,22 +32,6 @@ export function CreateRoom2(): void {
 
   door.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
 }
-```
-
-And then add a clock to display a countdown timer on the wall
-
-```typescript
-  // Add a model to display the countdown timer on the wall
-  const countdownClock = new Entity();
-  engine.addEntity(countdownClock);
-  countdownClock.addComponent(
-    new GLTFShape("models/room1/Countdown_Clock.glb")
-  );
-  countdownClock.addComponent(
-    new Transform({
-      position: new Vector3(25.1272, 9.51119, 25.1116)
-    })
-  );
 ```
 
 The timer is going to countdown from 5.  We'll create a helper function to format a string to display that looks like "00:05".

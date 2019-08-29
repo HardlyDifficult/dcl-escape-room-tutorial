@@ -1,10 +1,14 @@
-# 01: Room
+# 01: Door
 
-Start with the 01-room-playground folder, it has the default scene from 00-setup and the model & sound files for this room.
+Start with the [01-door-playground](https://github.com/HardlyDifficult/dcl-escape-room-tutorial/tree/master/01-door-playground) folder, it has the default scene from 00-setup and the model & sound files for this room.
 
-Add a door
+Resources:
+ - [01-door-complete](https://github.com/HardlyDifficult/dcl-escape-room-tutorial/tree/master/01-door-complete): this room's implementation
+ - [01-door-refactored](https://github.com/HardlyDifficult/dcl-escape-room-tutorial/tree/master/01-door-refactored): this room after introducing file separation
 
-After `engine.addEntity(baseScene)`...
+## Add a door
+
+Inside `game.ts` add the following after the base scene code:
 
 ```typescript
 // Add an entity for the door
@@ -14,35 +18,36 @@ engine.addEntity(door);
 // Give it a model and move it into place
 door.addComponent(new GLTFShape("models/room1/Puzzle01_Door.glb"));
 door.addComponent(new Transform({ position: new Vector3(21.18, 10.8, 24.5) }));
+```
 
+This adds a door and positions it in the doorway for the first room.
+
+## Animate opening the door
+
+Add an Animator and play `Door_Open` when the door is clicked:
+
+```typescript
 // Add an Animator to play clips inside the model file, created by the artist
 door.addComponent(new Animator());
 // This model has an "Open" animation that when played should happen once and then stop moving
 door
   .getComponent(Animator)
   .addClip(new AnimationState("Door_Open", { looping: false }));
-```
 
-Add an OnClick handler to open the door:
-
-```typescript
 // When the player clicks on the door, open it!
 let isDoorOpen = false;
 door.addComponent(
   new OnClick((): void => {
-    // Track if the door has already been opened so we don't play the animation twice
-    if (!isDoorOpen) {
-      isDoorOpen = true;
-
-      // Play the animation
-      door
-        .getComponent(Animator)
-        .getClip("Door_Open")
-        .play();
-    }
+    // Play the animation
+    door
+      .getComponent(Animator)
+      .getClip("Door_Open")
+      .play();
   })
 );
 ```
+
+## Play a sound effect on open
 
 And an audio source to play a sound effect when opened:
 
@@ -51,19 +56,48 @@ And an audio source to play a sound effect when opened:
 door.addComponent(new AudioSource(new AudioClip("sounds/door_squeak.mp3")));
 ```
 
-Audio is 3d, meaning that where the sound originates is relevant in terms of how loud it is for the user and if it's coming from the left or the right.
+Update the OnClick event handler to play the sound, once, when the door opens:
 
-In the OnClick handler, add:
+```typescript
+    // Track if the door has already been opened so we don't play the animation twice
+    if (!isDoorOpen) {
+      isDoorOpen = true;
+      
+      door
+        .getComponent(Animator)
+        .getClip("Door_Open")
+        .play();
 
-```
       // And the sound effect
       door.getComponent(AudioSource).playOnce();
+    }
+
 ```
+
+Audio is 3d, meaning that where the sound originates is relevant in terms of how loud it is for the user and if it's coming from the left or the right.
 
 ## Refactor
 
 Separate the game into seperate scene files.  This file separation makes it easy to focus on just one room at a time.
 
-## Challenge to the reader
+Create `scenes/room1.ts` with:
 
-The model also includes a `close` animation.  Add this to the Door GameObject and update the click behavior to toggle the door open/closed on click (instead of just open and then stay open).
+```typescript
+// Export as a function for game.ts to call in order to construct this room
+export function CreateRoom1(): void {
+  ...
+}
+```
+
+And cut the room 1 code from `game.ts` and paste it in that function.
+
+Update `game.ts` to include the new file and call `CreateRoom1`:
+
+```typescript
+import { CreateRoom1 } from "./scenes/room1";
+
+...
+
+// Room 1 was moved to another file
+CreateRoom1();
+```
