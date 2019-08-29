@@ -1,6 +1,6 @@
 # Tutorial
 
-See xxx (TBD URL)
+See https://hardlydifficult.github.io/dcl-escape-room-tutorial/
 
 To run locally:
 

@@ -1,21 +1,24 @@
 # 00: Setup
 
-Primary resource --> https://docs.decentraland.org/
+Resources:
+ - Documentation: https://docs.decentraland.org/
+ - NodeJS: https://nodejs.org/en/
+ - Complete example repo: [00-setup-complete](https://github.com/HardlyDifficult/dcl-escape-room-tutorial/tree/master/00-setup-complete)
 
-Install NodeJS: https://nodejs.org/en/
+## Getting Started
+
+Navigate to an empty folder you want to work in, open a command prompt or Powershell window and run the following:
 
 ```shell
 npm i -g decentraland
 dcl init
 ```
 
-Then run:
+And then run the following to see the "game" running in your browser:
 
 ```shell
 dcl start
 ```
-
-to see the "game" running in your browser.  If you have Metamask installed it will prompt you to connect before the page finishes loading (but it also works without metamask).
 
 It should look something like this:
 
@@ -29,17 +32,29 @@ A spinning box in the scene
 
 You can walk (wasd or arrows) around and jump (space).
 
-delete the example contents inside `game.ts` (done in playground)
+## Add a model
 
-Add a model:
+First we'll need the model itself, you can copy `models/scene.glb` from one of our example scenes.
 
-Add this to `game.ts` (this is the entire file ATM)
+Delete the example contents inside `game.ts` and then type the following:
 
 ```typescript
-const baseScene = new Entity()
-engine.addEntity(baseScene)
+// Create an entity for the main scene model
+const baseScene = new Entity();
 
-scene.addComponent(new GLTFShape("models/scene.glb"))
+// Add it to the engine for rendering
+engine.addEntity(baseScene);
+
+// Give it a component for the model itself
+baseScene.addComponent(new GLTFShape("models/scene.glb"));
 ```
 
-We also added multiple parcels to the `scene.json`
+## Configure the scene
+
+The house we are working in spans several parcels of land.  Update `scene.json` to include multiple parcels as seen here:
+
+```json
+"parcels": [
+    "0,0","1,0","0,1","1,1","1,2","0,2","2,0","2,1","2,2"
+]
+```
