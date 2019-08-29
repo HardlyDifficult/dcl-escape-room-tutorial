@@ -4,6 +4,7 @@ module.exports = {
   base: '/dcl-escape-room-tutorial/',
   themeConfig: {
     nav: [
+      { text: 'GitHub', link: 'https://github.com/HardlyDifficult/dcl-escape-room-tutorial' },
       { text: 'Full Example', link: 'https://google.com?q=todo' },
     ],
 
