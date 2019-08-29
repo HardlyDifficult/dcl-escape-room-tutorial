@@ -29,8 +29,8 @@ Add an Animator and play `Door_Open` when the door is clicked:
 ```typescript
 // Add an Animator to play clips inside the model file, created by the artist
 door.addComponent(new Animator());
-// This model has an "Open" animation that when played should happen once and then stop moving
-door
+// This model has an "Open" animation that when played should happen once
+// and then stop moving door
   .getComponent(Animator)
   .addClip(new AnimationState("Door_Open", { looping: false }));
 
