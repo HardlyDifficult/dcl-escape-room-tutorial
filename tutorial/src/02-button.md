@@ -1,5 +1,7 @@
 # 02: Button
 
+`WIP: Please come back soon`
+
 Start with the 02-button-playground folder, it has the default scene from 00-setup, a placeholder `room2.ts` and the model & sound files for this room.
 
 Resources:
