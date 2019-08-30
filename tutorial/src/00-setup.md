@@ -1,8 +1,12 @@
 # 00: Setup
 
+<center>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/_9-74i-1c2k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
 Resources:
- - Documentation: https://docs.decentraland.org/
- - NodeJS: https://nodejs.org/en/
+ - Documentation: [docs.decentraland.org](https://docs.decentraland.org/)
+ - [NodeJS](https://nodejs.org/en/)
  - Complete example repo: [00-setup-complete](https://github.com/HardlyDifficult/dcl-escape-room-tutorial/tree/master/00-setup-complete)
 
 ## Getting Started

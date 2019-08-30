@@ -8,6 +8,10 @@ Resources:
 
 ## Add a door
 
+<center>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/aonEnpfKIX8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
 Inside `game.ts` add the following after the base scene code:
 
 ```typescript
@@ -23,6 +27,10 @@ door.addComponent(new Transform({ position: new Vector3(21.18, 10.8, 24.5) }));
 This adds a door and positions it in the doorway for the first room.
 
 ## Animate opening the door
+
+<center>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/QHgOIh04ukY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 Add an Animator and play `Door_Open` when the door is clicked:
 
@@ -49,6 +57,10 @@ door.addComponent(
 ```
 
 ## Play a sound effect on open
+
+<center>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/l7NdwToC5tg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 And an audio source to play a sound effect when opened:
 
@@ -78,6 +90,10 @@ Update the OnClick event handler to play the sound, once, when the door opens:
 Audio is 3d, meaning that where the sound originates is relevant in terms of how loud it is for the user and if it's coming from the left or the right.
 
 ## Refactor
+
+<center>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/ihvRnrNusas" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 Separate the game into seperate scene files.  This file separation makes it easy to focus on just one room at a time.
 
