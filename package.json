@@ -32,8 +32,8 @@
     "npm-package-json-lint-config-default": "2.0.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "2.0.0",
-    "@typescript-eslint/parser": "2.0.0",
+    "@typescript-eslint/eslint-plugin": "2.1.0",
+    "@typescript-eslint/parser": "2.1.0",
     "eslint": "6.3.0",
     "prettier-eslint": "9.0.0"
   }
