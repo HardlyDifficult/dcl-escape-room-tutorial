@@ -1,7 +1,5 @@
 # 02: Button
 
-`WIP: Please come back soon`
-
 Start with the [02-button-playground](https://github.com/HardlyDifficult/dcl-escape-room-tutorial/tree/master/02-button-playground) folder, it has the default scene & all the models and sound files for this room.
 
 Resources:
