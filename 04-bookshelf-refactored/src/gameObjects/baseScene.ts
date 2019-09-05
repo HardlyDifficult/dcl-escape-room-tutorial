@@ -5,6 +5,6 @@ export class BaseScene extends Entity {
     super();
     engine.addEntity(this);
 
-    this.addComponent(resources.models.baseScene);
+    this.addComponent(resources.models.scene);
   }
 }
