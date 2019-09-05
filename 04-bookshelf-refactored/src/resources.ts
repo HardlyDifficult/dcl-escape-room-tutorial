@@ -8,7 +8,7 @@ export default {
     doorSqueak: new AudioClip("sounds/door_squeak.mp3"),
     moveObject1: new AudioClip("sounds/move_object1.mp3"),
     moveObject2: new AudioClip("sounds/move_object2.mp3"),
-    whip: new AudioClip("sounds/room3/whip.mp3"),
+    whip: new AudioClip("sounds/room3/whip.mp3")
   },
   models: {
     book1: new GLTFShape("models/room4/Puzzle04_Book1.glb"),
@@ -27,6 +27,6 @@ export default {
     roundButton: new GLTFShape("models/generic/Round_Button.glb"),
     scene: new GLTFShape("models/scene.glb"),
     squareButton: new GLTFShape("models/room2/Square_Button.glb"),
-    telescope: new GLTFShape("models/room4/Puzzle04_Telescope.glb"),
+    telescope: new GLTFShape("models/room4/Puzzle04_Telescope.glb")
   }
-}
+};
