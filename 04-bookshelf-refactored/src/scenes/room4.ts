@@ -1,16 +1,13 @@
 import { MovableEntity, RotatableEntity } from "../gameObjects/index";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
-// Importing new Resources File
 import resources from "../resources";
 
 export function CreateRoom4(): void {
   const bookshelf = new MovableEntity(
-    // Using Resources to Obtain Model
-    resources.models.bookshelf,
+    resources.models.door4,
     new Transform({
       position: new Vector3(20.6557, 5.4996, 15.041)
     }),
-    // Using Resources to Obtain Sound
     resources.sounds.moveObject1,
     new Vector3(1.5, 0, 0),
     3
@@ -31,7 +28,7 @@ export function CreateRoom4(): void {
   );
 
   const wineGlass = new MovableEntity(
-    resources.models.wineGlass,
+    resources.models.glass,
     new Transform({
       position: new Vector3(25.7505, 6.95786, 10.5917)
     }),
