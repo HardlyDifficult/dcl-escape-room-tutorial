@@ -5,9 +5,7 @@ export class MovableEntity extends Entity {
     model: GLTFShape,
     transform: TranformConstructorArgs,
     sound: AudioClip,
-    deltaPosition: Vector3,
-    // Add a variable move time with a default value
-    moveTime = 0.5
+    deltaPosition: Vector3
   ) {
     super();
     engine.addEntity(this);
@@ -26,7 +24,7 @@ export class MovableEntity extends Entity {
             new utils.MoveTransformComponent(
               this.getComponent(Transform).position,
               endPos,
-              moveTime
+              0.5
             )
           );
         } else {
@@ -34,7 +32,7 @@ export class MovableEntity extends Entity {
             new utils.MoveTransformComponent(
               this.getComponent(Transform).position,
               startPos,
-              moveTime
+              0.5
             )
           );
         }
