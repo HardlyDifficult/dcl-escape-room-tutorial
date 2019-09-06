@@ -13,6 +13,7 @@ module.exports = {
       '/00-setup',
       '/01-door',
       '/02-button',
+      '/03-plants',
     ]
   },
 }
