@@ -227,3 +227,4 @@ const door = new gameObjects.Door(
 	new GLTFShape("models/room3/Puzzle03_Door.glb"),
 ...
 ```
+
