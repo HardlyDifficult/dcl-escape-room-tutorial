@@ -14,6 +14,7 @@ module.exports = {
       '/01-door',
       '/02-button',
       '/03-plants',
+      '/04-bookshelf',
     ]
   },
 }
