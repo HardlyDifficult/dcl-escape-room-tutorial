@@ -5,11 +5,4 @@ import { MovableEntity } from "./movableEntity";
 import { NumPadLock } from "./NumPadLock";
 import { RotatableEntity } from "./rotatableEntity";
 
-export {
-  BaseScene,
-  Door,
-  Model,
-  MovableEntity,
-  NumPadLock,
-  RotatableEntity,
-};
+export { BaseScene, Door, Model, MovableEntity, NumPadLock, RotatableEntity };
