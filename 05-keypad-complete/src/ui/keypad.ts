@@ -46,7 +46,10 @@ export class Keypad {
     panelBackground.positionY = -55;
 
     // Add a close button near the top right
-    const closeImage = new UIImage(this.container, resources.textures.closeButton);
+    const closeImage = new UIImage(
+      this.container,
+      resources.textures.closeButton
+    );
     closeImage.sourceWidth = 92;
     closeImage.sourceHeight = 92;
     closeImage.width = 32;
@@ -62,8 +65,11 @@ export class Keypad {
     // 3 boxes to show the entered code or current message
     this.panelInputs = [];
     for (let i = 0; i < 3; i++) {
-      const inputImage = new UIImage(this.container, resources.textures.inputBox);
-      const inputSlot = new UIText(this.container)
+      const inputImage = new UIImage(
+        this.container,
+        resources.textures.inputBox
+      );
+      const inputSlot = new UIText(this.container);
       inputImage.sourceWidth = 173;
       inputImage.sourceHeight = 173;
       inputImage.width = inputSlot.width = buttonSize.x;
@@ -92,7 +98,10 @@ export class Keypad {
         let buttonImage: UIImage = null;
         if (col == 0 && row == 3) {
           // The clear button in the bottom left
-          buttonImage = new UIImage(this.container, resources.textures.clearButton);
+          buttonImage = new UIImage(
+            this.container,
+            resources.textures.clearButton
+          );
 
           // Call onReset when clicked
           buttonImage.onClick = new OnClick((): void => {
@@ -100,7 +109,10 @@ export class Keypad {
           });
         } else if (col == 2 && row == 3) {
           // The enter button in the bottom right
-          buttonImage = new UIImage(this.container, resources.textures.enterButton);
+          buttonImage = new UIImage(
+            this.container,
+            resources.textures.enterButton
+          );
 
           // Call onSubmit when clicked
           buttonImage.onClick = new OnClick((): void => {
@@ -108,7 +120,10 @@ export class Keypad {
           });
         } else {
           // A number value button
-          buttonImage = new UIImage(this.container, resources.textures.numberButton);
+          buttonImage = new UIImage(
+            this.container,
+            resources.textures.numberButton
+          );
 
           const numberText = new UIText(buttonImage);
           numberText.isPointerBlocker = false;

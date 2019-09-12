@@ -7,7 +7,7 @@ export class ImageHint {
   private hintImage: UIImage;
 
   constructor(gameCanvas: UICanvas, texture: Texture) {
-    this.container = new UIContainerRect(gameCanvas);    
+    this.container = new UIContainerRect(gameCanvas);
     this.container.width = "100%";
     this.container.height = "100%";
 
@@ -19,7 +19,10 @@ export class ImageHint {
     this.hintImage.height = 512;
 
     // And a close button to the top right
-    const close = new UIImage(this.container, resources.textures.closeHintButton);
+    const close = new UIImage(
+      this.container,
+      resources.textures.closeHintButton
+    );
     close.sourceWidth = 92;
     close.sourceHeight = 92;
     close.width = 46;

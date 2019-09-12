@@ -83,10 +83,12 @@ export function CreateRoom5(gameCanvas: UICanvas): void {
       // Correct!
       keypad.display("OK!", Color4.Green());
       numPadLock.playAccessGranted();
-      numPadLock.addComponentOrReplace(new utils.ExpireIn(2000, (): void => {
-        keypad.container.visible = false;
-        door.openDoor();
-      }));
+      numPadLock.addComponentOrReplace(
+        new utils.ExpireIn(2000, (): void => {
+          keypad.container.visible = false;
+          door.openDoor();
+        })
+      );
     } else {
       // The password is incorrect
       keypad.display("Err", Color4.Red());
