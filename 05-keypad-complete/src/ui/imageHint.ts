@@ -4,19 +4,17 @@ export class ImageHint {
   // Expose the container for changing visibility
   public container: UIContainerRect;
 
-  private hintImage: UIImage;
-
   constructor(gameCanvas: UICanvas, texture: Texture) {
     this.container = new UIContainerRect(gameCanvas);
     this.container.width = "100%";
     this.container.height = "100%";
 
     // Add the primary image
-    this.hintImage = new UIImage(this.container, texture);
-    this.hintImage.sourceWidth = 512;
-    this.hintImage.sourceHeight = 512;
-    this.hintImage.width = 512;
-    this.hintImage.height = 512;
+    const hintImage = new UIImage(this.container, texture);
+    hintImage.sourceWidth = 512;
+    hintImage.sourceHeight = 512;
+    hintImage.width = 512;
+    hintImage.height = 512;
 
     // And a close button to the top right
     const close = new UIImage(
