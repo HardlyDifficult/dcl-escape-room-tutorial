@@ -1,8 +1,17 @@
 import { SimpleDialog } from "../modules/simpleDialog";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 import resources from "../resources";
-import { MovableEntity, NumPadLock, Door } from "../gameObjects/index";
+import {
+  MovableEntity,
+  NumPadLock,
+  Door,
+  Spotlight
+} from "../gameObjects/index";
 import { Keypad } from "../ui/index";
+
+function selectRandom(options: string[]): string {
+  return options[Math.floor(Math.random() * (options.length - 1))];
+}
 
 export function CreateRoom6(gameCanvas: UICanvas): void {
   const door = new Door(
@@ -22,43 +31,80 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
     new Vector3(0, 0, 2),
     1.5
   );
-  munaStatue.addComponent(
+
+  // Prep the keypad UI
+  const keypad = new Keypad(gameCanvas);
+  keypad.container.visible = false;
+
+  // Add a panel which opens the UI when clicked
+  const numPadLock = new NumPadLock(resources.models.numpad2);
+  numPadLock.addComponent(
     new OnClick((): void => {
-      if (!dialog.isDialogTreeRunning()) {
-        dialog.runDialogTree(dialogTree);
-      }
+      keypad.container.visible = true;
     })
   );
 
-  // Spotlights
-  const spotLight1 = CreateSpotlight(
-    new Vector3(-0.04, 0, 0),
-    Quaternion.Identity,
-    new GLTFShape("models/room6/spotlightlight.glb"),
-    "1",
-    resources.sounds.spotlight
-  );
-  const spotLight2 = CreateSpotlight(
-    new Vector3(-0.02, 0, 0),
-    Quaternion.Euler(0, 90, 0),
-    new GLTFShape("models/room6/spotlightlight.glb"),
-    "0",
-    resources.sounds.spotlight
-  );
-  const spotLight3 = CreateSpotlight(
-    new Vector3(-0.03, 0, 0),
-    Quaternion.Euler(0, 180, 0),
-    new GLTFShape("models/room6/spotlightlight.glb"),
-    "4",
-    resources.sounds.spotlight
-  );
+  // Wire up the keypad logic
+  let currentInput = "";
+  keypad.onInput = (value: number): void => {
+    currentInput += value;
+    keypad.display(currentInput);
+    numPadLock.playButtonPressed();
+  };
+  keypad.onReset = (): void => {
+    currentInput = "";
+    keypad.display(currentInput);
+    numPadLock.playButtonPressed();
+  };
+  keypad.onSubmit = (): void => {
+    if (currentInput == "104") {
+      // Correct!
+      keypad.display("OK!", Color4.Green());
+      numPadLock.playAccessGranted();
+      numPadLock.removeComponent(OnClick);
+      munaStatue.getComponent(utils.ToggleComponent).toggle();
+      numPadLock.addComponentOrReplace(
+        new utils.ExpireIn(2000, (): void => {
+          keypad.container.visible = false;
+          door.openDoor();
+        })
+      );
+    } else {
+      // The password is incorrect
+      keypad.display("Err", Color4.Red());
+      numPadLock.playAccessDenied();
+      currentInput = "";
+    }
+  };
 
+  // Spotlights
+  const spotLight1 = new Spotlight(
+    {
+      position: new Vector3(-0.04, 0, 0),
+      rotation: Quaternion.Identity
+    },
+    "1"
+  );
   spotLight1.setParent(munaStatue);
+  const spotLight2 = new Spotlight(
+    {
+      position: new Vector3(-0.02, 0, 0),
+      rotation: Quaternion.Euler(0, 90, 0)
+    },
+    "0"
+  );
   spotLight2.setParent(munaStatue);
+  const spotLight3 = new Spotlight(
+    {
+      position: new Vector3(-0.03, 0, 0),
+      rotation: Quaternion.Euler(0, 180, 0)
+    },
+    "4"
+  );
   spotLight3.setParent(munaStatue);
 
-  //config dialog
-  const dialogConfig: SimpleDialog.DialogConfig = {
+  // Create a new SimpleDialog to manage the dialog tree
+  const dialog = new SimpleDialog({
     canvas: gameCanvas,
     leftPortrait: {
       width: 256,
@@ -80,7 +126,7 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
       textSpeed: 15,
       textIdleTime: 5,
       textConfig: { fontSize: 16, paddingLeft: 25, paddingRight: 25 },
-      background: new Texture("images/dialogs/textContainer.png"),
+      background: resources.textures.textContainer,
       backgroundConfig: { sourceWidth: 512, sourceHeight: 257 }
     },
     optionsContainer: {
@@ -91,16 +137,13 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
       vAlign: "top",
       hAlign: "center",
       positionY: "-65%",
-      background: new Texture("images/dialogs/optionsContainer.png"),
+      background: resources.textures.optionsContainer,
       backgroundConfig: { sourceWidth: 512, sourceHeight: 79 },
       optionsTextConfig: { fontSize: 20, paddingLeft: 20, positionY: "-35%" }
     }
-  };
+  });
 
-  //instantiate dialog
-  const dialog = new SimpleDialog(dialogConfig);
-
-  //some random replies for muna
+  // Some random replies for muna
   const randomStartingOptions = ["I see...", "...", "...OK..."];
   const randomWrongAnswers = [
     "You are just guessing...",
@@ -108,17 +151,17 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
     "What? Not even close!"
   ];
 
-  //some variables used for dialog
+  // Variables used in the dialog tree
   let firstTimeDialog = true;
   let firstOptionCorrect = false;
   let secondOptionCorrect = false;
   let thirdOptionCorrect = false;
 
-  //define dialog text color
+  // Dialog text colors
   const npcColor = Color4.White();
   const playerColor = new Color4(0.898, 0, 0.157);
 
-  //create dialog tree
+  // Define the dialog tree
   const dialogTree = new SimpleDialog.DialogTree()
     .if(() => firstTimeDialog)
     .call(() => (firstTimeDialog = false))
@@ -213,13 +256,7 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
       SimpleDialog.PortraitIndex.RIGHT,
       resources.textures.npcPortraitSurprised
     )
-    .say(
-      () =>
-        randomStartingOptions[
-          Math.floor(Math.random() * (randomStartingOptions.length - 1))
-        ],
-      { color: npcColor }
-    )
+    .say(() => selectRandom(randomStartingOptions), { color: npcColor })
     .showPortrait(
       SimpleDialog.PortraitIndex.RIGHT,
       resources.textures.npcPortraitThinking
@@ -242,13 +279,7 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
       SimpleDialog.PortraitIndex.RIGHT,
       resources.textures.npcPortraitSurprised
     )
-    .say(
-      () =>
-        randomWrongAnswers[
-          Math.floor(Math.random() * (randomWrongAnswers.length - 1))
-        ],
-      { color: npcColor }
-    )
+    .say(() => selectRandom(randomWrongAnswers), { color: npcColor })
     .endOption()
     .option(() => "- Blue.")
     .say(() => "Blue... right?", { color: playerColor })
@@ -256,13 +287,7 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
       SimpleDialog.PortraitIndex.RIGHT,
       resources.textures.npcPortraitSurprised
     )
-    .say(
-      () =>
-        randomWrongAnswers[
-          Math.floor(Math.random() * (randomWrongAnswers.length - 1))
-        ],
-      { color: npcColor }
-    )
+    .say(() => selectRandom(randomWrongAnswers), { color: npcColor })
     .endOption()
     .option(() => "- Orange.")
     .say(() => "Organge!", { color: playerColor })
@@ -294,13 +319,7 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
       SimpleDialog.PortraitIndex.RIGHT,
       resources.textures.npcPortraitSurprised
     )
-    .say(
-      () =>
-        randomWrongAnswers[
-          Math.floor(Math.random() * (randomWrongAnswers.length - 1))
-        ],
-      { color: npcColor }
-    )
+    .say(() => selectRandom(randomWrongAnswers), { color: npcColor })
     .endOption()
     .option(() => "- Darts.")
     .say(() => "Darts?", { color: playerColor })
@@ -323,13 +342,7 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
       SimpleDialog.PortraitIndex.RIGHT,
       resources.textures.npcPortraitSurprised
     )
-    .say(
-      () =>
-        randomWrongAnswers[
-          Math.floor(Math.random() * (randomWrongAnswers.length - 1))
-        ],
-      { color: npcColor }
-    )
+    .say(() => selectRandom(randomWrongAnswers), { color: npcColor })
     .endOption()
     .endOptionsGroup()
     .else()
@@ -346,13 +359,7 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
       SimpleDialog.PortraitIndex.RIGHT,
       resources.textures.npcPortraitSurprised
     )
-    .say(
-      () =>
-        randomWrongAnswers[
-          Math.floor(Math.random() * (randomWrongAnswers.length - 1))
-        ],
-      { color: npcColor }
-    )
+    .say(() => selectRandom(randomWrongAnswers), { color: npcColor })
     .endOption()
     .option(() => "- Apple Pie.")
     .say(() => "It's Apple Pie...", { color: playerColor })
@@ -360,13 +367,7 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
       SimpleDialog.PortraitIndex.RIGHT,
       resources.textures.npcPortraitSurprised
     )
-    .say(
-      () =>
-        randomWrongAnswers[
-          Math.floor(Math.random() * (randomWrongAnswers.length - 1))
-        ],
-      { color: npcColor }
-    )
+    .say(() => selectRandom(randomWrongAnswers), { color: npcColor })
     .endOption()
     .option(() => "- Lemon Pie.")
     .say(() => "Lemon Pie!", { color: playerColor })
@@ -405,86 +406,12 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
     .endOptionsGroup()
     .endif();
 
-  // Prep the keypad UI
-  const keypad = new Keypad(gameCanvas);
-  keypad.container.visible = false;
-
-  // Add a panel which opens the UI when clicked
-  const numPadLock = new NumPadLock(resources.models.numpad2);
-  numPadLock.addComponent(
+  // Kick off the dialog when the statue is clicked
+  munaStatue.addComponent(
     new OnClick((): void => {
-      keypad.container.visible = true;
-    })
-  );
-
-  // Wire up the keypad logic
-  let currentInput = "";
-  keypad.onInput = (value: number): void => {
-    currentInput += value;
-    keypad.display(currentInput);
-    numPadLock.playButtonPressed();
-  };
-  keypad.onReset = (): void => {
-    currentInput = "";
-    keypad.display(currentInput);
-    numPadLock.playButtonPressed();
-  };
-  keypad.onSubmit = (): void => {
-    if (currentInput == "104") {
-      // Correct!
-      keypad.display("OK!", Color4.Green());
-      numPadLock.playAccessGranted();
-      numPadLock.addComponentOrReplace(
-        new utils.ExpireIn(2000, (): void => {
-          keypad.container.visible = false;
-          door.openDoor();
-        })
-      );
-      numPadLock.removeComponent(OnClick);
-      munaStatue.getComponent(utils.ToggleComponent).toggle();
-    } else {
-      // The password is incorrect
-      keypad.display("Err", Color4.Red());
-      numPadLock.playAccessDenied();
-      currentInput = "";
-    }
-  };
-}
-
-function CreateSpotlight(
-  position: Vector3,
-  rotation: Quaternion,
-  spotlightLightShape: GLTFShape,
-  hiddenNumberValue: string,
-  audioClip: AudioClip
-): Entity {
-  const rootEntity = new Entity();
-  rootEntity.addComponent(
-    new Transform({ position: position, rotation: rotation })
-  );
-  rootEntity.addComponent(
-    new utils.ToggleComponent(utils.ToggleState.Off, value => {
-      if (value == utils.ToggleState.On) {
-        const spotLightLight = new Entity();
-        spotLightLight.addComponent(spotlightLightShape);
-        spotLightLight.setParent(rootEntity);
-
-        const hiddenNumber = new Entity();
-        const hiddenNumberShape = new TextShape();
-        hiddenNumber.addComponent(hiddenNumberShape);
-        hiddenNumber.addComponent(
-          new Transform({ position: new Vector3(0, 0.9, -0.4) })
-        );
-        hiddenNumber.setParent(rootEntity);
-
-        hiddenNumberShape.value = hiddenNumberValue;
-        hiddenNumberShape.fontSize = 5;
-
-        spotLightLight.addComponentOrReplace(new AudioSource(audioClip));
-        spotLightLight.getComponent(AudioSource).playOnce();
+      if (!dialog.isDialogTreeRunning()) {
+        dialog.runDialogTree(dialogTree);
       }
     })
   );
-
-  return rootEntity;
 }

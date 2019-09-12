@@ -16,7 +16,8 @@ export default {
 
     door6: new GLTFShape("models/room6/Puzzle06_Door.glb"),
     muna: new GLTFShape("models/room6/Puzzle06_Muna.glb"),
-    numpad2: new GLTFShape("models/room6/Numpad2.glb")
+    numpad2: new GLTFShape("models/room6/Numpad2.glb"),
+    spotlight: new GLTFShape("models/room6/spotlightlight.glb")
   },
   textures: {
     clearButton: new Texture("images/codepad/pwdpanel_clear.png"),
@@ -26,6 +27,8 @@ export default {
     numberButton: new Texture("images/codepad/pwdpanel_buttons.png"),
     panelBackground: new Texture("images/codepad/pwdpanel_bg.png"),
 
+    textContainer: new Texture("images/dialogs/textContainer.png"),
+    optionsContainer: new Texture("images/dialogs/optionsContainer.png"),
     playerPortraitDefault: new Texture("images/dialogs/player_default.png", {
       hasAlpha: true
     }),
