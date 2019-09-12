@@ -1,151 +1,161 @@
 import resources from "../resources";
-import { CloseImage } from "./closeImage";
-import { KeypadButton } from "./keypadButton";
-import { KeypadDisplay } from "./keypadDisplay";
 
+// Constants for positioning
 const panelPosition = new Vector2(12, -24);
+const buttonSize = new Vector2(55, 55);
+const buttonSpace = new Vector2(5, 5);
 
-/*
- * ToDo: Sound needs to be added, with this not being an Entity it's not going to be strait forward =<
- * Also cannot get the button input to work, I always get some error about it being undefined or something stupid
- * I suspect it's because I'm in a constructor or not in an entity?
- */
-export class Keypad extends UIContainerRect {
-  private currentIndex = 0;
-  private password = "155";
+export class Keypad {
+  // Expose the container for changing visibility
+  public container: UIContainerRect;
 
-  private display: KeypadDisplay[];
+  private panelInputs: UIText[];
 
-  constructor(parent: UICanvas, onPassed?: () => void) {
-    super(parent);
+  /**
+   * Called when a value key is pressed.
+   */
+  public onInput: (value: number) => void;
 
-    // Setting Container Width and Height
-    this.positionX = -50;
-    this.positionY = 50;
-    this.width = "100%";
-    this.height = "100%";
-    this.visible = false;
+  /**
+   * Called when the reset button is pressed.
+   */
+  public onReset: () => void;
 
-    // Creating Background
-    const panelBg = new UIImage(this, resources.textures.panelBackground);
-    panelBg.sourceWidth = 918;
-    panelBg.sourceHeight = 1300;
-    panelBg.width = 310;
-    panelBg.height = 420;
-    panelBg.positionX = 70;
-    panelBg.positionY = -55;
+  /**
+   * Called when the submit button is pressed.
+   */
+  public onSubmit: () => void;
 
-    // Creating Display
-    this.display = [];
+  constructor(parent: UIShape) {
+    this.container = new UIContainerRect(parent);
+    this.container.positionX = -50;
+    this.container.positionY = 50;
+    this.container.width = "100%";
+    this.container.height = "100%";
+
+    // Display an image in the background for the keypad UI
+    const panelBackground = new UIImage(
+      this.container,
+      resources.textures.panelBackground
+    );
+    panelBackground.sourceWidth = 918;
+    panelBackground.sourceHeight = 1300;
+    panelBackground.width = 310;
+    panelBackground.height = 420;
+    panelBackground.positionX = 70;
+    panelBackground.positionY = -55;
+
+    // Add a close button near the top right
+    const closeImage = new UIImage(
+      this.container,
+      resources.textures.closeButton
+    );
+    closeImage.sourceWidth = 92;
+    closeImage.sourceHeight = 92;
+    closeImage.width = 32;
+    closeImage.height = 32;
+    closeImage.positionX = 194;
+    closeImage.positionY = 108;
+
+    // When close is clicked, hide the UI
+    closeImage.onClick = new OnClick((): void => {
+      this.container.visible = false;
+    });
+
+    // 3 boxes to show the entered code or current message
+    this.panelInputs = [];
     for (let i = 0; i < 3; i++) {
-      this.display.push(new KeypadDisplay(this, new Vector2(i * 60 + 5, 45)));
+      const inputImage = new UIImage(
+        this.container,
+        resources.textures.inputBox
+      );
+      const inputSlot = new UIText(this.container);
+      inputImage.sourceWidth = 173;
+      inputImage.sourceHeight = 173;
+      inputImage.width = inputSlot.width = buttonSize.x;
+      inputImage.height = inputSlot.height = buttonSize.y;
+      inputImage.positionX = inputSlot.positionX =
+        i * (buttonSpace.x + buttonSize.x) + 5;
+      inputImage.positionY = inputSlot.positionY = 45;
+      inputSlot.fontAutoSize = true;
+      inputSlot.hTextAlign = "center";
+      this.panelInputs.push(inputSlot);
     }
 
-    // Creating Close Button
-    new CloseImage(this, new Vector2(194, 108));
-
-    // Creating 0-9 Buttons
+    // User input buttons
     for (let col = 0; col < 3; col++) {
       for (let row = 0; row < 4; row++) {
-        let number = row * 3 + col + 1;
-        const pos = new Vector2(
-          panelPosition.x + col * 60,
-          panelPosition.y - row * 60
-        );
-
-        if (row < 3 || col == 1) {
-          // Special case for 0
-          if (row == 3 && col == 1) {
-            number = 0;
-          }
-
-          // Error Occurs Here
-          const button = new KeypadButton(
-            this,
-            pos,
-            number,
-            (str: string): void => {
-              this.InputText(str);
-            }
-          );
+        // The value this button represents
+        let value: number;
+        if (col == 1 && row == 3) {
+          // The 0 button is a special case
+          value = 0;
+        } else {
+          value = row * 3 + col + 1;
         }
+
+        // Create the button and its event
+        let buttonImage: UIImage = null;
+        if (col == 0 && row == 3) {
+          // The clear button in the bottom left
+          buttonImage = new UIImage(
+            this.container,
+            resources.textures.clearButton
+          );
+
+          // Call onReset when clicked
+          buttonImage.onClick = new OnClick((): void => {
+            this.onReset();
+          });
+        } else if (col == 2 && row == 3) {
+          // The enter button in the bottom right
+          buttonImage = new UIImage(
+            this.container,
+            resources.textures.enterButton
+          );
+
+          // Call onSubmit when clicked
+          buttonImage.onClick = new OnClick((): void => {
+            this.onSubmit();
+          });
+        } else {
+          // A number value button
+          buttonImage = new UIImage(
+            this.container,
+            resources.textures.numberButton
+          );
+
+          const numberText = new UIText(buttonImage);
+          numberText.isPointerBlocker = false;
+          numberText.positionX = -23;
+          numberText.fontAutoSize = true;
+          numberText.hTextAlign = "center";
+          numberText.value = value.toString();
+
+          // Call onInput when clicked
+          buttonImage.onClick = new OnClick((): void => {
+            this.onInput(value);
+          });
+        }
+
+        // Configure button image
+        buttonImage.sourceWidth = 171;
+        buttonImage.sourceHeight = 171;
+        buttonImage.width = buttonSize.x;
+        buttonImage.height = buttonSize.y;
+        buttonImage.positionX =
+          panelPosition.x + col * (buttonSpace.x + buttonSize.x);
+        buttonImage.positionY =
+          panelPosition.y - row * (buttonSpace.y + buttonSize.y);
       }
     }
-
-    // Creating Clear Button
-    const clear = this.CreateButton(
-      resources.textures.clearButton,
-      new Vector2(panelPosition.x, panelPosition.y - 3 * 60)
-    );
-    clear.onClick = new OnClick((): void => {
-      this.display.forEach(element => {
-        element.text.value = "";
-      });
-      this.SetColour(Color4.White());
-      this.currentIndex = 0;
-    });
-
-    // Creating Enter Button
-    const enter = this.CreateButton(
-      resources.textures.enterButton,
-      new Vector2(panelPosition.x + 2 * 60, panelPosition.y - 3 * 60)
-    );
-    enter.onClick = new OnClick((): void => {
-      if (this.CheckPassword()) {
-        this.SetColour(Color4.Green());
-        this.SetDisplay("OK!");
-
-        onPassed.call(null);
-        this.currentIndex = 3;
-      } else {
-        this.SetColour(Color4.Red());
-        this.SetDisplay("Err");
-
-        this.currentIndex = 3;
-      }
-    });
   }
 
-  // Function checks if Password is Correct and will return True if so
-  private CheckPassword = function(): boolean {
-    for (let i = 0; i < 3; i++) {
-      if (this.display[i].text.value != this.password[i]) {
-        return false;
-      }
+  public display(message: string, color: Color4 = Color4.White()): void {
+    for (let i = 0; i < this.panelInputs.length; i++) {
+      const character = message.length > i ? message[i] : "";
+      this.panelInputs[i].value = character;
+      this.panelInputs[i].color = color;
     }
-    return true;
-  };
-
-  // Function sets the Display Text of the Keypad
-  private SetDisplay = function(text: string): void {
-    for (let i = 0; i < 3; i++) {
-      this.display[i].text.value = text[i];
-    }
-  };
-  // Function sets the Colour of the Display Text
-  private SetColour = function(colour: Color4): void {
-    this.display.forEach(element => {
-      element.text.color = colour;
-    });
-  };
-
-  // Function to easily Create Additional buttons (Clear & Enter)
-  private CreateButton = function(image: Texture, position: Vector2): UIImage {
-    const result = new UIImage(this, image);
-    result.sourceWidth = 171;
-    result.sourceHeight = 171;
-    result.width = 55;
-    result.height = 55;
-    result.positionX = position.x;
-    result.positionY = position.y;
-
-    return result;
-  };
-  // Function to add a String to the Display
-  private InputText = function(value: string): void {
-    if (this.currentIndex < 3) {
-      this.display[this.currentIndex].text.value = value;
-      this.currentIndex++;
-    }
-  };
+  }
 }
