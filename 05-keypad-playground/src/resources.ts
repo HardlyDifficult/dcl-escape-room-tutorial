@@ -1,7 +1,3 @@
-/**
- * Shared resources which may be used by multiple gameObjects, to improve performance.
- */
-
 export default {
   sounds: {
     accessGranted: new AudioClip("sounds/access_granted.mp3"),
