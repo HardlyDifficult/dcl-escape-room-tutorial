@@ -6,6 +6,7 @@ export default {
   sounds: {
     accessGranted: new AudioClip("sounds/access_granted.mp3"),
     accessDenied: new AudioClip("sounds/access_denied.mp3"),
+    button: new AudioClip("sounds/button.mp3"),
     doorSqueak: new AudioClip("sounds/door_squeak.mp3")
   },
   models: {
@@ -15,7 +16,8 @@ export default {
     postit: new GLTFShape("models/room5/Puzzle05_Postit.glb"),
     pictureFrame: new GLTFShape("models/room5/Puzzle05_PictureMain.glb"),
 
-    door5: new GLTFShape("models/room5/Puzzle05_Door.glb")
+    door5: new GLTFShape("models/room5/Puzzle05_Door.glb"),
+    numpad1: new GLTFShape("models/room5/Numpad1.glb")
   },
   textures: {
     closeHintButton: new Texture("images/room5/button_close.png"),
