@@ -151,6 +151,7 @@ export class Keypad {
     }
   }
 
+  // Display a message above the keypad, up to 3 characters
   public display(message: string, color: Color4 = Color4.White()): void {
     for (let i = 0; i < this.panelInputs.length; i++) {
       const character = message.length > i ? message[i] : "";
