@@ -111,12 +111,12 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
 
   // Reveal the hints as the player answers questions correctly.
   dialog.onCorrectAnswer = (questionId: number) => {
-    if(questionId === 0) {
-      spotLight1.getComponent(utils.ToggleComponent).set(utils.ToggleState.On)
-    } else if(questionId === 1) {
-      spotLight2.getComponent(utils.ToggleComponent).set(utils.ToggleState.On)
+    if (questionId === 0) {
+      spotLight1.getComponent(utils.ToggleComponent).set(utils.ToggleState.On);
+    } else if (questionId === 1) {
+      spotLight2.getComponent(utils.ToggleComponent).set(utils.ToggleState.On);
     } else {
-      spotLight3.getComponent(utils.ToggleComponent).set(utils.ToggleState.On)
+      spotLight3.getComponent(utils.ToggleComponent).set(utils.ToggleState.On);
     }
-  }
+  };
 }
