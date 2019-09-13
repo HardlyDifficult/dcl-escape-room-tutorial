@@ -1,5 +1,6 @@
 import { Door, ToggleEntity, Button } from "../gameObjects/index";
 import resources from "../resources";
+import utils from "../../node_modules/decentraland-ecs-utils/index";
 
 export function CreateRoom7(): void {
   let areButtonsEnabled = true;
@@ -30,7 +31,7 @@ export function CreateRoom7(): void {
 
   const AreAllLightsOn = (): boolean => {
     for (const bulb of lightbulbs) {
-      if (!bulb.IsLightOn()) {
+      if (!bulb.getComponent(utils.ToggleComponent).isOn()) {
         return false;
       }
     }
@@ -46,22 +47,22 @@ export function CreateRoom7(): void {
 
   const buttonInteractions = [
     (): void => {
-      lightbulbs[1].Toggle();
-      lightbulbs[2].Toggle();
-      lightbulbs[3].Toggle();
+      lightbulbs[1].getComponent(utils.ToggleComponent).toggle();
+      lightbulbs[2].getComponent(utils.ToggleComponent).toggle();
+      lightbulbs[3].getComponent(utils.ToggleComponent).toggle();
     },
     (): void => {
-      lightbulbs[2].Toggle();
-      lightbulbs[3].Toggle();
+      lightbulbs[2].getComponent(utils.ToggleComponent).toggle();
+      lightbulbs[3].getComponent(utils.ToggleComponent).toggle();
     },
     (): void => {
-      lightbulbs[0].Toggle();
-      lightbulbs[3].Toggle();
+      lightbulbs[0].getComponent(utils.ToggleComponent).toggle();
+      lightbulbs[3].getComponent(utils.ToggleComponent).toggle();
     },
     (): void => {
-      lightbulbs[0].Toggle();
-      lightbulbs[2].Toggle();
-      lightbulbs[3].Toggle();
+      lightbulbs[0].getComponent(utils.ToggleComponent).toggle();
+      lightbulbs[2].getComponent(utils.ToggleComponent).toggle();
+      lightbulbs[3].getComponent(utils.ToggleComponent).toggle();
     }
   ];
   const buttonsPosition = [
@@ -83,7 +84,9 @@ export function CreateRoom7(): void {
 
           if (AreAllLightsOn()) {
             areButtonsEnabled = false;
-            tvScreen.SetOn();
+            tvScreen
+              .getComponent(utils.ToggleComponent)
+              .set(utils.ToggleState.On);
           }
         }
       })
