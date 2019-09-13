@@ -13,10 +13,4 @@ export class Ticket extends Entity {
       new AnimationState("Ticket_Action", { looping: false })
     );
   }
-
-  AnimateTicket(): void {
-    this.getComponent(Animator)
-      .getClip("Ticket_Action")
-      .play();
-  }
 }

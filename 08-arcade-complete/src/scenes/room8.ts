@@ -44,7 +44,10 @@ export function CreateRoom8(): void {
       mouse2.removeComponent(MouseFollowPathComponent);
       engine.removeSystem(mouseBehaviorSystem);
 
-      ticket.AnimateTicket();
+      ticket
+        .getComponent(Animator)
+        .getClip("Ticket_Action")
+        .play();
       return false;
     }
     return true;

@@ -23,18 +23,4 @@ export class ToggleEntity extends Entity {
       })
     );
   }
-
-  IsLightOn(): boolean {
-    return this.getComponent(utils.ToggleComponent).isOn();
-  }
-
-  Toggle(): void {
-    this.getComponent(utils.ToggleComponent).toggle();
-  }
-  SetOn(): void {
-    this.getComponent(utils.ToggleComponent).set(utils.ToggleState.On);
-  }
-  setOff(): void {
-    this.getComponent(utils.ToggleComponent).set(utils.ToggleState.Off);
-  }
 }
