@@ -28,10 +28,10 @@ export function CreateRoom5(gameCanvas: UICanvas): void {
   // And a carpet which covers a postit note
   const carpet = new RotatableEntity(
     resources.models.carpet,
-    new Transform({
+    {
       position: new Vector3(20.7079, 5.50579, 24.6273),
       rotation: Quaternion.Identity
-    }),
+    },
     undefined,
     Quaternion.Euler(0, -10, 0)
   );
