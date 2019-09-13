@@ -7,9 +7,7 @@ export class Spotlight extends Entity {
     engine.addEntity(this);
 
     this.addComponent(new Transform(transform));
-    this.addComponent(
-      new AudioSource(resources.sounds.spotlight)
-    );
+    this.addComponent(new AudioSource(resources.sounds.spotlight));
 
     this.addComponent(
       new utils.ToggleComponent(utils.ToggleState.Off, value => {
