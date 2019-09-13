@@ -60,7 +60,7 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
       numPadLock.removeComponent(OnClick);
       munaStatue.getComponent(utils.ToggleComponent).toggle();
       numPadLock.addComponentOrReplace(
-        new utils.ExpireIn(2000, (): void => {
+        new utils.Delay(2000, (): void => {
           keypad.container.visible = false;
           door.openDoor();
         })
