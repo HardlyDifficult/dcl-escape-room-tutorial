@@ -6,8 +6,7 @@ import {
   Door,
   Spotlight
 } from "../gameObjects/index";
-import { Keypad } from "../ui/index";
-import { MunaDialog } from "../ui/munaDialog";
+import { Keypad, MunaDialog } from "../ui/index";
 
 export function CreateRoom6(gameCanvas: UICanvas): void {
   const door = new Door(
