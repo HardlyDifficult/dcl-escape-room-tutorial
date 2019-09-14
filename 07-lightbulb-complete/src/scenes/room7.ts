@@ -1,6 +1,6 @@
-import { Door, ToggleEntity, Button } from "../gameObjects/index";
-import resources from "../resources";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
+import resources from "../resources";
+import { Door, ToggleEntity, Button } from "../gameObjects/index";
 
 export function CreateRoom7(): void {
   let areButtonsEnabled = true;
@@ -9,23 +9,23 @@ export function CreateRoom7(): void {
   const lightbulbs: ToggleEntity[] = [
     new ToggleEntity(
       { position: new Vector3(23.408, 2.26006, 10.3273) },
-      new GLTFShape("models/room7/Puzzle07_LightOn.glb"),
-      new GLTFShape("models/room7/Puzzle07_LightOff.glb")
+      resources.models.lightOn,
+      resources.models.lightOff
     ),
     new ToggleEntity(
       { position: new Vector3(23.408, 2.22122, 11.1682) },
-      new GLTFShape("models/room7/Puzzle07_LightOn.glb"),
-      new GLTFShape("models/room7/Puzzle07_LightOff.glb")
+      resources.models.lightOn,
+      resources.models.lightOff
     ),
     new ToggleEntity(
       { position: new Vector3(23.408, 2.10693, 12.1568) },
-      new GLTFShape("models/room7/Puzzle07_LightOn.glb"),
-      new GLTFShape("models/room7/Puzzle07_LightOff.glb")
+      resources.models.lightOn,
+      resources.models.lightOff
     ),
     new ToggleEntity(
       { position: new Vector3(23.408, 2.24542, 13.1888) },
-      new GLTFShape("models/room7/Puzzle07_LightOn.glb"),
-      new GLTFShape("models/room7/Puzzle07_LightOff.glb")
+      resources.models.lightOn,
+      resources.models.lightOff
     )
   ];
 
