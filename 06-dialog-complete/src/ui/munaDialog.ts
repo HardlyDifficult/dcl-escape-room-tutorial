@@ -237,7 +237,7 @@ export class MunaDialog extends SimpleDialog {
       .say(() => '"Give light, and the darkness will disappear of itself."', {
         color: npcColor
       })
-      .call(() => this.onCorrectAnswer(0))
+      .call(() => this.onCorrectAnswer(1))
       .endOption()
       .option(() => "- Bowling.")
       .say(() => "Of course… It’s bowling... right?", { color: playerColor })

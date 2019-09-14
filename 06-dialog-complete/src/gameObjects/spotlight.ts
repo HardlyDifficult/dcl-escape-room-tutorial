@@ -7,29 +7,24 @@ export class Spotlight extends Entity {
     engine.addEntity(this);
 
     this.addComponent(new Transform(transform));
+    this.addComponent(new AudioSource(resources.sounds.spotlight));
 
     this.addComponent(
       new utils.ToggleComponent(utils.ToggleState.Off, value => {
         if (value == utils.ToggleState.On) {
-          const spotLightLight = new Entity();
           this.addComponent(resources.models.spotlight);
-          spotLightLight.setParent(this);
 
           const hiddenNumber = new Entity();
-          const hiddenNumberShape = new TextShape();
-          hiddenNumber.addComponent(hiddenNumberShape);
+          hiddenNumber.addComponent(new TextShape());
+          hiddenNumber.getComponent(TextShape).value = hiddenNumberValue;
+          hiddenNumber.getComponent(TextShape).fontSize = 5;
+
+          hiddenNumber.setParent(this);
           hiddenNumber.addComponent(
             new Transform({ position: new Vector3(0, 0.9, -0.4) })
           );
-          hiddenNumber.setParent(this);
 
-          hiddenNumberShape.value = hiddenNumberValue;
-          hiddenNumberShape.fontSize = 5;
-
-          spotLightLight.addComponentOrReplace(
-            new AudioSource(resources.sounds.spotlight)
-          );
-          spotLightLight.getComponent(AudioSource).playOnce();
+          this.getComponent(AudioSource).playOnce();
         }
       })
     );
