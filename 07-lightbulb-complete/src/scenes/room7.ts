@@ -29,7 +29,7 @@ export function CreateRoom7(): void {
     )
   ];
 
-  const AreAllLightsOn = (): boolean => {
+  const areAllLightsOn = (): boolean => {
     for (const bulb of lightbulbs) {
       if (!bulb.getComponent(utils.ToggleComponent).isOn()) {
         return false;
@@ -82,7 +82,7 @@ export function CreateRoom7(): void {
           buttonInteractions[i]();
           button.press();
 
-          if (AreAllLightsOn()) {
+          if (areAllLightsOn()) {
             areButtonsEnabled = false;
             tvScreen
               .getComponent(utils.ToggleComponent)
