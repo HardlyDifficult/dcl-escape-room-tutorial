@@ -34,12 +34,14 @@ export function CreateRoom7(): void {
 
   // Puzzle Lightbulbs
   const lightbulbs: ToggleEntity[] = [];
-  for(let i = 0; i < 4; i++) {
-    lightbulbs.push(new ToggleEntity(
-      { position: bulbPositions[i] },
-      new GLTFShape(resources.models.lightOnSrc),
-      new GLTFShape(resources.models.lightOffSrc)
-    ))
+  for (let i = 0; i < 4; i++) {
+    lightbulbs.push(
+      new ToggleEntity(
+        { position: bulbPositions[i] },
+        new GLTFShape(resources.models.lightOnSrc),
+        new GLTFShape(resources.models.lightOffSrc)
+      )
+    );
   }
 
   const buttonInteractions = [
