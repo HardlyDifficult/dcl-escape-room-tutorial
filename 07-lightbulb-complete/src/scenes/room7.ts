@@ -25,23 +25,23 @@ export function CreateRoom7(): void {
   const lightbulbs: ToggleEntity[] = [
     new ToggleEntity(
       { position: new Vector3(23.408, 2.26006, 10.3273) },
-      resources.models.lightOn,
-      resources.models.lightOff
+      new GLTFShape(resources.models.lightOnSrc),
+      new GLTFShape(resources.models.lightOffSrc)
     ),
     new ToggleEntity(
       { position: new Vector3(23.408, 2.22122, 11.1682) },
-      resources.models.lightOn,
-      resources.models.lightOff
+      new GLTFShape(resources.models.lightOnSrc),
+      new GLTFShape(resources.models.lightOffSrc)
     ),
     new ToggleEntity(
       { position: new Vector3(23.408, 2.10693, 12.1568) },
-      resources.models.lightOn,
-      resources.models.lightOff
+      new GLTFShape(resources.models.lightOnSrc),
+      new GLTFShape(resources.models.lightOffSrc)
     ),
     new ToggleEntity(
       { position: new Vector3(23.408, 2.24542, 13.1888) },
-      resources.models.lightOn,
-      resources.models.lightOff
+      new GLTFShape(resources.models.lightOnSrc),
+      new GLTFShape(resources.models.lightOffSrc)
     )
   ];
 

@@ -4,12 +4,12 @@ export class ToggleModelComponent {
   private offModel: GLTFShape;
 
   constructor(entity: IEntity, onModel: GLTFShape, offModel: GLTFShape) {
-    this.onModel = new GLTFShape(onModel.src);
+    this.onModel = onModel;
     const onEntity = new Entity();
     onEntity.addComponent(this.onModel);
     onEntity.setParent(entity);
 
-    this.offModel = new GLTFShape(offModel.src);
+    this.offModel = offModel;
     const offEntity = new Entity();
     offEntity.addComponent(this.offModel);
     offEntity.setParent(entity);
