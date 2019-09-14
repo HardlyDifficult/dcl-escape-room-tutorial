@@ -3,6 +3,22 @@ import resources from "../resources";
 import { Door, ToggleEntity, Button } from "../gameObjects/index";
 
 export function CreateRoom7(): void {
+  const door = new Door(
+    resources.models.door7,
+    {
+      position: new Vector3(26.3087, 0, 14.9449),
+      rotation: Quaternion.Euler(0, -10.2, 0)
+    },
+    resources.sounds.doorSqueek
+  );
+  door.addComponent(
+    new OnClick((): void => {
+      if (!door.isOpen) {
+        door.openDoor();
+      }
+    })
+  );
+
   let areButtonsEnabled = true;
 
   // Puzzle Lightbulbs
@@ -92,21 +108,4 @@ export function CreateRoom7(): void {
       })
     );
   }
-
-  // Adding Door for the Room
-  const door = new Door(
-    resources.models.door7,
-    {
-      position: new Vector3(26.3087, 0, 14.9449),
-      rotation: Quaternion.Euler(0, -10.2, 0)
-    },
-    resources.sounds.doorSqueek
-  );
-  door.addComponent(
-    new OnClick((): void => {
-      if (!door.isOpen) {
-        door.openDoor();
-      }
-    })
-  );
 }
