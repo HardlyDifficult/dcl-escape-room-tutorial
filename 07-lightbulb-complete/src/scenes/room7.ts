@@ -1,6 +1,6 @@
-import utils from "../../node_modules/decentraland-ecs-utils/index";
 import resources from "../resources";
 import { Door, ToggleEntity, Button } from "../gameObjects/index";
+import { ToggleModelComponent } from "../components/toggleModelComponent";
 
 const buttonPositions = [
   new Vector3(23.0891, 1.58507, 10.2526),
@@ -46,27 +46,27 @@ export function CreateRoom7(): void {
 
   const buttonInteractions = [
     (): void => {
-      lightbulbs[1].getComponent(utils.ToggleComponent).toggle();
-      lightbulbs[2].getComponent(utils.ToggleComponent).toggle();
-      lightbulbs[3].getComponent(utils.ToggleComponent).toggle();
+      lightbulbs[1].getComponent(ToggleModelComponent).toggle();
+      lightbulbs[2].getComponent(ToggleModelComponent).toggle();
+      lightbulbs[3].getComponent(ToggleModelComponent).toggle();
     },
     (): void => {
-      lightbulbs[2].getComponent(utils.ToggleComponent).toggle();
-      lightbulbs[3].getComponent(utils.ToggleComponent).toggle();
+      lightbulbs[2].getComponent(ToggleModelComponent).toggle();
+      lightbulbs[3].getComponent(ToggleModelComponent).toggle();
     },
     (): void => {
-      lightbulbs[0].getComponent(utils.ToggleComponent).toggle();
-      lightbulbs[3].getComponent(utils.ToggleComponent).toggle();
+      lightbulbs[0].getComponent(ToggleModelComponent).toggle();
+      lightbulbs[3].getComponent(ToggleModelComponent).toggle();
     },
     (): void => {
-      lightbulbs[0].getComponent(utils.ToggleComponent).toggle();
-      lightbulbs[2].getComponent(utils.ToggleComponent).toggle();
-      lightbulbs[3].getComponent(utils.ToggleComponent).toggle();
+      lightbulbs[0].getComponent(ToggleModelComponent).toggle();
+      lightbulbs[2].getComponent(ToggleModelComponent).toggle();
+      lightbulbs[3].getComponent(ToggleModelComponent).toggle();
     }
   ];
   const areAllLightsOn = (): boolean => {
     for (const bulb of lightbulbs) {
-      if (!bulb.getComponent(utils.ToggleComponent).isOn()) {
+      if (!bulb.getComponent(ToggleModelComponent).isOn()) {
         return false;
       }
     }
@@ -93,9 +93,7 @@ export function CreateRoom7(): void {
 
           if (areAllLightsOn()) {
             areButtonsEnabled = false;
-            tvScreen
-              .getComponent(utils.ToggleComponent)
-              .set(utils.ToggleState.On);
+            tvScreen.getComponent(ToggleModelComponent).toggle();
           }
         }
       })

@@ -14,16 +14,20 @@ export class ToggleModelComponent {
     offEntity.addComponent(this.offModel);
     offEntity.setParent(entity);
 
-    this.setOff();
-  }
-
-  setOn() {
-    this.offModel.visible = false;
-    this.onModel.visible = true;
-  }
-
-  setOff() {
     this.onModel.visible = false;
-    this.offModel.visible = true;
+  }
+
+  isOn(): boolean {
+    return this.onModel.visible;
+  }
+
+  toggle() {
+    if (this.isOn()) {
+      this.onModel.visible = false;
+      this.offModel.visible = true;
+    } else {
+      this.offModel.visible = false;
+      this.onModel.visible = true;
+    }
   }
 }
