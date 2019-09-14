@@ -75,8 +75,7 @@ export function CreateRoom6(gameCanvas: UICanvas): void {
   // Spotlights
   const spotLight1 = new Spotlight(
     {
-      position: new Vector3(-0.04, 0, 0),
-      rotation: Quaternion.Identity
+      position: new Vector3(-0.04, 0, 0)
     },
     "1"
   );
