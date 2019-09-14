@@ -3,33 +3,27 @@ export class ToggleModelComponent {
   private onModel: GLTFShape;
   private offModel: GLTFShape;
 
-  constructor(
-    lightbulbEntity: IEntity,
-    lightOnModel: GLTFShape,
-    lightOffModel: GLTFShape
-  ) {
+  constructor(entity: IEntity, onModel: GLTFShape, offModel: GLTFShape) {
+    this.onModel = new GLTFShape(onModel.src);
     const onEntity = new Entity();
-    this.onModel = new GLTFShape(lightOnModel.src);
-
     onEntity.addComponent(this.onModel);
-    onEntity.setParent(lightbulbEntity);
+    onEntity.setParent(entity);
 
+    this.offModel = new GLTFShape(offModel.src);
     const offEntity = new Entity();
-    this.offModel = new GLTFShape(lightOffModel.src);
-
     offEntity.addComponent(this.offModel);
-    offEntity.setParent(lightbulbEntity);
+    offEntity.setParent(entity);
 
     this.setOff();
   }
 
-  setOn(): void {
+  setOn() {
     this.offModel.visible = false;
     this.onModel.visible = true;
   }
 
-  setOff(): void {
-    this.offModel.visible = true;
+  setOff() {
     this.onModel.visible = false;
+    this.offModel.visible = true;
   }
 }
