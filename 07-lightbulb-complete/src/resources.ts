@@ -9,6 +9,8 @@ export default {
     tvOff: new GLTFShape("models/room7/TVColor.glb"),
     tvOn: new GLTFShape("models/room7/TVOrange.glb"),
 
-    door7: new GLTFShape("models/room7/Puzzle07_Door.glb")
+    door7: new GLTFShape("models/room7/Puzzle07_Door.glb"),
+    lightOn: new GLTFShape("models/room7/Puzzle07_LightOn.glb"),
+    lightOff: new GLTFShape("models/room7/Puzzle07_LightOff.glb")
   }
 };

@@ -1,35 +1,51 @@
-import { Door, ToggleEntity, Button } from "../gameObjects/index";
-import resources from "../resources";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
+import resources from "../resources";
+import { Door, ToggleEntity, Button } from "../gameObjects/index";
 
 export function CreateRoom7(): void {
+  const door = new Door(
+    resources.models.door7,
+    {
+      position: new Vector3(26.3087, 0, 14.9449),
+      rotation: Quaternion.Euler(0, -10.2, 0)
+    },
+    resources.sounds.doorSqueek
+  );
+  door.addComponent(
+    new OnClick((): void => {
+      if (!door.isOpen) {
+        door.openDoor();
+      }
+    })
+  );
+
   let areButtonsEnabled = true;
 
   // Puzzle Lightbulbs
   const lightbulbs: ToggleEntity[] = [
     new ToggleEntity(
       { position: new Vector3(23.408, 2.26006, 10.3273) },
-      new GLTFShape("models/room7/Puzzle07_LightOn.glb"),
-      new GLTFShape("models/room7/Puzzle07_LightOff.glb")
+      resources.models.lightOn,
+      resources.models.lightOff
     ),
     new ToggleEntity(
       { position: new Vector3(23.408, 2.22122, 11.1682) },
-      new GLTFShape("models/room7/Puzzle07_LightOn.glb"),
-      new GLTFShape("models/room7/Puzzle07_LightOff.glb")
+      resources.models.lightOn,
+      resources.models.lightOff
     ),
     new ToggleEntity(
       { position: new Vector3(23.408, 2.10693, 12.1568) },
-      new GLTFShape("models/room7/Puzzle07_LightOn.glb"),
-      new GLTFShape("models/room7/Puzzle07_LightOff.glb")
+      resources.models.lightOn,
+      resources.models.lightOff
     ),
     new ToggleEntity(
       { position: new Vector3(23.408, 2.24542, 13.1888) },
-      new GLTFShape("models/room7/Puzzle07_LightOn.glb"),
-      new GLTFShape("models/room7/Puzzle07_LightOff.glb")
+      resources.models.lightOn,
+      resources.models.lightOff
     )
   ];
 
-  const AreAllLightsOn = (): boolean => {
+  const areAllLightsOn = (): boolean => {
     for (const bulb of lightbulbs) {
       if (!bulb.getComponent(utils.ToggleComponent).isOn()) {
         return false;
@@ -82,7 +98,7 @@ export function CreateRoom7(): void {
           buttonInteractions[i]();
           button.press();
 
-          if (AreAllLightsOn()) {
+          if (areAllLightsOn()) {
             areButtonsEnabled = false;
             tvScreen
               .getComponent(utils.ToggleComponent)
@@ -92,21 +108,4 @@ export function CreateRoom7(): void {
       })
     );
   }
-
-  // Adding Door for the Room
-  const door = new Door(
-    resources.models.door7,
-    {
-      position: new Vector3(26.3087, 0, 14.9449),
-      rotation: Quaternion.Euler(0, -10.2, 0)
-    },
-    resources.sounds.doorSqueek
-  );
-  door.addComponent(
-    new OnClick((): void => {
-      if (!door.isOpen) {
-        door.openDoor();
-      }
-    })
-  );
 }

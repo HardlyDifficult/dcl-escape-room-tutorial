@@ -20,14 +20,15 @@ export class ToggleModelComponent {
     offEntity.addComponent(this.offModel);
     offEntity.setParent(lightbulbEntity);
 
-    this.SetOff();
+    this.setOff();
   }
 
-  SetOn(): void {
+  setOn(): void {
     this.offModel.visible = false;
     this.onModel.visible = true;
   }
-  SetOff(): void {
+
+  setOff(): void {
     this.offModel.visible = true;
     this.onModel.visible = false;
   }

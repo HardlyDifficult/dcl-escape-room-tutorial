@@ -16,9 +16,9 @@ export class ToggleEntity extends Entity {
     this.addComponent(
       new utils.ToggleComponent(utils.ToggleState.Off, (value): void => {
         if (value === utils.ToggleState.On) {
-          this.getComponent(ToggleModelComponent).SetOn();
+          this.getComponent(ToggleModelComponent).setOn();
         } else {
-          this.getComponent(ToggleModelComponent).SetOff();
+          this.getComponent(ToggleModelComponent).setOff();
         }
       })
     );
