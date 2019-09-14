@@ -9,13 +9,13 @@ export class ToggleModelComponent {
     lightOffModel: GLTFShape
   ) {
     const onEntity = new Entity();
-    this.onModel = lightOnModel;
+    this.onModel = new GLTFShape(lightOnModel.src);
 
     onEntity.addComponent(this.onModel);
     onEntity.setParent(lightbulbEntity);
 
     const offEntity = new Entity();
-    this.offModel = lightOffModel;
+    this.offModel = new GLTFShape(lightOffModel.src);
 
     offEntity.addComponent(this.offModel);
     offEntity.setParent(lightbulbEntity);
