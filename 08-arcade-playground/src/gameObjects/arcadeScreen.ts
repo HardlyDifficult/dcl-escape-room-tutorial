@@ -56,7 +56,7 @@ export class ArcadeScreen {
             if (tileEntity.getComponent(Material) != playerMaterial) {
               tileEntity.addComponentOrReplace(playerMaterial);
               this.tilesPaintedByPlayer++;
-              if(this.tilesPaintedByPlayer === columnCount * rowCount) {
+              if (this.tilesPaintedByPlayer === columnCount * rowCount) {
                 this.onCompletion();
               }
             }
@@ -72,13 +72,13 @@ export class ArcadeScreen {
             2,
             (entityEnter): void => {
               // TODO if (entityEnter.hasComponent(MouseFollowPathComponent)) {
-                //check if the tile was painted by player
-                if (tileEntity.getComponent(Material) == playerMaterial) {
-                  //decrease tiles painted variable
-                  this.tilesPaintedByPlayer--;
-                }
-                tileEntity.addComponentOrReplace(miceMaterial);
+              //check if the tile was painted by player
+              if (tileEntity.getComponent(Material) == playerMaterial) {
+                //decrease tiles painted variable
+                this.tilesPaintedByPlayer--;
               }
+              tileEntity.addComponentOrReplace(miceMaterial);
+            }
             // }
           )
         );

@@ -56,7 +56,7 @@ export class ArcadeScreen {
             if (tileEntity.getComponent(Material) != playerMaterial) {
               tileEntity.addComponentOrReplace(playerMaterial);
               this.tilesPaintedByPlayer++;
-              if(this.tilesPaintedByPlayer === columnCount * rowCount) {
+              if (this.tilesPaintedByPlayer === columnCount * rowCount) {
                 this.onCompletion();
               }
             }

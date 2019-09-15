@@ -45,11 +45,11 @@ export function CreateRoom8(): void {
     scale: new Vector3(0.8, 0.8, 0.8)
   });
 
+  // TODO get the mice running across the screen
+
   // When the player wins the game
   arcade.onCompletion = () => {
     // Reveal the hint
     ticket.emitTicket();
   };
-
-  // TODO get the mice running across the screen
 }
