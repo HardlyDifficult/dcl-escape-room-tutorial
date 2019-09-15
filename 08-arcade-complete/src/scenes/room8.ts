@@ -1,6 +1,9 @@
 import resources from "../resources";
 import { Door, Ticket, Mouse, ArcadeScreen } from "../gameObjects/index";
-import { MouseFollowPathComponent, MouseFollowPathSystem } from "../components/index";
+import {
+  MouseFollowPathComponent,
+  MouseFollowPathSystem
+} from "../components/index";
 
 export function CreateRoom8(): void {
   const door = new Door(
@@ -13,9 +16,7 @@ export function CreateRoom8(): void {
   );
   door.addComponent(
     new OnClick((): void => {
-      if (!door.isOpen) {
-        door.openDoor();
-      }
+      door.openDoor();
     })
   );
 
@@ -59,10 +60,7 @@ export function CreateRoom8(): void {
       mouse2.removeComponent(MouseFollowPathComponent);
       engine.removeSystem(mouseBehaviorSystem);
 
-      ticket
-        .getComponent(Animator)
-        .getClip("Ticket_Action")
-        .play();
+      ticket.emitTicket();
       return false;
     }
     return true;
