@@ -1,6 +1,6 @@
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 import { StateMachine } from "./stateMachine";
-import { MouseComponent } from "../components/mouseWillComponent";
+import { MouseComponent } from "../components/mouseComponent";
 
 /**
  * mouse appearing state

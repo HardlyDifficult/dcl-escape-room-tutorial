@@ -1,5 +1,5 @@
 import resources from "../resources";
-import { MouseComponent } from "../components/mouseWillComponent";
+import { MouseComponent } from "../components/mouseComponent";
 
 export class KitchenMouse extends Entity {
   constructor(parent: Entity) {

@@ -2,16 +2,15 @@ import utils from "../../node_modules/decentraland-ecs-utils/index";
 
 @Component("mouseFollowPathComponent")
 export class MouseFollowPathComponent {
+  private startDelay: number;
   private idleTime: number;
   private path: Vector3[];
   private movingTime: number;
+  private onIdleChanged: () => boolean;
 
   private reversePath: boolean;
   private currentTime: number;
   private isInIdleTime: boolean;
-  private startDelay: number;
-
-  private onIdleChanged: () => boolean;
 
   constructor(
     startDelay: number,
@@ -20,14 +19,15 @@ export class MouseFollowPathComponent {
     movingTime: number,
     onIdleChanged: () => boolean
   ) {
+    this.startDelay = startDelay;
     this.idleTime = idleTime;
     this.path = path;
+    this.movingTime = movingTime;
+    this.onIdleChanged = onIdleChanged;
+
     this.reversePath = false;
     this.currentTime = idleTime;
     this.isInIdleTime = true;
-    this.movingTime = movingTime;
-    this.onIdleChanged = onIdleChanged;
-    this.startDelay = startDelay;
   }
 
   update(dt: number, mouseEntiy: IEntity) {

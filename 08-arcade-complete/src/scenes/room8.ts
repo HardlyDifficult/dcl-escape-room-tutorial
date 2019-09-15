@@ -1,10 +1,25 @@
-import { Door, Ticket, Mouse, ArcadeScreen } from "../gameObjects/index";
 import resources from "../resources";
-import { MouseFollowPathComponent } from "../components/mouseFollowPathComponent";
-import { MouseFollowPathSystem } from "../components/mouseFollowPathSystem";
+import { Door, Ticket, Mouse, ArcadeScreen } from "../gameObjects/index";
+import { MouseFollowPathComponent, MouseFollowPathSystem } from "../components/index";
 
 export function CreateRoom8(): void {
-  // Adding Arcade Ticket
+  const door = new Door(
+    resources.models.door8,
+    {
+      position: new Vector3(22.612, 0, 14.9205),
+      rotation: Quaternion.Euler(0, 135, 0)
+    },
+    resources.sounds.doorSqueek
+  );
+  door.addComponent(
+    new OnClick((): void => {
+      if (!door.isOpen) {
+        door.openDoor();
+      }
+    })
+  );
+
+  // The ticket will reveal the hint for this room
   const ticket = new Ticket({
     position: new Vector3(18.1903, 0.397274, 11.771),
     rotation: Quaternion.Euler(0, 63.6, 0)
@@ -23,7 +38,7 @@ export function CreateRoom8(): void {
     Quaternion.Euler(118, -45, 127.3)
   );
 
-  // Adding Mice
+  // Adding Mice to run across the screen
   const mouse1 = new Mouse({
     position: new Vector3(25.82, 1.46, 4.25),
     scale: new Vector3(0.8, 0.8, 0.8)
@@ -33,13 +48,13 @@ export function CreateRoom8(): void {
     scale: new Vector3(0.8, 0.8, 0.8)
   });
 
-  // Adding Mouse Behaviour System to Engine
+  // Adding Mouse Behaviour System
   const mouseBehaviorSystem = new MouseFollowPathSystem();
   engine.addSystem(mouseBehaviorSystem);
 
   const onMouseIdleChanged = (): boolean => {
     if (arcade.tilesPaintedByPlayer == columnCount * rowCount) {
-      // Removing Components
+      // Removing Components to stop the mice
       mouse1.removeComponent(MouseFollowPathComponent);
       mouse2.removeComponent(MouseFollowPathComponent);
       engine.removeSystem(mouseBehaviorSystem);
@@ -79,22 +94,5 @@ export function CreateRoom8(): void {
       5,
       onMouseIdleChanged
     )
-  );
-
-  // Adding Door
-  const door = new Door(
-    resources.models.door8,
-    {
-      position: new Vector3(22.612, 0, 14.9205),
-      rotation: Quaternion.Euler(0, 135, 0)
-    },
-    resources.sounds.doorSqueek
-  );
-  door.addComponent(
-    new OnClick((): void => {
-      if (!door.isOpen) {
-        door.openDoor();
-      }
-    })
   );
 }
