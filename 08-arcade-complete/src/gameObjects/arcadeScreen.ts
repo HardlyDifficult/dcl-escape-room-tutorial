@@ -3,6 +3,7 @@ import { MouseFollowPathComponent } from "../components/mouseFollowPathComponent
 
 export class ArcadeScreen {
   public tilesPaintedByPlayer = 0;
+  public onCompletion: () => void;
 
   constructor(
     tileSize: Vector3,
@@ -53,8 +54,11 @@ export class ArcadeScreen {
         tileEntity.addComponent(
           new OnClick((): void => {
             if (tileEntity.getComponent(Material) != playerMaterial) {
-              this.tilesPaintedByPlayer++;
               tileEntity.addComponentOrReplace(playerMaterial);
+              this.tilesPaintedByPlayer++;
+              if (this.tilesPaintedByPlayer === columnCount * rowCount) {
+                this.onCompletion();
+              }
             }
           })
         );

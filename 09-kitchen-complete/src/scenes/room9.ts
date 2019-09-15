@@ -9,7 +9,7 @@ import {
 import resources from "../resources";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 import mouseMachine from "../modules/mouseStateMachine";
-import { MouseComponent } from "../components/mouseWillComponent";
+import { MouseComponent } from "../components/mouseComponent";
 import { StateMachine } from "../modules/stateMachine";
 
 export function CreateRoom9(): void {
