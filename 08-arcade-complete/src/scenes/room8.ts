@@ -49,6 +49,17 @@ export function CreateRoom8(): void {
     scale: new Vector3(0.8, 0.8, 0.8)
   });
 
+  // When the player wins the game
+  arcade.onCompletion = () => {
+    // Reveal the hint
+    ticket.emitTicket();
+
+    // Removing Components to stop the mice
+    mouse1.removeComponent(MouseFollowPathComponent);
+    mouse2.removeComponent(MouseFollowPathComponent);
+    engine.removeSystem(mouseBehaviorSystem);
+  };
+
   // Adding Mouse Behaviour System
   const mouseBehaviorSystem = new MouseFollowPathSystem();
   engine.addSystem(mouseBehaviorSystem);
@@ -76,8 +87,7 @@ export function CreateRoom8(): void {
         new Vector3(16.7, 1.7, 11.47),
         new Vector3(16.3, 2.24, 11.28)
       ],
-      2,
-      onMouseIdleChanged
+      2
     )
   );
   mouse2.addComponent(
@@ -89,8 +99,7 @@ export function CreateRoom8(): void {
         new Vector3(16.7, 1.7, 11.47),
         new Vector3(16.36, 1.7, 12.17)
       ],
-      5,
-      onMouseIdleChanged
+      5
     )
   );
 }
