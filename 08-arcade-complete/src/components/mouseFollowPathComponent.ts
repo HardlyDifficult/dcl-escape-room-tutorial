@@ -8,7 +8,6 @@ export class MouseFollowPathComponent {
   private movingTime: number;
   private onIdleChanged: () => boolean;
 
-  private reversePath: boolean;
   private currentTime: number;
   private isInIdleTime: boolean;
 
@@ -25,7 +24,6 @@ export class MouseFollowPathComponent {
     this.movingTime = movingTime;
     this.onIdleChanged = onIdleChanged;
 
-    this.reversePath = false;
     this.currentTime = idleTime;
     this.isInIdleTime = true;
   }
@@ -44,26 +42,19 @@ export class MouseFollowPathComponent {
         //we are not in idle state any more
         this.isInIdleTime = false;
 
-        let path: Vector3[];
-        //check if we shoul reverse the path
-        if (this.reversePath) {
-          path = this.path.reverse();
-        } else {
-          path = this.path;
-        }
         //rotate mouse to look at it's next point in path
-        mouseEntiy.getComponent(Transform).lookAt(path[1]);
+        mouseEntiy.getComponent(Transform).lookAt(this.path[1]);
         //add component to follow the path
         mouseEntiy.addComponentOrReplace(
           new utils.FollowPathComponent(
-            path,
+            this.path,
             this.movingTime,
             () => {
               //when path is finished we reset mouse variables
               this.isInIdleTime = true;
               this.currentTime = 0;
               //we set the mouse to go the other way arround next time
-              this.reversePath = true;
+              this.path.reverse();
               //callback that idle state is going to change
               this.onIdleChanged();
             },
