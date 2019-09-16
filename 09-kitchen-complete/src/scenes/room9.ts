@@ -12,6 +12,7 @@ import { MouseBurstBubbleState } from "../stateMachine/mouseBurstBubbleState";
 import { MouseBubbleState } from "../stateMachine/mouseBubbleState";
 import { MouseBubbleStartState } from "../stateMachine/mouseBubbleStartState";
 import { MouseFallingState } from "../stateMachine/mouseFallingState";
+import { MouseComponent } from "../components/mouseComponent";
 
 //set trigger layers
 const MouseLayer = 8;
