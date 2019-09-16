@@ -4,6 +4,7 @@ import {
   MouseFollowPathComponent,
   MouseFollowPathSystem
 } from "../components/index";
+import utils from "../../node_modules/decentraland-ecs-utils/index";
 
 export function CreateRoom8(): void {
   const door = new Door(
@@ -85,8 +86,8 @@ export function CreateRoom8(): void {
     ticket.emitTicket();
 
     // Removing Components to stop the mice
-    mouse1.removeComponent(MouseFollowPathComponent);
-    mouse2.removeComponent(MouseFollowPathComponent);
+    mouse1.removeComponent(utils.FollowPathComponent);
+    mouse2.removeComponent(utils.FollowPathComponent);
     engine.removeSystem(mouseBehaviorSystem);
   };
 }
