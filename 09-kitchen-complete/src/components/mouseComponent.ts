@@ -1,5 +1,5 @@
 @Component("mouseComponent")
-export class MouseComponent {
+class MouseComponent {
   direction: Vector3;
   mouseEntity: Entity;
   transform: Transform;

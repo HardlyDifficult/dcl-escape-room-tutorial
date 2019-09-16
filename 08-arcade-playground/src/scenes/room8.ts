@@ -1,4 +1,5 @@
 import resources from "../resources";
+import utils from "../../node_modules/decentraland-ecs-utils/index";
 import { Door, Ticket, Mouse, ArcadeScreen } from "../gameObjects/index";
 
 export function CreateRoom8(): void {
