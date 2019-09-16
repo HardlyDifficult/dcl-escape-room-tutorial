@@ -1,5 +1,6 @@
 import { StateMachine } from "../modules/stateMachine";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
+import { MouseComponent } from "../components/mouseComponent";
 
 /**
  * state for when mouse dies

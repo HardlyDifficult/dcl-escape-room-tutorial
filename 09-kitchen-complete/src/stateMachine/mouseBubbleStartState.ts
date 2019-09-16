@@ -2,6 +2,7 @@ import { StateMachine } from "../modules/stateMachine";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 import { StateMachineOnClickEvent } from "./stateMachineOnClickEvent";
 import { StateMachineCollisionEvent } from "./stateMachineCollisionEvent";
+import { MouseComponent } from "../components/mouseComponent";
 
 /**
  * state for bubble appearing and then going up in the air

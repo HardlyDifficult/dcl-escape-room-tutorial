@@ -1,6 +1,7 @@
 import { StateMachine } from "../modules/stateMachine";
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 import { StateMachineCollisionEvent } from "./stateMachineCollisionEvent";
+import { MouseComponent } from "../components/mouseComponent";
 
 /**
  * state for mouse falling after bubble burst
