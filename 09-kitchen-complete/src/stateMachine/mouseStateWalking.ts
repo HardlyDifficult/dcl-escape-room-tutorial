@@ -1,6 +1,7 @@
 import { StateMachine } from "../modules/stateMachine";
 import { StateMachineCollisionEvent } from "./stateMachineCollisionEvent";
 import { StateMachineOnClickEvent } from "./stateMachineOnClickEvent";
+import { MouseComponent } from "../components/mouseComponent";
 
 /**
  * mouse walking state

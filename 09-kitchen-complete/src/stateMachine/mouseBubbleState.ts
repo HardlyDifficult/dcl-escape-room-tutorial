@@ -1,6 +1,7 @@
 import { StateMachine } from "../modules/stateMachine";
 import { StateMachineOnClickEvent } from "./stateMachineOnClickEvent";
 import { StateMachineCollisionEvent } from "./stateMachineCollisionEvent";
+import { MouseComponent } from "../components/mouseComponent";
 
 /**
  * bubble floating around pushed by some wind from the fans
