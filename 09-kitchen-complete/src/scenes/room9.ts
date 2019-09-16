@@ -21,6 +21,12 @@ const BoxLayer = 32;    //   100000
 const FanLayer = 64;    //  1000000
 const CageLayer = 128;  // 10000000
 // e.g.                    10100000 (160) means cage or box
+const MouseLayer = 8; //     1000 in binary
+const PikesLayer = 16; //    10000
+const BoxLayer = 32; //   100000
+const FanLayer = 64; //  1000000
+const CageLayer = 128; // 10000000
+// e.g.                    10100000 means cage or box
 
 export function CreateRoom9(): void {
   //create door entity
