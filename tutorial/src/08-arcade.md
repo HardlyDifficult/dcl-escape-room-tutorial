@@ -3,7 +3,7 @@
 Start with [08-arcade-playground](https://github.com/HardlyDifficult/dcl-escape-room-tutorial/tree/master/08-arcade-playground)
 
 Resources:
-- [07-arcade-complete](https://github.com/HardlyDifficult/dcl-escape-room-tutorial/tree/master/08-arcade-complete)
+- [08-arcade-complete](https://github.com/HardlyDifficult/dcl-escape-room-tutorial/tree/master/08-arcade-complete)
 
 ## Path Following
 
