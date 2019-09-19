@@ -19,6 +19,7 @@ module.exports = {
       '/06-dialog',
       '/07-lightbulbs',
       '/08-arcade',
+      '/09-kitchen'
     ]
   },
 }
