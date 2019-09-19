@@ -18,7 +18,7 @@ module.exports = {
       '/05-keypad',
       '/06-dialog',
       '/07-lightbulbs',
-      
+      '/08-arcade',
     ]
   },
 }
