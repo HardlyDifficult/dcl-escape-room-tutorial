@@ -26,8 +26,7 @@ export class MouseBurstBubbleState extends StateMachine.State {
       "images/room9/bubbleParticle.png",
       { hasAlpha: true }
     );
-    bubbleParticleMaterial.hasAlpha = true;
-    bubbleParticleMaterial.alpha = 0.5;
+    bubbleParticleMaterial.transparencyMode = 2;
     bubbleParticleMaterial.emissiveColor = Color3.White();
 
     this.burstParticle = new Entity();

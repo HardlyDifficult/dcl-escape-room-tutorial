@@ -182,8 +182,7 @@ export function CreateRoom9(): void {
   bubbleMaterial.albedoTexture = new Texture("images/room9/bubbleTexture.png", {
     hasAlpha: false
   });
-  bubbleMaterial.hasAlpha = true;
-  bubbleMaterial.alpha = 0.5;
+  bubbleMaterial.transparencyMode = 2;
   //add bubble material
   bubbleEntity.addComponent(bubbleMaterial);
   //set bubble as child of mouse
